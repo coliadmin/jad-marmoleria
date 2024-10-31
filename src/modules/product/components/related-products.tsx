@@ -1,4 +1,5 @@
-import {Product} from "./types";
+import type {Product} from "@/modules/product";
+
 import {ProductLink} from "./product-link";
 
 import {H3} from "@/components/typo";

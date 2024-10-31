@@ -1,0 +1,30 @@
+#* Productos con portada, sin imagenes
+#? Caso de uso: Listar productos
+GET /api/products?populate[portada][fields][0]=name&populate[portada][fields][1]=url&populate[portada][fields][2]=hash&fields[0]=nombre&fields[1]=slug&fields[2]=descripcion&fields[3]=espesor&fields[4]=uso&fields[5]=disponibilidad&status=published
+Authorization: Bearer 375e18f79907e9fbc9de13d7c0e347651afb35eb08e359602899c3c4cad0bd27412b25387242a8f3206580f53950904b726da527d5ada6fc94c92e08c51817626be3c36438a972ab915ab4f5e3bf746eae591734403b5f0edfdf7a33f91b2a1af921f84a7c0e65836673e88cbf511412a56506dc2f500b33adc78d62039744c9
+Host: jad-marmoleria.colidevs.com
+
+###
+
+#* Un producto con imagenes, por documentId (forma eficiente)
+#? Caso de uso: Ver producto
+#! Trae un unico objeto, no un array. No se adecua al contrato (interface)
+GET /api/products/hr81kpjbhmr0cpp7rlp2wnp9?populate[imagenes][fields][0]=name&populate[imagenes][fields][1]=url&populate[imagenes][fields][2]=hash
+Authorization: Bearer 375e18f79907e9fbc9de13d7c0e347651afb35eb08e359602899c3c4cad0bd27412b25387242a8f3206580f53950904b726da527d5ada6fc94c92e08c51817626be3c36438a972ab915ab4f5e3bf746eae591734403b5f0edfdf7a33f91b2a1af921f84a7c0e65836673e88cbf511412a56506dc2f500b33adc78d62039744c9
+Host: jad-marmoleria.colidevs.com
+
+###
+
+#* Un producto con imagenes, por slug
+#? Caso de uso: Ver producto
+GET /api/products?filters[slug][$contains]=negro-boreal&populate[imagenes][fields][0]=name&populate[imagenes][fields][1]=url&populate[imagenes][fields][2]=hash
+Authorization: Bearer 375e18f79907e9fbc9de13d7c0e347651afb35eb08e359602899c3c4cad0bd27412b25387242a8f3206580f53950904b726da527d5ada6fc94c92e08c51817626be3c36438a972ab915ab4f5e3bf746eae591734403b5f0edfdf7a33f91b2a1af921f84a7c0e65836673e88cbf511412a56506dc2f500b33adc78d62039744c9
+Host: jad-marmoleria.colidevs.com
+
+###
+
+#* Productos por categoria con portada, sin imagenes
+#? Caso de uso: Listar productos por categoria
+GET /api/products?filters[color][slug][$contains]=blanco&populate[portada][fields][0]=name&populate[portada][fields][1]=url&populate[portada][fields][2]=hash
+Authorization: Bearer 375e18f79907e9fbc9de13d7c0e347651afb35eb08e359602899c3c4cad0bd27412b25387242a8f3206580f53950904b726da527d5ada6fc94c92e08c51817626be3c36438a972ab915ab4f5e3bf746eae591734403b5f0edfdf7a33f91b2a1af921f84a7c0e65836673e88cbf511412a56506dc2f500b33adc78d62039744c9
+Host: jad-marmoleria.colidevs.com
