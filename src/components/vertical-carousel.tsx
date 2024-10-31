@@ -12,7 +12,7 @@ import {
   CarouselPrevious,
   type CarouselApi,
 } from "@/components/ui/carousel";
-import {Image} from "@/modules/product";
+import {type Image} from "@/lib/strapi";
 
 type VerticalCarouselProps = {
   images: Image[];
@@ -41,7 +41,7 @@ export function VerticalCarousel({images}: VerticalCarouselProps) {
       <CarouselContent>
         {images.map((image) => (
           <CarouselItem key={image.id}>
-            <VerticalImage alt={image.alt} src={image.url} />
+            <VerticalImage alt={image.name} src={image.url} />
           </CarouselItem>
         ))}
       </CarouselContent>
