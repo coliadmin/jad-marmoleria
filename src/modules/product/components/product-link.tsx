@@ -1,11 +1,12 @@
+import type {Product} from "@/modules/product";
+
 import {ChevronRight} from "lucide-react";
 import Link from "next/link";
 
-import {Product} from "./types";
-
 import {H4} from "@/components/typo";
 import {VerticalImage} from "@/components/vertical-image";
-import {capitalizeAll, cn} from "@/lib/utils";
+import {cn} from "@/lib/utils";
+import {toUrl} from "@/lib/strapi";
 
 type ProductLinkProps = {
   product: Product;
@@ -18,10 +19,10 @@ export function ProductLink({product, ratio, className, color}: ProductLinkProps
   return (
     <Link className="group space-y-2" href={`/products/${product.slug}`}>
       <VerticalImage
-        alt={product.portada.alt}
+        alt={product.portada.nombre}
         className={className}
         ratio={ratio}
-        src={product.portada.url}
+        src={toUrl(product.portada.url)}
       />
       <div className="inline-flex w-full items-center">
         <H4
@@ -30,7 +31,7 @@ export function ProductLink({product, ratio, className, color}: ProductLinkProps
             color,
           )}
         >
-          {capitalizeAll(product.nombre)}
+          {product.nombre}
         </H4>
         <ChevronRight className="mb-icon ms-2 size-5 text-border transition-all duration-200 ease-in-out group-hover:inline-block group-hover:text-foreground" />
       </div>

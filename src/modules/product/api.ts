@@ -1,42 +1,36 @@
-import {ProductDTO, Product, Image} from "./types";
+import {Product} from "./types";
 
-import {query, type QueryResponse, STRAPI_HOST} from "@/lib/stripe";
+import {Api, query, type QueryResponse} from "@/lib/strapi";
 
 // TODO: Increase performance by reducing the number fields fetched, specify the fields to fetch.
-export async function getProducts(): Promise<QueryResponse<Product[]>> {
-  const {data, meta} = await query<ProductDTO[]>("products?populate=imagenes&populate=portada");
-
-  const withImages: Product[] = data.map((product: ProductDTO) => {
-    const portada: Image = {
-      id: product.portada.id,
-      url: `${STRAPI_HOST}${product.portada.url}`,
-      alt: product.portada.alternativeText || "",
-    };
-
-    const data: Product = {...product, imagenes: [], portada: portada};
-
-    if (!product.imagenes) {
-      return data;
-    }
-
-    const images: Image[] = product.imagenes.map((image) => ({
-      id: image.id,
-      url: `${STRAPI_HOST}${image.url}`,
-      alt: image.alternativeText || "",
-    }));
-
-    data.imagenes = images;
-
-    return data;
-  });
-
-  return {data: withImages, meta};
+async function getProducts(): QueryResponse<Product[]> {
+  return await query<Product[]>(
+    "products?populate[portada][fields][0]=name&populate[portada][fields][1]=url&populate[portada][fields][2]=hash&fields[0]=nombre&fields[1]=slug&fields[2]=descripcion&fields[3]=espesor&fields[4]=uso&fields[5]=disponibilidad&status=published",
+  );
 }
 
-export async function fetchProduct(slug: string): Promise<Product | null> {
-  const {data} = await getProducts();
+async function fetchProduct(slug: string): Promise<Product | null> {
+  try {
+    const {data} = await query<Product[]>(
+      `products?filters[slug][$contains]=${slug}&populate[imagenes][fields][0]=name&populate[imagenes][fields][1]=url&populate[imagenes][fields][2]=hash&populate[portada][fields][0]=name&populate[portada][fields][1]=url&populate[portada][fields][2]=hash`,
+    );
 
-  const p = data.find((product) => product.slug === slug);
+    return data[0];
+  } catch (error) {
+    //return null;
+    throw error;
+  }
 
-  return p || null;
+  // console.log(data);
+
+  // if (data.length === 0 || data.length > 1 || !data[0]) {
+  //   return null;
+  // }
+
+  // return data[0];
 }
+
+export const api: Api<Product> = {
+  get: getProducts,
+  fetch: fetchProduct,
+};

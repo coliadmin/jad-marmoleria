@@ -1,13 +1,15 @@
 import type {Metadata} from "next";
 
-import Link from "next/link";
-
 import "./globals.css";
-import {Layers3} from "lucide-react";
+
+import {Instagram} from "lucide-react";
 
 import {montserrat} from "@/fonts";
 import {cn} from "@/lib/utils";
-import {Nav} from "@/components/nav-menu";
+import {Header} from "@/components/header";
+import {ColiFooter} from "@/components/coli-footer";
+import {HeroV2} from "@/components/hero-v2";
+import {Hero} from "@/components/hero";
 
 export const metadata: Metadata = {
   title: "jad-marmoleria",
@@ -21,20 +23,14 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
         <div
           className={cn(
             montserrat.className,
-            "container m-auto grid min-h-screen grid-rows-[auto,1fr,auto] border-l border-r border-foreground font-sans antialiased",
+            "relative grid min-h-[100dvh] grid-rows-[auto,1fr] antialiased",
           )}
         >
-          <header className="inline-flex w-full justify-between border-b border-foreground text-xl font-bold leading-[4rem]">
-            <Link className="ms-4 inline-flex items-center gap-3" href="/">
-              <Layers3 className="size-8 text-foreground" />
-              JAD Marmoleria
-            </Link>
-            <Nav />
-          </header>
-          <main className="px-4 py-8">{children}</main>
-          <footer className="text-center leading-[4rem] opacity-70">
-            © {new Date().getFullYear()} jad-marmoleria
-          </footer>
+          <Header />
+          <main>{children}</main>
+          {/* <div className="border-t">
+            <ColiFooter />
+          </div> */}
         </div>
       </body>
     </html>
