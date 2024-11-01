@@ -1,9 +1,8 @@
-import Link from "next/link";
+import {Link} from "next-view-transitions";
 
 import {api} from "@/api";
 import {ProductLink} from "@/modules/product";
-import {ScrollArea} from "@/components/ui/scroll-area";
-import {H3, H4} from "@/components/typo";
+import {H3} from "@/components/typo";
 
 export default async function ProductsPage() {
   const products = await api.products.get();

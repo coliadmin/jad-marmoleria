@@ -1,7 +1,4 @@
-import Link from "next/link";
-import {Instagram, Phone} from "lucide-react";
-
-import {Whatsapp} from "./icons/whatsapp";
+import {Link} from "next-view-transitions";
 
 import {cn} from "@/lib/utils";
 import {quicksand} from "@/fonts";

@@ -1,18 +1,16 @@
 "use client";
 
 import * as React from "react";
-import Link from "next/link";
+import {Link} from "next-view-transitions";
 import {Instagram} from "lucide-react";
 
 import {Whatsapp} from "@/components/icons/whatsapp";
 import {cn} from "@/lib/utils";
 import {
   NavigationMenu,
-  NavigationMenuContent,
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
-  NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
 

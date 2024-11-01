@@ -2,14 +2,11 @@ import type {Metadata} from "next";
 
 import "./globals.css";
 
-import {Instagram} from "lucide-react";
+import {ViewTransitions} from "next-view-transitions";
 
 import {montserrat} from "@/fonts";
 import {cn} from "@/lib/utils";
 import {Header} from "@/components/header";
-import {ColiFooter} from "@/components/coli-footer";
-import {HeroV2} from "@/components/hero-v2";
-import {Hero} from "@/components/hero";
 
 export const metadata: Metadata = {
   title: "jad-marmoleria",
@@ -18,21 +15,23 @@ export const metadata: Metadata = {
 
 export default function RootLayout({children}: {children: React.ReactNode}) {
   return (
-    <html lang="es">
-      <body className="border-border bg-background text-foreground">
-        <div
-          className={cn(
-            montserrat.className,
-            "relative grid min-h-[100dvh] grid-rows-[auto,1fr] antialiased",
-          )}
-        >
-          <Header />
-          <main>{children}</main>
-          {/* <div className="border-t">
+    <ViewTransitions>
+      <html lang="es">
+        <body className="border-border bg-background text-foreground">
+          <div
+            className={cn(
+              montserrat.className,
+              "relative grid min-h-[100dvh] grid-rows-[auto,1fr] antialiased",
+            )}
+          >
+            <Header />
+            <main>{children}</main>
+            {/* <div className="border-t">
             <ColiFooter />
           </div> */}
-        </div>
-      </body>
-    </html>
+          </div>
+        </body>
+      </html>
+    </ViewTransitions>
   );
 }

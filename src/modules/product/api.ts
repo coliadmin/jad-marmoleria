@@ -1,6 +1,6 @@
 import {Product} from "./types";
 
-import {Api, query, type QueryResponse} from "@/lib/strapi";
+import {Api, Image, query, type QueryResponse} from "@/lib/strapi";
 
 // TODO: Increase performance by reducing the number fields fetched, specify the fields to fetch.
 async function getProducts(): QueryResponse<Product[]> {

@@ -8,6 +8,7 @@ export interface ProductDTO {
   uso: string | null;
   disponibilidad: boolean;
   portada: Image;
+  imagenes: Image[];
 }
 
 export type Product = Data<ProductDTO>;

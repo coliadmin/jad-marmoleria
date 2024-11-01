@@ -1,7 +1,7 @@
 import type {Product} from "@/modules/product";
 
 import {ChevronRight} from "lucide-react";
-import Link from "next/link";
+import {Link} from "next-view-transitions";
 
 import {H4} from "@/components/typo";
 import {VerticalImage} from "@/components/vertical-image";
@@ -19,7 +19,7 @@ export function ProductLink({product, ratio, className, color}: ProductLinkProps
   return (
     <Link className="group space-y-2" href={`/products/${product.slug}`}>
       <VerticalImage
-        alt={product.portada.nombre}
+        alt={product.portada.name}
         className={className}
         ratio={ratio}
         src={toUrl(product.portada.url)}

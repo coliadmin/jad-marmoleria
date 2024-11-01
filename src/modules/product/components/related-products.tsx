@@ -2,27 +2,22 @@ import type {Product} from "@/modules/product";
 
 import {ProductLink} from "./product-link";
 
-import {H3} from "@/components/typo";
+import {cn} from "@/lib/utils";
 
 type RelatedProductsProps = {
   products: Product[];
-  title?: string;
 };
 
-export function RelatedProducts({
-  products,
-  title = "Productos relacionados",
-}: RelatedProductsProps) {
+export function RelatedProducts({products}: RelatedProductsProps) {
+  const length = products.length;
+
   return (
-    <>
-      <H3 className="mb-4 text-2xl font-medium">{title}</H3>
-      <ul className="flex gap-8">
-        {products.map((related) => (
-          <li key={related.id} className="space-y-2">
-            <ProductLink className="w-40" product={related} ratio={4 / 4} />
-          </li>
-        ))}
-      </ul>
-    </>
+    <ul className={cn("mb-12 flex gap-8", length < 5 ? "justify-center" : "")}>
+      {products.map((related) => (
+        <li key={related.id} className="space-y-2">
+          <ProductLink className="w-28" product={related} ratio={1} />
+        </li>
+      ))}
+    </ul>
   );
 }

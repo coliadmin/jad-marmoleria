@@ -1,14 +1,13 @@
 import {Instagram} from "lucide-react";
-import Link from "next/link";
+import {Link} from "next-view-transitions";
 
 import {H1, P} from "./typo";
 import {Whatsapp} from "./icons/whatsapp";
 
-import {toUrl} from "@/lib/strapi";
 import {api} from "@/api";
 import {Button} from "@/components/ui/button";
 import {cn} from "@/lib/utils";
-import {montserrat, quicksand} from "@/fonts";
+import {quicksand} from "@/fonts";
 
 type HeroProps = {
   title: string | React.ReactNode;
