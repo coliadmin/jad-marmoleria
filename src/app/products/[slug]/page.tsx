@@ -50,6 +50,9 @@ export default async function ProductPage({params: {slug}}: ProductPageProps) {
   const nextProductIdx = data.findIndex((p) => p.slug === slug);
   const nextProduct = data[nextProductIdx + 1] || data[0];
 
+  const productImages = product.imagenes || [];
+  const apiImages = productImages.map((image) => ({...image, url: toUrl(image.url)}));
+
   return (
     <>
       <section className="container">
@@ -61,7 +64,7 @@ export default async function ProductPage({params: {slug}}: ProductPageProps) {
             <ProductArticle product={product}>
               <aside className="ms-16 w-vertical">
                 {product.imagenes !== null ? (
-                  <VerticalCarousel images={product.imagenes} />
+                  <VerticalCarousel images={apiImages} />
                 ) : (
                   <Skeleton className="h-[33.75rem] w-vertical" />
                 )}

@@ -41,7 +41,7 @@ export function VerticalCarousel({images}: VerticalCarouselProps) {
       <CarouselContent>
         {images.map((image) => (
           <CarouselItem key={image.id}>
-            <VerticalImage alt={image.name} src={toUrl(image.url)} />
+            <VerticalImage alt={image.name} src={image.url} />
           </CarouselItem>
         ))}
       </CarouselContent>
