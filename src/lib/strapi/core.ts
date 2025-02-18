@@ -1,6 +1,6 @@
 import type {QueryResponse} from "./types";
 
-export const {STRAPI_HOST, STRAPI_TOKEN} = process.env;
+import {STRAPI_HOST, STRAPI_TOKEN} from "@/config";
 
 export async function query<T>(path: string): QueryResponse<T> {
   const url = `${STRAPI_HOST}/api/${path}`;
