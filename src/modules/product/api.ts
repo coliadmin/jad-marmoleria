@@ -1,12 +1,21 @@
 import {Product} from "./types";
 
+import {STRAPI_HOST} from "@/config";
 import {Api, Image, query, type QueryResponse} from "@/lib/strapi";
 
 // TODO: Increase performance by reducing the number fields fetched, specify the fields to fetch.
 async function getProducts(): QueryResponse<Product[]> {
-  return await query<Product[]>(
+  const res = await query<Product[]>(
     "products?populate[portada][fields][0]=name&populate[portada][fields][1]=url&populate[portada][fields][2]=hash&fields[0]=nombre&fields[1]=slug&fields[2]=descripcion&fields[3]=espesor&fields[4]=uso&fields[5]=disponibilidad&status=published",
   );
+
+  const cpy = res;
+
+  res.data.forEach((x, idx) =>
+    cpy.data.splice(idx, 1, {...x, portada: {...x.portada, url: STRAPI_HOST + x.portada.url}}),
+  );
+
+  return cpy;
 }
 
 async function fetchProduct(slug: string): Promise<Product | null> {

@@ -6,7 +6,6 @@ import {Link} from "next-view-transitions";
 import {H4} from "@/components/typo";
 import {VerticalImage} from "@/components/vertical-image";
 import {cn} from "@/lib/utils";
-import {toUrl} from "@/lib/strapi";
 
 type ProductLinkProps = {
   product: Product;
@@ -22,7 +21,7 @@ export function ProductLink({product, ratio, className, color}: ProductLinkProps
         alt={product.portada.name}
         className={className}
         ratio={ratio}
-        src={toUrl(product.portada.url)}
+        src={product.portada.url}
       />
       <div className="inline-flex w-full items-center">
         <H4
