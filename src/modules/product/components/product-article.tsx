@@ -31,7 +31,14 @@ export function ProductArticle({product, children}: ProductArticleProps) {
               <span className="font-medium">Espesor: </span> {product.espesor}
             </P>
             <P className="w-72 rounded bg-muted px-6">
-              <span className="font-medium">Uso: </span> {product.uso}
+              <span className="font-medium">Uso: </span>
+              {product.usos !== null
+                ? product.usos.map((uso) => (
+                    <span key={uso.id} className="pr-3">
+                      {uso.nombre}
+                    </span>
+                  ))
+                : null}
             </P>
             <P className="w-72 rounded bg-muted px-6">
               <span className="font-medium">Disponibilidad: </span>
