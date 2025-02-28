@@ -6,6 +6,9 @@ import {H3} from "@/components/typo";
 
 export default async function ProductsPage() {
   const products = await api.products.get();
+  const colors = await api.colors.get();
+  const uses = await api.uses.get();
+  const materials = await api.materials.get();
 
   return (
     <section className="container flex border-e border-s">
@@ -15,21 +18,13 @@ export default async function ProductsPage() {
             <span className="px-3">Color</span>
           </h4>
           <ul className="space-y-2 ps-5 pt-2">
-            <li>
-              <Link className="hover:underline" href="/products/1">
-                Blanco
-              </Link>
-            </li>
-            <li>
-              <Link className="hover:underline" href="/products/2">
-                Negro
-              </Link>
-            </li>
-            <li>
-              <Link className="hover:underline" href="/products/3">
-                Rojo
-              </Link>
-            </li>
+            {colors.data.map((color) => (
+              <li key={color.id}>
+                <Link className="hover:underline" href={`/products/${color.slug}`}>
+                  {color.nombre}
+                </Link>
+              </li>
+            ))}
           </ul>
         </div>
         <div>
@@ -37,21 +32,13 @@ export default async function ProductsPage() {
             <span className="px-3">Uso</span>
           </h4>
           <ul className="space-y-2 ps-5 pt-2">
-            <li>
-              <Link className="hover:underline" href="/products/1">
-                Cocina
-              </Link>
-            </li>
-            <li>
-              <Link className="hover:underline" href="/products/2">
-                Baño
-              </Link>
-            </li>
-            <li>
-              <Link className="hover:underline" href="/products/3">
-                Exterior
-              </Link>
-            </li>
+            {uses.data.map((use) => (
+              <li key={use.id}>
+                <Link className="hover:underline" href={`/products/${use.slug}`}>
+                  {use.nombre}
+                </Link>
+              </li>
+            ))}
           </ul>
         </div>
         <div>
@@ -59,21 +46,13 @@ export default async function ProductsPage() {
             <span className="px-3">Material</span>
           </h4>
           <ul className="space-y-2 ps-5 pt-2">
-            <li>
-              <Link className="hover:underline" href="/products/1">
-                Neolith
-              </Link>
-            </li>
-            <li>
-              <Link className="hover:underline" href="/products/2">
-                Silestone
-              </Link>
-            </li>
-            <li>
-              <Link className="hover:underline" href="/products/3">
-                Dekton
-              </Link>
-            </li>
+            {materials.data.map((material) => (
+              <li key={material.id}>
+                <Link className="hover:underline" href={`/products/${material.slug}`}>
+                  {material.nombre}
+                </Link>
+              </li>
+            ))}
           </ul>
         </div>
       </aside>
