@@ -1,5 +1,4 @@
-import {AspectRatio} from "@radix-ui/react-aspect-ratio";
-
+import {AspectRatio} from "@/components/ui/aspect-ratio";
 import {cn} from "@/lib/utils";
 
 type VerticalImageProps = {
