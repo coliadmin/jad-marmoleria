@@ -19,7 +19,6 @@ async function getProducts(): QueryResponse<Product[]> {
 }
 
 async function fetchProduct(slug: string): Promise<Product | null> {
-  ///SE PUEDE AGREGAR LOS PARAMETROS FILTER & VALUE PARA HACER UNA BUSQUEDA MAS ESPECIFICA
   try {
     const {data} = await query<Product[]>(
       `products?filters[slug][$contains]=${slug}&populate[usos][fields][0]=nombre&populate[usos][fields][1]=slug&populate[imagenes][fields][0]=name&populate[imagenes][fields][1]=url&populate[imagenes][fields][2]=hash&populate[portada][fields][0]=name&populate[portada][fields][1]=url&populate[portada][fields][2]=hash`,
@@ -38,6 +37,29 @@ async function fetchProduct(slug: string): Promise<Product | null> {
   // }
 
   // return data[0];
+}
+
+/// Hay que mejorar, hecho para testear!
+export async function fetchProductByCategory(category: string, value: string): Promise<Product[]> {
+  if (!category && !value) {
+    return [];
+  }
+
+  try {
+    const {data} = await query<Product[]>(
+      `products?filters[${category}][slug][$contains]=${value}&populate[usos][fields][0]=nombre&populate[usos][fields][1]=slug&populate[imagenes][fields][0]=name&populate[imagenes][fields][1]=url&populate[imagenes][fields][2]=hash&populate[portada][fields][0]=name&populate[portada][fields][1]=url&populate[portada][fields][2]=hash`,
+    );
+
+    const cpy = data;
+
+    data.forEach((x, idx) =>
+      cpy.splice(idx, 1, {...x, portada: {...x.portada, url: STRAPI_HOST + x.portada.url}}),
+    );
+
+    return data;
+  } catch (error) {
+    throw error;
+  }
 }
 
 export const api: Api<Product> = {
