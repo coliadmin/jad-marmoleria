@@ -1,29 +1,39 @@
-import {Link} from "next-view-transitions";
-
 import {api} from "@/api";
-import {Product, ProductLink} from "@/modules/product";
+import {fetchProductByCategory} from "@/modules/product";
+import {ProductLink} from "@/modules/product";
 import {H3} from "@/components/typo";
 import {Categories} from "@/modules/categories/enum";
+import {FilterLink} from "@/components/filter-link";
 
 type Props = {
   searchParams: {
-    name: string;
+    category: string;
     value: string;
   };
 };
 
-export default async function ProductsPage({searchParams: {name, value}}: Props) {
+export default async function ProductsPage({searchParams: {category, value}}: Props) {
   const products = await api.products.get();
   const colors = await api.colors.get();
   const uses = await api.uses.get();
   const materials = await api.materials.get();
-  const filterProds = products.data.filter((x) => x.slug == name);
+  const aplications = await api.aplications.get();
+  const filterProds = await fetchProductByCategory(category, value);
 
-  function addFilters(name: string, value: string): string {
-    const href = `/products?name=${name}&value=${value}`;
+  const title = () => {
+    let title = "Catálogo";
 
-    return href;
-  }
+    if (category && value) {
+      const cat = category.charAt(0).toUpperCase() + category.slice(1);
+      let val = value.charAt(0).toUpperCase() + value.slice(1);
+
+      if (val.includes("-")) val = val.split("-").join(" ");
+
+      title += ` ${cat} ${val}`;
+    }
+
+    return title;
+  };
 
   return (
     <section className="container flex border-e border-s">
@@ -35,9 +45,7 @@ export default async function ProductsPage({searchParams: {name, value}}: Props)
           <ul className="space-y-2 ps-5 pt-2">
             {colors.data.map((color) => (
               <li key={color.id}>
-                <Link className="hover:underline" href={addFilters(Categories.COLOR, color.slug)}>
-                  {color.nombre}
-                </Link>
+                <FilterLink category={Categories.COLOR} value={color} />
               </li>
             ))}
           </ul>
@@ -49,9 +57,7 @@ export default async function ProductsPage({searchParams: {name, value}}: Props)
           <ul className="space-y-2 ps-5 pt-2">
             {uses.data.map((use) => (
               <li key={use.id}>
-                <Link className="hover:underline" href={addFilters(Categories.USE, use.slug)}>
-                  {use.nombre}
-                </Link>
+                <FilterLink category={Categories.USE} value={use} />
               </li>
             ))}
           </ul>
@@ -63,24 +69,27 @@ export default async function ProductsPage({searchParams: {name, value}}: Props)
           <ul className="space-y-2 ps-5 pt-2">
             {materials.data.map((material) => (
               <li key={material.id}>
-                <Link
-                  className="hover:underline"
-                  href={addFilters(Categories.MATERIAL, material.slug)}
-                >
-                  {material.nombre}
-                </Link>
+                <FilterLink category={Categories.MATERIAL} value={material} />
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div>
+          <h4 className="border-b font-medium">
+            <span className="px-3">Aplicación</span>
+          </h4>
+          <ul className="space-y-2 ps-5 pt-2">
+            {aplications.data.map((aplication) => (
+              <li key={aplication.id}>
+                <FilterLink category={Categories.APLICATION} value={aplication} />
               </li>
             ))}
           </ul>
         </div>
       </aside>
       <section className="flex-1 border-s">
-        {name ? (
-          <H3 className="border-b py-3 text-center">Catálogo {name}</H3>
-        ) : (
-          <H3 className="border-b py-3 text-center">Catálogo</H3>
-        )}
-        {name ? (
+        <H3 className="border-b py-3 text-center">{title()}</H3>
+        {category ? (
           <ul className="flex flex-wrap justify-evenly gap-4 py-8">
             {filterProds.map((product) => (
               <li key={product.id} className="inline-flex">
