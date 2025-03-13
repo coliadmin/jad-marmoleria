@@ -36,7 +36,7 @@ export default async function HomePage() {
         </H2>
         <ul className="mx-auto flex max-w-xl flex-wrap justify-evenly gap-8">
           <li className="w-32 rounded border p-2 py-6 transition-colors duration-200 ease-in-out hover:border-foreground">
-            <Link className="m-auto" href="/products?categories=exteriores">
+            <Link className="m-auto" href="/products?category=usos&value=exterior">
               <Feather className="mx-auto size-10" />
               <P className={cn(quicksand.className, "mt-0 text-center text-lg leading-none")}>
                 <span className="rounded px-2">Exteriores</span>
@@ -45,7 +45,7 @@ export default async function HomePage() {
           </li>
           <div className="my-auto size-3 rounded-full bg-foreground" />
           <li className="w-32 rounded border p-2 py-6 transition-colors duration-200 ease-in-out hover:border-foreground">
-            <Link className="w-6" href="/products?categories=exteriores">
+            <Link className="w-6" href="/products?category=usos&value=interior">
               <Armchair className="mx-auto size-10" />
               <P className={cn(quicksand.className, "mt-0 text-center text-lg leading-none")}>
                 <span className="rounded px-2">Interiores</span>
@@ -54,7 +54,7 @@ export default async function HomePage() {
           </li>
           <div className="my-auto size-3 rounded-full bg-foreground" />
           <li className="w-32 rounded border p-2 py-6 transition-colors duration-200 ease-in-out hover:border-foreground">
-            <Link className="w-6" href="/products?categories=exteriores">
+            <Link className="w-6" href="/products?category=aplicaciones&value=mesadas-de-cocina">
               <ChefHat className="mx-auto size-10" />
               <P className={cn(quicksand.className, "mt-0 text-center text-lg leading-none")}>
                 <span className="rounded px-2">Cocina</span>
@@ -63,7 +63,7 @@ export default async function HomePage() {
           </li>
           <div className="my-auto size-3 rounded-full bg-transparent" />
           <li className="w-32 rounded border p-2 py-6 transition-colors duration-200 ease-in-out hover:border-foreground">
-            <Link className="w-6" href="/products?categories=exteriores">
+            <Link className="w-6" href="/products?category=aplicaciones&value=mesadas-de-bano">
               <ShowerHead className="mx-auto size-10" />
               <P className={cn(quicksand.className, "mt-0 text-center text-lg leading-none")}>
                 <span className="rounded px-2">Baño</span>
