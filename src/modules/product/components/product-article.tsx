@@ -32,13 +32,11 @@ export function ProductArticle({product, children}: ProductArticleProps) {
             </P>
             <P className="w-72 rounded bg-muted px-6">
               <span className="font-medium">Uso: </span>
-              {product.usos !== null
-                ? product.usos.map((uso) => (
-                    <span key={uso.id} className="pr-3">
-                      {uso.nombre}
-                    </span>
-                  ))
-                : null}
+              {product.usos!.map((uso) => (
+                <span key={uso.id} className="pr-3">
+                  {uso.nombre}
+                </span>
+              ))}
             </P>
             <P className="w-72 rounded bg-muted px-6">
               <span className="font-medium">Disponibilidad: </span>
@@ -48,7 +46,7 @@ export function ProductArticle({product, children}: ProductArticleProps) {
           <div className="inline-flex w-full justify-between">
             <ul className="flex max-w-md flex-wrap gap-4">
               <li className="w-32 rounded border p-2 py-6 transition-colors duration-200 ease-in-out hover:border-foreground">
-                <Link className="m-auto" href="/products?categories=exteriores">
+                <Link className="m-auto" href="/products?category=usos&value=exterior">
                   <Feather className="mx-auto size-8" />
                   <P className={cn(quicksand.className, "mt-0 text-center text-lg leading-none")}>
                     <span className="rounded px-2">Exteriores</span>
@@ -56,7 +54,7 @@ export function ProductArticle({product, children}: ProductArticleProps) {
                 </Link>
               </li>
               <li className="w-32 rounded border p-2 py-6 transition-colors duration-200 ease-in-out hover:border-foreground">
-                <Link className="w-6" href="/products?categories=exteriores">
+                <Link className="w-6" href="/products?category=usos&value=interior">
                   <Armchair className="mx-auto size-8" />
                   <P className={cn(quicksand.className, "mt-0 text-center text-lg leading-none")}>
                     <span className="rounded px-2">Interiores</span>
@@ -64,7 +62,10 @@ export function ProductArticle({product, children}: ProductArticleProps) {
                 </Link>
               </li>
               <li className="w-32 rounded border p-2 py-6 transition-colors duration-200 ease-in-out hover:border-foreground">
-                <Link className="w-6" href="/products?categories=exteriores">
+                <Link
+                  className="w-6"
+                  href="/products?category=aplicaciones&value=mesadas-de-cocina"
+                >
                   <ChefHat className="mx-auto size-8" />
                   <P className={cn(quicksand.className, "mt-0 text-center text-lg leading-none")}>
                     <span className="rounded px-2">Cocina</span>
@@ -72,7 +73,7 @@ export function ProductArticle({product, children}: ProductArticleProps) {
                 </Link>
               </li>
               <li className="w-32 rounded border p-2 py-6 transition-colors duration-200 ease-in-out hover:border-foreground">
-                <Link className="w-6" href="/products?categories=exteriores">
+                <Link className="w-6" href="/products?category=aplicaciones&value=mesadas-de-bano">
                   <ShowerHead className="mx-auto size-8" />
                   <P className={cn(quicksand.className, "mt-0 text-center text-lg leading-none")}>
                     <span className="rounded px-2">Baño</span>
