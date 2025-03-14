@@ -64,3 +64,7 @@ export function Small({children, className}: TypoProps) {
 export function Muted({children, className}: TypoProps) {
   return <p className={cn("text-sm text-muted-foreground", className)}>{children}</p>;
 }
+
+export function Highlight({children}: TypoProps) {
+  return <span className="bg-amber-500/65 px-3 text-background">{children}</span>;
+}
