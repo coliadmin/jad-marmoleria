@@ -1,9 +1,13 @@
+import {Link} from "next-view-transitions";
+
 import {api} from "@/api";
 import {fetchProductByCategory} from "@/modules/product";
 import {ProductLink} from "@/modules/product";
 import {H3} from "@/components/typo";
 import {Categories} from "@/modules/categories/enum";
 import {FilterLink} from "@/components/filter-link";
+import {query, CategoryCommons, categoryXPlural} from "@/lib/strapi";
+import {capitalize, cn} from "@/lib/utils";
 
 type Props = {
   searchParams: {
@@ -20,24 +24,39 @@ export default async function ProductsPage({searchParams: {category, value}}: Pr
   const aplications = await api.aplications.get();
   const filterProds = await fetchProductByCategory(category, value);
 
-  const title = () => {
-    let title = "Catálogo";
+  const title = async () => {
+    const baseTitle = "Catálogo";
 
-    if (category && value) {
-      const cat = category.charAt(0).toUpperCase() + category.slice(1);
-      let val = value.charAt(0).toUpperCase() + value.slice(1);
+    if (!category && !value) return baseTitle;
 
-      if (val.includes("-")) val = val.split("-").join(" ");
+    const {
+      data: [{nombre: subcategory}],
+    } = await query<CategoryCommons[]>(
+      `${categoryXPlural[category]}?filters[slug][$contains]=${value}&populate[fields][0]=nombre&populate[fields][1]=slug`,
+    );
 
-      title += ` ${cat} ${val}`;
-    }
+    const title = `${baseTitle} ${capitalize(category)}:  ${subcategory}`;
 
     return title;
   };
 
   return (
     <section className="container flex border-e border-s">
-      <aside className="flex h-full w-[250px] flex-col gap-8 py-8">
+      <aside className="flex h-full w-[250px] flex-col gap-8 py-6">
+        <div>
+          <H3 className="border-b">
+            <span className="px-3">Filtros</span>
+            <Link
+              className={cn(
+                "invisible ml-14 rounded-e-full px-2 text-sm font-normal text-slate-800/65 hover:underline",
+                category && value && "visible",
+              )}
+              href="/products"
+            >
+              Borrar filtros
+            </Link>
+          </H3>
+        </div>
         <div>
           <h4 className="border-b font-medium">
             <span className="px-3">Color</span>

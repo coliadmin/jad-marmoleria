@@ -15,26 +15,15 @@ type FilterLinkProps = {
 
 export function FilterLink({category, value}: FilterLinkProps) {
   const searchParams = useSearchParams();
-
   const activeValue = searchParams.get("value");
-
-  function handleOnChange(value: string) {
-    if (value === activeValue) {
-      window.location.href = "/products";
-
-      return;
-    }
-  }
 
   return (
     <Link
-      replace
       className={cn(
         "hover:underline",
         activeValue === value.slug && "rounded-e-full bg-amber-300/65 px-2",
       )}
       href={`/products?category=${category.toString()}&value=${value.slug}`}
-      onClick={() => handleOnChange(value.slug)}
     >
       {value.nombre}
     </Link>

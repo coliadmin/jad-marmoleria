@@ -7,6 +7,7 @@ import {H2, P} from "@/components/typo";
 import {Button} from "@/components/ui/button";
 import {cn} from "@/lib/utils";
 import {quicksand} from "@/fonts";
+import {Whatsapp} from "@/components/icons/whatsapp";
 
 type ProductArticleProps = {
   product: Product;
@@ -91,7 +92,12 @@ export function ProductArticle({product, children}: ProductArticleProps) {
             </ul>
             <footer className="self-end">
               <div className="flex justify-end py-6">
-                <Button className="btn btn-primary">Sacate las dudas</Button>
+                <Button className="btn btn-primary">
+                  Sacate las dudas
+                  <Link className="group relative" href="/" target="_blank">
+                    <Whatsapp className="size-5" />
+                  </Link>
+                </Button>
               </div>
             </footer>
           </div>

@@ -1,4 +1,7 @@
 import {Link} from "next-view-transitions";
+import {Instagram} from "lucide-react";
+
+import {Whatsapp} from "./icons/whatsapp";
 
 import {cn} from "@/lib/utils";
 import {quicksand} from "@/fonts";
@@ -36,6 +39,16 @@ export function Header() {
             <Link className="group relative" href="/faqs">
               <span className="px-2 tracking-widest">FAQs</span>
               <div className="h-[0.15rem] w-full bg-transparent transition-colors duration-100 ease-in-out group-hover:bg-amber-400/65" />
+            </Link>
+            <Link
+              className="group relative"
+              href="https://www.instagram.com/jad.marmoleria/"
+              target="_blank"
+            >
+              <Instagram className="size-5" />
+            </Link>
+            <Link className="group relative" href="/" target="_blank">
+              <Whatsapp className="size-5" />
             </Link>
           </div>
         </nav>

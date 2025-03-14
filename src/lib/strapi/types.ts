@@ -49,3 +49,11 @@ export interface Api<T> {
   get: () => QueryResponse<T[]>;
   fetch: (id: string) => Promise<Data<T> | null>;
 }
+
+export interface CategoryCommons {
+  nombre: string;
+}
+
+export interface CategoryIcon extends JSX.Element {
+  className?: string;
+}
