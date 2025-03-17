@@ -1,27 +1,20 @@
 import Link from "next/link";
-import {Flame} from "lucide-react";
+import {ArrowUpRight} from "lucide-react";
 
 import {api} from "@/api";
 import {Hero} from "@/components/hero";
-import {H2, Highlight, P} from "@/components/typo";
+import {H2, P} from "@/components/typo";
 import {ProductLink} from "@/modules/product";
 import {cn} from "@/lib/utils";
 import {quicksand} from "@/fonts";
-import {Interior} from "@/components/icons/interior";
-import {Exterior} from "@/components/icons/exterior";
-import {Kitchen} from "@/components/icons/kitchen";
-import {Bathroom} from "@/components/icons/bathroom";
+import {IconLink} from "@/components/icon-link";
+import {IconNames} from "@/components/icons";
+import {Categories} from "@/modules/categories/enum";
 
 export default async function HomePage() {
   const products = await api.products.get();
-
-  // const title = () => {
-  //   return (
-  //     <span className="text-pretty font-bold leading-[4rem]">
-  //       Bienvenidos a <Highlight>JAD</Highlight> Marmoleria de diseño
-  //     </span>
-  //   );
-  // };
+  const usos = await api.uses.get();
+  const aplications = await api.aplications.get();
 
   return (
     <section className="m-auto mx-auto pt-8">
@@ -36,31 +29,40 @@ export default async function HomePage() {
           Encontrá el marmol que buscas según tus necesidades
         </H2>
         <ul className="mx-auto flex max-w-xl flex-wrap justify-evenly gap-8">
-          <li className="w-32 rounded border p-2 py-6 transition-colors duration-200 ease-in-out hover:border-foreground">
-            <Exterior />
-          </li>
-          <div className="my-auto size-3 rounded-full bg-foreground" />
-          <li className="w-32 rounded border p-2 py-6 transition-colors duration-200 ease-in-out hover:border-foreground">
-            <Interior />
-          </li>
-          <div className="my-auto size-3 rounded-full bg-foreground" />
-          <li className="w-32 rounded border p-2 py-6 transition-colors duration-200 ease-in-out hover:border-foreground">
-            <Kitchen />
-          </li>
-          <div className="my-auto size-3 rounded-full bg-transparent" />
-          <li className="w-32 rounded border p-2 py-6 transition-colors duration-200 ease-in-out hover:border-foreground">
-            <Bathroom />
-          </li>
-          <div className="my-auto size-3 rounded-full bg-foreground" />
-          <li className="w-32 rounded border p-2 py-6 transition-colors duration-200 ease-in-out hover:border-foreground">
-            <Link className="w-6" href="/products?categories=exteriores">
-              <Flame className="mx-auto size-10" />
-              <P className={cn(quicksand.className, "mt-0 text-center text-lg leading-none")}>
-                <span className="rounded px-2">Resistente al calor</span>
+          {usos.data.map((uso) => (
+            <li
+              key={uso.id}
+              className="w-32 rounded border p-2 py-4 transition-colors duration-200 ease-in-out hover:border-foreground"
+            >
+              <IconLink
+                href={`/products?category=${Categories.USE}&value=${uso.slug}`}
+                icon={uso.slug as IconNames}
+                iconName={uso.nombre}
+              />
+            </li>
+          ))}
+          {aplications.data.map((aplication) => (
+            <li
+              key={aplication.id}
+              className="size-32 rounded border p-2 py-4 transition-colors duration-200 ease-in-out hover:border-foreground"
+            >
+              <IconLink
+                href={`/products?category=${Categories.APLICATION}&value=${aplication.slug}`}
+                icon={aplication.slug as IconNames}
+                iconName={aplication.nombre}
+              />
+            </li>
+          ))}
+          <li className="size-32 rounded border p-2 py-4 transition-colors duration-200 ease-in-out hover:border-foreground">
+            <Link className="m-auto w-6" href="/products">
+              <span className="mt-2 flex justify-center">
+                <ArrowUpRight />
+              </span>
+              <P className={cn(quicksand.className, "text-center text-lg leading-none")}>
+                <span className="rounded px-2">Ver todos</span>
               </P>
             </Link>
           </li>
-          <div className="my-auto size-3 rounded-full bg-transparent" />
         </ul>
       </div>
       <div className="m-auto mt-24 max-w-5xl">
