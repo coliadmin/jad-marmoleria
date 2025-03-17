@@ -1,13 +1,15 @@
 import type {Product} from "@/modules/product";
 
 import {Link} from "next-view-transitions";
-import {Armchair, ChefHat, Feather, Flame, ShowerHead} from "lucide-react";
+import {Armchair, ChefHat, Feather, Flame, icons, ShowerHead} from "lucide-react";
 
 import {H2, P} from "@/components/typo";
 import {Button} from "@/components/ui/button";
 import {cn} from "@/lib/utils";
 import {quicksand} from "@/fonts";
 import {Whatsapp} from "@/components/icons/whatsapp";
+import {IconLink} from "@/components/icon-link";
+import {IconNames} from "@/components/icons";
 
 type ProductArticleProps = {
   product: Product;
@@ -32,12 +34,8 @@ export function ProductArticle({product, children}: ProductArticleProps) {
               <span className="font-medium">Espesor: </span> {product.espesor}
             </P>
             <P className="w-72 rounded bg-muted px-6">
-              <span className="font-medium">Uso: </span>
-              {product.usos!.map((uso) => (
-                <span key={uso.id} className="pr-3">
-                  {uso.nombre}
-                </span>
-              ))}
+              <span className="font-medium">Material: </span>
+              {product.material.nombre}
             </P>
             <P className="w-72 rounded bg-muted px-6">
               <span className="font-medium">Disponibilidad: </span>
@@ -46,49 +44,31 @@ export function ProductArticle({product, children}: ProductArticleProps) {
           </div>
           <div className="inline-flex w-full justify-between">
             <ul className="flex max-w-md flex-wrap gap-4">
-              <li className="w-32 rounded border p-2 py-6 transition-colors duration-200 ease-in-out hover:border-foreground">
-                <Link className="m-auto" href="/products?category=usos&value=exterior">
-                  <Feather className="mx-auto size-8" />
-                  <P className={cn(quicksand.className, "mt-0 text-center text-lg leading-none")}>
-                    <span className="rounded px-2">Exteriores</span>
-                  </P>
-                </Link>
-              </li>
-              <li className="w-32 rounded border p-2 py-6 transition-colors duration-200 ease-in-out hover:border-foreground">
-                <Link className="w-6" href="/products?category=usos&value=interior">
-                  <Armchair className="mx-auto size-8" />
-                  <P className={cn(quicksand.className, "mt-0 text-center text-lg leading-none")}>
-                    <span className="rounded px-2">Interiores</span>
-                  </P>
-                </Link>
-              </li>
-              <li className="w-32 rounded border p-2 py-6 transition-colors duration-200 ease-in-out hover:border-foreground">
-                <Link
-                  className="w-6"
-                  href="/products?category=aplicaciones&value=mesadas-de-cocina"
+              {product.usos!.map((uso) => (
+                <li
+                  key={uso.id}
+                  className="size-32 rounded border p-2 py-4 transition-colors duration-200 ease-in-out hover:border-foreground"
                 >
-                  <ChefHat className="mx-auto size-8" />
-                  <P className={cn(quicksand.className, "mt-0 text-center text-lg leading-none")}>
-                    <span className="rounded px-2">Cocina</span>
-                  </P>
-                </Link>
-              </li>
-              <li className="w-32 rounded border p-2 py-6 transition-colors duration-200 ease-in-out hover:border-foreground">
-                <Link className="w-6" href="/products?category=aplicaciones&value=mesadas-de-bano">
-                  <ShowerHead className="mx-auto size-8" />
-                  <P className={cn(quicksand.className, "mt-0 text-center text-lg leading-none")}>
-                    <span className="rounded px-2">Baño</span>
-                  </P>
-                </Link>
-              </li>
-              <li className="w-32 rounded border p-2 py-6 transition-colors duration-200 ease-in-out hover:border-foreground">
-                <Link className="w-6" href="/products?categories=exteriores">
-                  <Flame className="mx-auto size-8" />
-                  <P className={cn(quicksand.className, "mt-0 text-center text-lg leading-none")}>
-                    <span className="rounded px-2">Resistente al calor</span>
-                  </P>
-                </Link>
-              </li>
+                  <IconLink
+                    href={`/products?category=usos&value=${uso.slug}`}
+                    icon={uso.slug as IconNames}
+                    iconName={uso.nombre}
+                  />
+                </li>
+              ))}
+
+              {product.aplicaciones!.map((aplic) => (
+                <li
+                  key={aplic.id}
+                  className="size-32 rounded border p-2 py-4 transition-colors duration-200 ease-in-out hover:border-foreground"
+                >
+                  <IconLink
+                    href={`/products?category=aplicaciones&value=${aplic.slug}`}
+                    icon={aplic.slug as IconNames}
+                    iconName={aplic.nombre}
+                  />
+                </li>
+              ))}
             </ul>
             <footer className="self-end">
               <div className="flex justify-end py-6">
