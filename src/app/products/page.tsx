@@ -48,12 +48,12 @@ export default async function ProductsPage({searchParams: {category, value}}: Pr
             <span className="px-3">Filtros</span>
             <Link
               className={cn(
-                "invisible ml-14 rounded-e-full px-2 text-sm font-normal text-slate-800/65 hover:underline",
+                "invisible ml-12 rounded-e-full px-2 text-sm font-normal text-slate-800/65 hover:underline",
                 category && value && "visible",
               )}
               href="/products"
             >
-              Borrar filtros
+              Limpiar filtro
             </Link>
           </H3>
         </div>
