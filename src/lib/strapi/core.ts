@@ -1,10 +1,6 @@
-import type {CategoryIcon, QueryResponse} from "./types";
+import type {QueryResponse} from "./types";
 
-import {Exterior} from "@/components/icons/exterior";
-import {Interior} from "@/components/icons/interior";
 import {STRAPI_HOST, STRAPI_TOKEN} from "@/config";
-import {Kitchen} from "@/components/icons/kitchen";
-import {Bathroom} from "@/components/icons/bathroom";
 
 export async function query<T>(path: string): QueryResponse<T> {
   const url = `${STRAPI_HOST}/api/${path}`;
@@ -35,10 +31,3 @@ export const categoryXPlural: Record<string, string> = {
   material: "materials",
   aplicaciones: "applications",
 };
-
-// export const categoryXIcon: Record<string, React.ReactNode> = {
-//   interior: <Interior>,
-//   exterior: Exterior,
-//   "mesadas-de-cocina": Kitchen,
-//   "mesadas-de-bano": Bathroom,
-// };
