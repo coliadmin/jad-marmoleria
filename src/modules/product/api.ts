@@ -21,7 +21,7 @@ async function getProducts(): QueryResponse<Product[]> {
 async function fetchProduct(slug: string): Promise<Product | null> {
   try {
     const {data} = await query<Product[]>(
-      `products?filters[slug][$contains]=${slug}&populate[usos][fields][0]=nombre&populate[usos][fields][1]=slug&populate[imagenes][fields][0]=name&populate[imagenes][fields][1]=url&populate[imagenes][fields][2]=hash&populate[portada][fields][0]=name&populate[portada][fields][1]=url&populate[portada][fields][2]=hash`,
+      `products?filters[slug][$contains]=${slug}&populate[usos][fields][0]=nombre&populate[usos][fields][1]=slug&populate[aplicaciones][fields][0]=nombre&populate[aplicaciones][fields][1]=slug&populate[material][fields][0]=nombre&populate[material][fields][1]=slug&populate[imagenes][fields][0]=name&populate[imagenes][fields][1]=url&populate[imagenes][fields][2]=hash&populate[portada][fields][0]=name&populate[portada][fields][1]=url&populate[portada][fields][2]=hash`,
     );
 
     return data[0];
