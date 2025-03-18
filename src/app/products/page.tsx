@@ -117,9 +117,9 @@ export default async function ProductsPage({searchParams: {category, value}}: Pr
             ))}
           </ul>
         ) : (
-          <ul className="flex flex-wrap justify-evenly gap-4 py-8">
+          <ul className="grid grid-cols-3 gap-10 py-8">
             {products.data.map((product) => (
-              <li key={product.id} className="inline-flex">
+              <li key={product.id} className="inline-flex max-w-[19rem] justify-self-center">
                 <ProductLink product={product} ratio={1} />
               </li>
             ))}
