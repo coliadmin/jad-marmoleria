@@ -4,7 +4,9 @@ interface ProjectDTO {
   nombre: string;
   slug: string;
   descripcion: string;
+  portada: Img;
   imagenes: Img[];
+  videos: Img[];
 }
 
 export type Project = Data<ProjectDTO>;
