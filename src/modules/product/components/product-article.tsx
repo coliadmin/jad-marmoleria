@@ -1,7 +1,6 @@
 import type {Product} from "@/modules/product";
 
 import {Link} from "next-view-transitions";
-import {Armchair, ChefHat, Feather, Flame, icons, ShowerHead} from "lucide-react";
 
 import {H2, P} from "@/components/typo";
 import {Button} from "@/components/ui/button";
