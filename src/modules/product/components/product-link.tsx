@@ -6,17 +6,25 @@ import {Link} from "next-view-transitions";
 import {H4} from "@/components/typo";
 import {VerticalImage} from "@/components/vertical-image";
 import {cn} from "@/lib/utils";
+import {Project} from "@/modules/projects";
 
 type ProductLinkProps = {
-  product: Product;
+  product: Product | Project;
   ratio?: number;
   className?: string;
   color?: string;
+  path?: "products" | "projects";
 };
 
-export function ProductLink({product, ratio, className, color}: ProductLinkProps) {
+export function ProductLink({
+  product,
+  ratio,
+  className,
+  color,
+  path = "products",
+}: ProductLinkProps) {
   return (
-    <Link className="group space-y-2" href={`/products/${product.slug}`}>
+    <Link className="group space-y-2" href={`/${path}/${product.slug}`}>
       <VerticalImage
         alt={product.portada.name}
         className={className}
@@ -26,7 +34,7 @@ export function ProductLink({product, ratio, className, color}: ProductLinkProps
       <div className="inline-flex w-full items-center">
         <H4
           className={cn(
-            "inline-flex w-fit items-center border-b text-lg transition-all duration-200 ease-in-out group-hover:border-foreground",
+            "inline-flex w-fit items-center text-wrap border-b text-lg transition-all duration-200 ease-in-out group-hover:border-foreground",
             color,
           )}
         >
