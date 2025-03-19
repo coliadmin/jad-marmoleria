@@ -1,11 +1,13 @@
 import {Link} from "next-view-transitions";
 import {BlocksRenderer, type BlocksContent} from "@strapi/blocks-react-renderer";
+import {ChevronLeft} from "lucide-react";
 
 import {Project} from "../types";
 
 import {H1, H2, H3, H4, P} from "@/components/typo";
 import {Button} from "@/components/ui/button";
 import {Whatsapp} from "@/components/icons/whatsapp";
+import {cn} from "@/lib/utils";
 
 type ProjectArticleProps = {
   project: Project;
@@ -17,8 +19,17 @@ export function ProjectArticle({project, children}: ProjectArticleProps) {
 
   return (
     <article className="border-e border-s">
-      <header className="flex justify-center gap-4 border-b">
-        <H2 className=" border-none py-6 text-3xl font-medium">{project.nombre}</H2>
+      <header className="flex items-center justify-between gap-4 border-b">
+        <Link
+          className={cn(
+            "group inline-flex items-center px-2 text-sm font-normal text-slate-800/65  hover:underline",
+          )}
+          href="/projects"
+        >
+          <ChevronLeft className="ms-2 size-4 stroke-1 transition-all duration-100 ease-in-out group-hover:inline-block group-hover:text-foreground" />
+          Atrás
+        </Link>
+        <H2 className="flex-1 border-none py-6 text-center text-4xl">{project.nombre}</H2>
       </header>
       <div className="inline-flex w-full gap-20 px-6 py-6">
         {children}
