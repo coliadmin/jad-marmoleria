@@ -36,10 +36,6 @@ export function Header() {
               <span className="px-2 tracking-widest">Nuestro trabajo</span>
               <div className="h-[0.15rem] w-full bg-transparent transition-colors duration-100 ease-in-out group-hover:bg-amber-400/65" />
             </Link>
-            <Link className="group relative" href="/faqs">
-              <span className="px-2 tracking-widest">FAQs</span>
-              <div className="h-[0.15rem] w-full bg-transparent transition-colors duration-100 ease-in-out group-hover:bg-amber-400/65" />
-            </Link>
             <Link
               className="group relative"
               href="https://www.instagram.com/jad.marmoleria/"
