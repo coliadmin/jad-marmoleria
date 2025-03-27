@@ -5,7 +5,7 @@ import {Api, query, QueryResponse} from "@/lib/strapi";
 async function getAplications(): QueryResponse<Aplication[]> {
   const res = await query<Aplication[]>(
     "applications?populate[fields][0]=nombre&populate[fields][1]=slug",
-  );
+    { next: { tags: ['application'] } });
 
   return res;
 }
