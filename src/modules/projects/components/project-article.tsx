@@ -34,7 +34,9 @@ export function ProjectArticle({project, children}: ProjectArticleProps) {
       <div className="inline-flex w-full gap-20 px-6 py-6">
         {children}
         <div className="mx-auto max-w-3xl flex-1 space-y-6 ">
+          <div className="prose">
           <BlocksRenderer content={content} />
+          </div>
           <div className="inline-flex w-full justify-between">
             <footer className="self-end">
               <div className="flex justify-end py-6">
