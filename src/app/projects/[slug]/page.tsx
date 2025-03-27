@@ -47,7 +47,7 @@ export default async function ProjectPage({params: {slug}}: ProjectPageProps) {
       <div className="flex flex-1 items-center">
         <div className="mx-2 flex-1">
           <ProjectArticle project={project}>
-            <aside className="ms-16 w-vertical">
+            <aside className="m-auto lg:ms-16 lg:m-0 w-vertical">
               {project.imagenes !== null ? (
                 <VerticalCarousel images={multimedia} />
               ) : (
