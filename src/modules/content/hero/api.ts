@@ -19,7 +19,7 @@ export async function fetchHero(): QueryResponse<Hero> {
   try {
     const res = await query<Hero>(
       "hero?populate[imagenes][fields][0]=name&populate[imagenes][fields][1]=url",
-    );
+      { next: { tags: ['hero'] } });
 
     return res;
   } catch (error) {
