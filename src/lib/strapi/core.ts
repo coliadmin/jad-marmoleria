@@ -2,12 +2,13 @@ import type {QueryResponse} from "./types";
 
 import {STRAPI_HOST, STRAPI_TOKEN} from "@/config";
 
-export async function query<T>(path: string): QueryResponse<T> {
+export async function query<T>(path: string, options?: RequestInit): QueryResponse<T> {
   const url = `${STRAPI_HOST}/api/${path}`;
   const prom = await fetch(url, {
     headers: {
       Authorization: `Bearer ${STRAPI_TOKEN}`,
     },
+    ...options,
   });
 
   const res = await prom.json();
