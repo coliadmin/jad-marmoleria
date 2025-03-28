@@ -117,7 +117,7 @@ export default async function ProductsPage({searchParams: {category, value}}: Pr
             ))}
           </ul>
         ) : (
-          <ul className="grid grid-cols-3 gap-10 py-8">
+          <ul className="grid gap-12 py-8 md:grid-cols-2 lg:grid-cols-3">
             {products.data.map((product) => (
               <li key={product.id} className="inline-flex max-w-[19rem] justify-self-center">
                 <ProductLink product={product} ratio={1} />
