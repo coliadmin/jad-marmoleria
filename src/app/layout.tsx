@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 export default function RootLayout({children}: {children: React.ReactNode}) {
   return (
     <ViewTransitions>
-      <html lang="es">
+      <html className="scroll-smooth" lang="es">
         <body className="border-border bg-background text-foreground">
           <div
             className={cn(
