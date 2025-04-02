@@ -52,9 +52,9 @@ export async function Hero() {
         <H1 className="">{titleComponent()}</H1>
         <P className={cn("text-xl text-muted-foreground", quicksand.className)}>{descripcion}</P>
         <div className="mt-8 inline-flex gap-2">
-          <Button className="w-48 ">
-            Contactanos
-            <Link href="#" target="_blank">
+          <Button className="w-48">
+            <Link href="https://wa.me/5491169101717" target="_blank" className="flex items-center gap-2">
+              Contactanos
               <Whatsapp className="size-7" />
             </Link>
           </Button>
