@@ -1,6 +1,7 @@
 import type {Product} from "@/modules/product";
 
 import {Link} from "next-view-transitions";
+import {ChevronDown, ChevronLeft} from "lucide-react";
 
 import {H2, P} from "@/components/typo";
 import {Button} from "@/components/ui/button";
@@ -49,12 +50,23 @@ export function ProductArticle({product, children, nextProduct}: ProductArticleP
             variant="rightString"
           />
         </div>
-      <div className="inline-flex w-full gap-20 px-6 py-6">
+        <Link href="/" target="_blank">
+          <Button className="btn btn-primary ">
+            Sacate las dudas
+            <Whatsapp className="size-5" />
+          </Button>
+        </Link>
+        <Link
+          className="inline-flex items-center text-sm font-normal text-slate-800/65"
+          href="#descripcion"
+        >
+          Más información
+          <ChevronDown className="ms-1 size-4 stroke-1" />
+        </Link>
+      </div>
+      <div className="m-auto w-full gap-20 px-6 py-6 lg:inline-flex">
         {children}
-        <div className="mx-auto max-w-2xl flex-1 space-y-6 ">
-          {/* <P className="text-xl font-medium">
-            {product.nombre} - {product.publishedAt}
-          </P> */}
+        <div className="mx-auto max-w-2xl flex-1 space-y-6 pt-6 lg:pt-0" id="descripcion">
           <P className="text-pretty">{product.descripcion}</P>
           <div className="space-y-3 text-muted-foreground">
             <P className="w-72 rounded bg-muted px-6">
@@ -69,8 +81,8 @@ export function ProductArticle({product, children, nextProduct}: ProductArticleP
               {product.disponibilidad ? "sin stock" : "en stock"}
             </P>
           </div>
-          <div className="inline-flex w-full justify-between">
-            <ul className="flex max-w-md flex-wrap gap-4">
+          <div className="inline-flex w-full flex-col justify-between space-y-6">
+            <ul className="flex flex-wrap gap-4 lg:max-w-md">
               {product.usos!.map((uso) => (
                 <li
                   key={uso.id}
@@ -97,7 +109,7 @@ export function ProductArticle({product, children, nextProduct}: ProductArticleP
                 </li>
               ))}
             </ul>
-            <footer className="self-end">
+            <footer className="self-center lg:self-end">
               <div className="flex justify-end py-6">
                 <Button className="btn btn-primary">
                   <Link className="group relative flex items-center gap-2" href="https://wa.me/5491169101717" target="_blank">
