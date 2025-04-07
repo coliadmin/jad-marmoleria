@@ -111,12 +111,12 @@ export function ProductArticle({product, children, nextProduct}: ProductArticleP
             </ul>
             <footer className="self-center lg:self-end">
               <div className="flex justify-end py-6">
-                <Button className="btn btn-primary">
-                  <Link className="group relative flex items-center gap-2" href="https://wa.me/5491169101717" target="_blank">
-                    Sacate las dudas
+                <Link className="group relative flex items-center gap-2" href="https://wa.me/5491169101717" target="_blank">
+                 <Button className="btn btn-primary">
+                   Sacate las dudas
                     <Whatsapp className="size-5" />
-                  </Link>
-                </Button>
+                  </Button>
+                </Link>
               </div>
             </footer>
           </div>
