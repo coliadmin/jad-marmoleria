@@ -56,7 +56,7 @@ export async function Hero() {
             <Button className="w-48">
               Contactanos
               <Whatsapp className="size-7" />
-              </Button>
+             </Button>
           </Link>
           <Link href="/products">
             <Button variant="outline">

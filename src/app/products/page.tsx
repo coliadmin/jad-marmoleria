@@ -6,8 +6,14 @@ import {ProductLink} from "@/modules/product";
 import {H3} from "@/components/typo";
 import {Categories} from "@/modules/categories/enum";
 import {FilterLink} from "@/components/filter-link";
-import {query, CategoryCommons, categoryXPlural} from "@/lib/strapi";
+import {query, CategoryCommons, categoryXPlural, Data} from "@/lib/strapi";
 import {capitalize, cn} from "@/lib/utils";
+import type { Aplication } from "@/modules/categories/aplication";
+import type { Use } from "@/modules/categories/use";
+import type { Material } from "@/modules/categories/material";
+import type {Color} from "@/modules/categories/color/types";
+import { ScrollArea } from "@radix-ui/react-scroll-area";
+import { ScrollBar } from "@/components/ui/scroll-area";
 
 type Props = {
   searchParams: {
@@ -16,18 +22,56 @@ type Props = {
   };
 };
 
+interface Filters {
+  title: string;
+  slug: string;
+  category: Data<Color[]> | Data<Aplication[]> | Data<Material[]> | Data<Use[]>;
+}
+
+async function getFilters() {
+  const {data: colors} = await api.colors.get();
+  const {data: uses} = await api.uses.get();
+  const {data: materials} = await api.materials.get();
+  const {data: aplications} = await api.aplications.get();
+
+  const filters: Filters[] = [
+    {
+      title: "Color",
+      slug: Categories.COLOR,
+      category: colors,
+    },
+    {
+      title: "Uso",
+      slug: Categories.USE,
+      category: uses,
+    },
+    {
+      title: "Material",
+      slug: Categories.MATERIAL,
+      category: materials,
+    },
+    {
+      title: "Aplicación",
+      slug: Categories.APLICATION,
+      category: aplications,
+    },
+  ]
+
+  return filters;
+}
+
+
+
 export default async function ProductsPage({searchParams: {category, value}}: Props) {
   const products = await api.products.get();
-  const colors = await api.colors.get();
-  const uses = await api.uses.get();
-  const materials = await api.materials.get();
-  const aplications = await api.aplications.get();
   const filterProds = await fetchProductByCategory(category, value);
+
+  const filters = await getFilters();
 
   const title = async () => {
     const baseTitle = "Catálogo";
 
-    if (!category && !value) return baseTitle;
+    if (!category || !value) return baseTitle;
 
     const {
       data: [{nombre: subcategory}],
@@ -41,74 +85,62 @@ export default async function ProductsPage({searchParams: {category, value}}: Pr
   };
 
   return (
-    <section className="container flex border-e border-s">
-      <aside className="flex h-full w-[250px] flex-col gap-8 py-6">
-        <div>
-          <H3 className="border-b">
-            <span className="px-3">Filtros</span>
-            <Link
-              className={cn(
-                "invisible ml-12 rounded-e-full px-2 text-sm font-normal text-slate-800/65 hover:underline",
-                category && value && "visible",
+    <section className="w-full mx-auto max-w-xl sm:max-w-2xl overflow-hidden md:max-w-5xl lg:max-w-[88rem] flex flex-col lg:flex-row border-e border-s">
+      <aside className="flex flex-col lg:h-full lg:w-[250px] w-full pt-6 lg:py-6">
+        <div className="border-b lg:w-auto flex flex-row gap-4 lg:gap-0 lg:justify-between">
+          <H3 className="ml-3">Filtros</H3>
+          <Link
+            className={cn(
+                "content-center invisible rounded-e-full px-2 text-sm font-normal text-slate-800/65 hover:underline",
+                category && "visible" || value && "visible",
               )}
-              href="/products"
-            >
-              Limpiar filtro
-            </Link>
-          </H3>
+           href="/products"
+          >
+           Limpiar filtro
+          </Link>
         </div>
-        <div>
-          <h4 className="border-b font-medium">
-            <span className="px-3">Color</span>
-          </h4>
-          <ul className="space-y-2 ps-5 pt-2">
-            {colors.data.map((color) => (
-              <li key={color.id}>
-                <FilterLink category={Categories.COLOR} value={color} />
-              </li>
-            ))}
-          </ul>
-        </div>
-        <div>
-          <h4 className="border-b font-medium">
-            <span className="px-3">Uso</span>
-          </h4>
-          <ul className="space-y-2 ps-5 pt-2">
-            {uses.data.map((use) => (
-              <li key={use.id}>
-                <FilterLink category={Categories.USE} value={use} />
-              </li>
-            ))}
-          </ul>
-        </div>
-        <div>
-          <h4 className="border-b font-medium">
-            <span className="px-3">Material</span>
-          </h4>
-          <ul className="space-y-2 ps-5 pt-2">
-            {materials.data.map((material) => (
-              <li key={material.id}>
-                <FilterLink category={Categories.MATERIAL} value={material} />
-              </li>
-            ))}
-          </ul>
-        </div>
-        <div>
-          <h4 className="border-b font-medium">
-            <span className="px-3">Aplicación</span>
-          </h4>
-          <ul className="space-y-2 ps-5 pt-2">
-            {aplications.data.map((aplication) => (
-              <li key={aplication.id}>
-                <FilterLink category={Categories.APLICATION} value={aplication} />
-              </li>
-            ))}
-          </ul>
-        </div>
+       <div className="block border-b lg:hidden ml-1">
+         <ScrollArea className="whitespace-nowrap w-full">
+            <div className="flex gap-6 p-2 overflow-x-auto">
+            {filters.map((filter) => (
+                <Link className={cn("font-medium rounded-full", category === filter.slug && "bg-gray-200/65 px-3" )} key={filter.slug} href={`/products?category=${filter.slug}`}>
+                  {filter.title}
+                </Link>
+              ))}
+            </div>
+          <ScrollBar orientation="horizontal" />
+          </ScrollArea>
+          <ScrollArea className="whitespace-nowrap w-full">
+            <div className="flex gap-6 p-2 overflow-x-auto">
+            {filters.map((filter) => (
+              filter.slug === category && filter.category.map((item) => (
+                <FilterLink category={filter.slug} value={item} key={item.id} />
+                ))
+              ))}
+            </div>
+          <ScrollBar orientation="horizontal" />
+          </ScrollArea>
+       </div>
+       <div className="hidden lg:block">
+        {filters.map((filter) => (
+            <div className="gap-8 py-4">
+              <h4 className="border-b font-medium">
+                <span className="px-3">{filter.title}</span>
+              </h4>
+              <ul className="space-y-2 ps-5 pt-2">
+                {filter.category.map((item) => (
+                  <li key={item.id}>
+                  <FilterLink category={filter.slug} value={item} />
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+       </div>
       </aside>
-      <section className="flex-1 border-s">
+      <section className="lg:flex-1 lg:border-s">
         <H3 className="border-b py-3 text-center">{title()}</H3>
-        {category ? (
+        {category && value ? (
           <ul className="flex flex-wrap justify-evenly gap-4 py-8">
             {filterProds.map((product) => (
               <li key={product.id} className="inline-flex">
@@ -117,7 +149,7 @@ export default async function ProductsPage({searchParams: {category, value}}: Pr
             ))}
           </ul>
         ) : (
-          <ul className="grid grid-cols-3 gap-10 py-8">
+          <ul className="grid gap-12 py-8 md:grid-cols-2 lg:grid-cols-3">
             {products.data.map((product) => (
               <li key={product.id} className="inline-flex max-w-[19rem] justify-self-center">
                 <ProductLink product={product} ratio={1} />
