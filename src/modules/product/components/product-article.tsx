@@ -18,8 +18,17 @@ type ProductArticleProps = {
 export function ProductArticle({product, children}: ProductArticleProps) {
   return (
     <article className="border-e border-s">
-      <header className="flex justify-center gap-4 border-b">
-        <H2 className="border-none py-6 text-4xl">{product.nombre}</H2>
+      <header className="relative flex items-center border-b">
+        <Link
+          className={cn(
+            "group absolute left-0 inline-flex items-center gap-1 px-2 text-sm font-normal text-slate-800/65 hover:underline",
+          )}
+          href="/products"
+        >
+          <ChevronLeft className="ms-2 mt-icon size-4 stroke-1 transition-all duration-100 ease-in-out group-hover:inline-block group-hover:text-foreground" />
+          Atrás
+        </Link>
+        <H2 className="flex-grow border-none py-6 text-center text-4xl">{product.nombre}</H2>
       </header>
       <div className="inline-flex w-full gap-20 px-6 py-6">
         {children}
