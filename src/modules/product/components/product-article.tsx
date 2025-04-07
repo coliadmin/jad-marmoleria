@@ -5,17 +5,18 @@ import {Link} from "next-view-transitions";
 import {H2, P} from "@/components/typo";
 import {Button} from "@/components/ui/button";
 import {cn} from "@/lib/utils";
-import {quicksand} from "@/fonts";
 import {Whatsapp} from "@/components/icons/whatsapp";
 import {IconLink} from "@/components/icon-link";
 import {IconNames} from "@/components/icons";
+import {NavProductButton} from "@/components/nav-button";
 
 type ProductArticleProps = {
   product: Product;
   children?: React.ReactNode;
+nextProduct?: Product;
 };
 
-export function ProductArticle({product, children}: ProductArticleProps) {
+export function ProductArticle({product, children, nextProduct}: ProductArticleProps) {
   return (
     <article className="border-e border-s">
       <header className="relative flex items-center border-b">
@@ -30,6 +31,24 @@ export function ProductArticle({product, children}: ProductArticleProps) {
         </Link>
         <H2 className="flex-grow border-none py-6 text-center text-4xl">{product.nombre}</H2>
       </header>
+      <div className="flex w-full flex-col items-center gap-y-6 pt-4 lg:hidden">
+        <div className="flex w-full justify-between px-4">
+          <NavProductButton
+            className={cn(
+              "w-auto text-base font-normal text-slate-800/80 hover:bg-transparent hover:underline",
+            )}
+            mode="back"
+            variant="leftString"
+          />
+          <NavProductButton
+            className={cn(
+              "w-auto text-base font-normal text-slate-800/80 hover:bg-transparent hover:underline",
+            )}
+            mode="path"
+            path={nextProduct?.slug}
+            variant="rightString"
+          />
+        </div>
       <div className="inline-flex w-full gap-20 px-6 py-6">
         {children}
         <div className="mx-auto max-w-2xl flex-1 space-y-6 ">
