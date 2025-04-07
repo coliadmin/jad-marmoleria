@@ -22,11 +22,11 @@ export function ProjectArticle({project, children}: ProjectArticleProps) {
       <header className="flex items-center justify-between gap-4 border-b">
         <Link
           className={cn(
-            "group inline-flex items-center px-2 text-sm font-normal text-slate-800/65 hover:underline",
+            "group inline-flex items-center gap-1 px-2 text-sm font-normal text-slate-800/65 hover:underline",
           )}
           href="/projects"
         >
-          <ChevronLeft className="ms-2 size-4 stroke-1 transition-all duration-100 ease-in-out group-hover:inline-block group-hover:text-foreground" />
+          <ChevronLeft className="ms-2 mt-icon size-4 stroke-1 transition-all duration-100 ease-in-out group-hover:inline-block group-hover:text-foreground" />
           Atrás
         </Link>
         <H2 className="flex-1 border-none py-6 md:text-center text-4xl">{project.nombre}</H2>

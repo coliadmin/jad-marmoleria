@@ -8,7 +8,7 @@ import {Button} from "./ui/button";
 import {cn} from "@/lib/utils";
 
 type NavProductButtonProps = {
-  variant: "left" | "right";
+  variant: "left" | "right" | "leftString" | "rightString";
   path?: string;
   className?: string;
   mode?: "path" | "back";
@@ -17,6 +17,16 @@ type NavProductButtonProps = {
 const variants = {
   left: <ChevronLeft />,
   right: <ChevronRight />,
+  leftString: (
+    <>
+      <ChevronLeft /> Anterior
+    </>
+  ),
+  rightString: (
+    <>
+      Siguiente <ChevronRight />
+    </>
+  ),
 };
 
 export function NavProductButton({

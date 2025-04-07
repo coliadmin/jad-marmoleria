@@ -56,13 +56,11 @@ export default async function ProductPage({params: {slug}}: ProductPageProps) {
   return (
     <>
       <section className="container">
-        {/* <BackButton className="" /> */}
         <div className="flex flex-1 items-center">
-          {/* <NavProductButton path="tundra-dark" variant="prev" /> */}
-          <NavProductButton mode="back" variant="left" />
+          <NavProductButton className="hidden lg:block" mode="back" variant="left" />
           <div className="mx-12 flex-1">
-            <ProductArticle product={product}>
-              <aside className="ms-16 w-vertical">
+            <ProductArticle nextProduct={nextProduct} product={product}>
+              <aside className="m-auto w-vertical lg:ms-16">
                 {product.imagenes !== null ? (
                   <VerticalCarousel images={apiImages} />
                 ) : (
@@ -71,7 +69,7 @@ export default async function ProductPage({params: {slug}}: ProductPageProps) {
               </aside>
             </ProductArticle>
           </div>
-          <NavProductButton path={nextProduct.slug} variant="right" />
+          <NavProductButton className="hidden lg:block" path={nextProduct.slug} variant="right" />
         </div>
       </section>
       <aside className="border-t">
