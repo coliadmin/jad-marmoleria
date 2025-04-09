@@ -69,7 +69,7 @@ export default async function HomePage() {
         <H2 className="mb-8 border-none text-center">
           Algunos de nuestros productos más solicitados
         </H2>
-        <ul className="flex flex-wrap justify-between gap-8 pb-12">
+        <ul className="flex flex-wrap justify-center gap-8 pb-12 lg:justify-between">
           {products.data.map((product) => (
             <li key={product.id} className="inline-flex">
               <ProductLink product={product} />
