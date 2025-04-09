@@ -17,7 +17,7 @@ export default async function HomePage() {
   const aplications = await api.aplications.get();
 
   return (
-    <section className="m-auto mx-auto pt-8">
+    <section className="m-auto mx-auto p-8 lg:pt-8">
       <Hero />
       <div className="m-auto max-w-5xl">
         <H2 className={cn("mb-8 border-none text-center leading-[3.2rem]")}>
@@ -28,7 +28,7 @@ export default async function HomePage() {
           </div>
           Encontrá el marmol que buscas según tus necesidades
         </H2>
-        <ul className="mx-auto flex max-w-xl flex-wrap justify-evenly gap-8">
+        <ul className="mx-auto flex max-w-xl flex-wrap justify-center gap-8 lg:justify-evenly">
           {usos.data.map((uso) => (
             <li
               key={uso.id}
