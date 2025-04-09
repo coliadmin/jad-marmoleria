@@ -1,9 +1,15 @@
 import Link from "next/link";
-import {ArrowUpRight} from "lucide-react";
+import {ArrowUpRight, ChevronDownIcon} from "lucide-react";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@radix-ui/react-accordion";
 
 import {api} from "@/api";
 import {Hero} from "@/components/hero";
-import {H2, H4, P} from "@/components/typo";
+import {H2, P} from "@/components/typo";
 import {ProductLink} from "@/modules/product";
 import {cn} from "@/lib/utils";
 import {quicksand} from "@/fonts";
@@ -15,6 +21,7 @@ export default async function HomePage() {
   const products = await api.products.get();
   const usos = await api.uses.get();
   const aplications = await api.aplications.get();
+  const faqs = await api.faqs.get();
 
   return (
     <section className="m-auto mx-auto p-8 lg:pt-8">
@@ -77,37 +84,22 @@ export default async function HomePage() {
           ))}
         </ul>
       </div>
-      <div className="m-auto mt-24 max-w-5xl">
-        <H2 className="mb-8 border-none text-center">Preguntas Frecuentes</H2>
-        <ul className="flex flex-col gap-8 pb-12">
-          <li className="">
-            <H4>¿Pregunta 1?</H4>
-            <P>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ultricies, nisi vitae
-              consectetur tristique, mi dolor pretium risus, ut pharetra est felis sed ex. Sed quis
-              orci pharetra, tincidunt sapien non, vulputate urna. Nunc et sodales turpis. Phasellus
-              et nisi ultrices, iaculis orci ac, fermentum nunc. Suspendisse felis risus, viverra id
-              ex eu, ultrices vehicula ipsum. Pellentesque rhoncus nisi placerat, sagittis purus id,
-              mollis sem. Fusce leo metus, vulputate sed felis et, bibendum aliquam dolor.
-            </P>
-          </li>
-          <li className="">
-            <H4>¿Pregunta 2?</H4>
-            <P>
-              Nunc et sodales turpis. Phasellus et nisi ultrices, iaculis orci ac, fermentum nunc.
-              Suspendisse felis risus, viverra id ex eu, ultrices vehicula ipsum. Pellentesque
-              rhoncus nisi placerat, sagittis purus id, mollis sem. Fusce leo metus, vulputate sed
-              felis et, bibendum aliquam dolor.
-            </P>
-          </li>
-          <li className="">
-            <H4>¿Pregunta 3?</H4>
-            <P>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ultricies, nisi vitae
-              consectetur tristique, mi dolor pretium risus, ut pharetra est felis sed ex. Sed quis
-              orci pharetra, tincidunt sapien non, vulputate urna.
-            </P>
-          </li>
+      <div className="m-auto mt-24 max-w-3xl py-16">
+        <H2 className="mb-14 border-none text-center">Preguntas Frecuentes</H2>
+        <ul className="flex max-w-3xl flex-col gap-12 px-8">
+          {faqs.data.map((faq) => (
+            <li key={faq.id} className="border-b">
+              <Accordion collapsible defaultValue={faq.id} type="single">
+                <AccordionItem value={faq.id}>
+                  <AccordionTrigger className="group mb-4 flex w-full justify-between text-start font-medium">
+                    ¿{faq.titulo}?
+                    <ChevronDownIcon className="stroke-1 transition-transform duration-300 group-data-[state=open]:rotate-180" />
+                  </AccordionTrigger>
+                  <AccordionContent className="mb-2">{faq.respuesta}</AccordionContent>
+                </AccordionItem>
+              </Accordion>
+            </li>
+          ))}
         </ul>
       </div>
     </section>
