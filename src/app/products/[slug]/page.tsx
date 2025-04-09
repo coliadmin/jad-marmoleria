@@ -58,7 +58,7 @@ export default async function ProductPage({params: {slug}}: ProductPageProps) {
       <section className="container">
         <div className="flex flex-1 items-center">
           <NavProductButton className="hidden lg:block" mode="back" variant="left" />
-          <div className="mx-12 flex-1">
+          <div className="flex-1 lg:mx-12">
             <ProductArticle nextProduct={nextProduct} product={product}>
               <aside className="m-auto w-vertical lg:ms-16">
                 {product.imagenes !== null ? (
