@@ -6,7 +6,7 @@ export default async function ProjectsPage() {
   const {data} = await api.projects.get();
 
   return (
-    <section className="container flex border-e border-s">
+    <section className="container flex lg:border-e lg:border-s">
       <section className="flex-1">
         <header className="w-full border-b pb-0">
           <H3 className="py-3 text-center">Our Work</H3>

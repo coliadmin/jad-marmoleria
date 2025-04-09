@@ -17,7 +17,7 @@ export default async function HomePage() {
   const aplications = await api.aplications.get();
 
   return (
-    <section className="m-auto mx-auto pt-8">
+    <section className="m-auto mx-auto p-8 lg:pt-8">
       <Hero />
       <div className="m-auto max-w-5xl">
         <H2 className={cn("mb-8 border-none text-center leading-[3.2rem]")}>
@@ -69,7 +69,7 @@ export default async function HomePage() {
         <H2 className="mb-8 border-none text-center">
           Algunos de nuestros productos más solicitados
         </H2>
-        <ul className="flex flex-wrap justify-between gap-8 pb-12">
+        <ul className="flex flex-wrap justify-center gap-8 pb-12 lg:justify-between">
           {products.data.map((product) => (
             <li key={product.id} className="inline-flex">
               <ProductLink product={product} />
