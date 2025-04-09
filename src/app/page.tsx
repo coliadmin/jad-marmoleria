@@ -28,7 +28,7 @@ export default async function HomePage() {
           </div>
           Encontrá el marmol que buscas según tus necesidades
         </H2>
-        <ul className="mx-auto flex max-w-xl flex-wrap justify-center gap-8 lg:justify-evenly">
+        <ul className="mx-auto flex max-w-xl flex-wrap justify-evenly gap-8">
           {usos.data.map((uso) => (
             <li
               key={uso.id}
