@@ -103,7 +103,14 @@ export default async function ProductsPage({searchParams: {category, value}}: Pr
          <ScrollArea className="whitespace-nowrap w-full">
             <div className="flex gap-6 p-2 overflow-x-auto">
             {filters.map((filter) => (
-                <Link className={cn("font-medium rounded-full", category === filter.slug && "bg-gray-200/65 px-3" )} key={filter.slug} href={`/products?category=${filter.slug}`}>
+                <Link
+                  key={filter.slug}
+                  className={cn(
+                    "rounded-full font-medium",
+                    category === filter.slug && "bg-gray-200/65 px-3",
+                  )}
+                  href={`/products?category=${filter.slug}`}
+                >
                   {filter.title}
                 </Link>
               ))}
