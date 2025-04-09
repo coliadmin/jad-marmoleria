@@ -3,7 +3,7 @@ import {ArrowUpRight} from "lucide-react";
 
 import {api} from "@/api";
 import {Hero} from "@/components/hero";
-import {H2, P} from "@/components/typo";
+import {H2, H4, P} from "@/components/typo";
 import {ProductLink} from "@/modules/product";
 import {cn} from "@/lib/utils";
 import {quicksand} from "@/fonts";
@@ -75,6 +75,39 @@ export default async function HomePage() {
               <ProductLink product={product} />
             </li>
           ))}
+        </ul>
+      </div>
+      <div className="m-auto mt-24 max-w-5xl">
+        <H2 className="mb-8 border-none text-center">Preguntas Frecuentes</H2>
+        <ul className="flex flex-col gap-8 pb-12">
+          <li className="">
+            <H4>¿Pregunta 1?</H4>
+            <P>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ultricies, nisi vitae
+              consectetur tristique, mi dolor pretium risus, ut pharetra est felis sed ex. Sed quis
+              orci pharetra, tincidunt sapien non, vulputate urna. Nunc et sodales turpis. Phasellus
+              et nisi ultrices, iaculis orci ac, fermentum nunc. Suspendisse felis risus, viverra id
+              ex eu, ultrices vehicula ipsum. Pellentesque rhoncus nisi placerat, sagittis purus id,
+              mollis sem. Fusce leo metus, vulputate sed felis et, bibendum aliquam dolor.
+            </P>
+          </li>
+          <li className="">
+            <H4>¿Pregunta 2?</H4>
+            <P>
+              Nunc et sodales turpis. Phasellus et nisi ultrices, iaculis orci ac, fermentum nunc.
+              Suspendisse felis risus, viverra id ex eu, ultrices vehicula ipsum. Pellentesque
+              rhoncus nisi placerat, sagittis purus id, mollis sem. Fusce leo metus, vulputate sed
+              felis et, bibendum aliquam dolor.
+            </P>
+          </li>
+          <li className="">
+            <H4>¿Pregunta 3?</H4>
+            <P>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ultricies, nisi vitae
+              consectetur tristique, mi dolor pretium risus, ut pharetra est felis sed ex. Sed quis
+              orci pharetra, tincidunt sapien non, vulputate urna.
+            </P>
+          </li>
         </ul>
       </div>
     </section>
