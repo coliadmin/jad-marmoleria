@@ -34,8 +34,8 @@ export async function Hero() {
   const p3 = imagenes[2];
 
   return (
-    <section className="mb-8 inline-flex h-[750px] w-full justify-center">
-      <div className="max-w-[52rem] flex-1">
+    <section className="mb-8 inline-flex h-[38rem] w-full justify-center p-2 lg:h-[750px] lg:p-0">
+      <div className="hidden max-w-[52rem] flex-1 lg:block">
         <div className="relative inline-flex gap-2">
           <div className={cn("absolute -z-20 h-[600px] w-[300px] rounded bg-blue-200")}>
             <img alt={p2.name} className="h-full rounded object-cover" src={p2.url} />
@@ -48,7 +48,7 @@ export async function Hero() {
           </div>
         </div>
       </div>
-      <div className="max-w-lg pt-36">
+      <div className="m-auto mt-24 max-w-lg lg:pt-36">
         <H1 className="">{titleComponent()}</H1>
         <P className={cn("text-xl text-muted-foreground", quicksand.className)}>{descripcion}</P>
         <div className="mt-8 inline-flex gap-2">
@@ -56,7 +56,7 @@ export async function Hero() {
             <Button className="w-48">
               Contactanos
               <Whatsapp className="size-7" />
-             </Button>
+            </Button>
           </Link>
           <Link href="/products">
             <Button variant="outline">
