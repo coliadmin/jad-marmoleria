@@ -48,7 +48,7 @@ export async function Hero() {
           </div>
         </div>
       </div>
-      <div className="m-auto mt-24 max-w-lg lg:pt-36">
+      <div className="m-auto mt-24 max-w-lg lg:m-0  lg:pt-36">
         <H1 className="">{titleComponent()}</H1>
         <P className={cn("text-xl text-muted-foreground", quicksand.className)}>{descripcion}</P>
         <div className="mt-8 inline-flex gap-2">
