@@ -4,6 +4,7 @@ import {api as uses} from "@/modules/categories/use";
 import {api as materials} from "@/modules/categories/material";
 import {api as projects} from "@/modules/projects";
 import {api as aplications} from "@/modules/categories/aplication";
+import {api as faqs} from "@/modules/faqs";
 
 export const api = {
   products,
@@ -12,4 +13,5 @@ export const api = {
   uses,
   materials,
   aplications,
+  faqs,
 };
