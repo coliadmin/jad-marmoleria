@@ -45,7 +45,7 @@ export default async function ProjectPage({params: {slug}}: ProjectPageProps) {
   return (
     <section className="container">
       <div className="flex flex-1 items-center">
-        <div className="mx-2 flex-1">
+        <div className="flex-1 lg:mx-2">
           <ProjectArticle project={project}>
             <aside className="m-auto lg:ms-16 lg:m-0 w-vertical">
               {project.imagenes !== null ? (
