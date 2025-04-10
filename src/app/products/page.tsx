@@ -85,7 +85,7 @@ export default async function ProductsPage({searchParams: {category, value}}: Pr
   };
 
   return (
-    <section className="mx-auto flex w-full max-w-xl flex-col overflow-hidden border-e border-s sm:max-w-2xl md:max-w-5xl lg:mx-auto lg:max-w-[88rem] lg:flex-row">
+    <section className="flex w-full flex-col overflow-hidden border-e border-s lg:mx-auto lg:max-w-[88rem] lg:flex-row">
       <aside className="flex flex-col lg:h-full lg:w-[250px] w-full pt-6 lg:py-6">
         <div className="border-b lg:w-auto flex flex-row gap-4 lg:gap-0 lg:justify-between">
           <H3 className="ml-3">Filtros</H3>
