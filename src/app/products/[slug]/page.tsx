@@ -72,8 +72,8 @@ export default async function ProductPage({params: {slug}}: ProductPageProps) {
           <NavProductButton className="hidden lg:block" path={nextProduct.slug} variant="right" />
         </div>
       </section>
-      <aside className="border-t">
-        <div className="mx-24">
+      <aside className="flex justify-center border-t">
+        <div className="mx-24 flex max-w-lg flex-col justify-center sm:max-w-2xl md:max-w-3xl lg:max-w-5xl">
           <H3 className="my-6 text-center text-2xl font-medium">
             Productos que podrían interesarte
           </H3>
