@@ -43,7 +43,7 @@ export function Header() {
             >
               <Instagram className="size-5" />
             </Link>
-            <Link className="group relative" href="/" target="_blank">
+            <Link className="group relative" href="https://wa.me/5491169101717" target="_blank">
               <Whatsapp className="size-5" />
             </Link>
           </div>

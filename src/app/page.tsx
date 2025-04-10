@@ -1,5 +1,11 @@
 import Link from "next/link";
-import {ArrowUpRight} from "lucide-react";
+import {ArrowUpRight, ChevronDownIcon} from "lucide-react";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@radix-ui/react-accordion";
 
 import {api} from "@/api";
 import {Hero} from "@/components/hero";
@@ -15,9 +21,10 @@ export default async function HomePage() {
   const products = await api.products.get();
   const usos = await api.uses.get();
   const aplications = await api.aplications.get();
+  const faqs = await api.faqs.get();
 
   return (
-    <section className="m-auto mx-auto pt-8">
+    <section className="m-auto mx-auto p-8 lg:pt-8">
       <Hero />
       <div className="m-auto max-w-5xl">
         <H2 className={cn("mb-8 border-none text-center leading-[3.2rem]")}>
@@ -69,10 +76,28 @@ export default async function HomePage() {
         <H2 className="mb-8 border-none text-center">
           Algunos de nuestros productos más solicitados
         </H2>
-        <ul className="flex flex-wrap justify-between gap-8 pb-12">
+        <ul className="flex flex-wrap justify-center gap-8 pb-12 lg:justify-between">
           {products.data.map((product) => (
             <li key={product.id} className="inline-flex">
               <ProductLink product={product} />
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div className="m-auto mt-24 max-w-3xl py-16">
+        <H2 className="mb-14 border-none text-center">Preguntas Frecuentes</H2>
+        <ul className="flex max-w-3xl flex-col gap-12 px-8">
+          {faqs.data.map((faq) => (
+            <li key={faq.id} className="border-b">
+              <Accordion collapsible defaultValue={faq.id} type="single">
+                <AccordionItem value={faq.id}>
+                  <AccordionTrigger className="group mb-4 flex w-full justify-between text-start font-medium">
+                    ¿{faq.titulo}?
+                    <ChevronDownIcon className="stroke-1 transition-transform duration-300 group-data-[state=open]:rotate-180" />
+                  </AccordionTrigger>
+                  <AccordionContent className="mb-2">{faq.respuesta}</AccordionContent>
+                </AccordionItem>
+              </Accordion>
             </li>
           ))}
         </ul>

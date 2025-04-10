@@ -22,23 +22,23 @@ export function ProjectArticle({project, children}: ProjectArticleProps) {
       <header className="flex items-center justify-between gap-4 border-b">
         <Link
           className={cn(
-            "group inline-flex items-center px-2 text-sm font-normal text-slate-800/65 hover:underline",
+            "group inline-flex items-center gap-1 px-2 text-sm font-normal text-slate-800/65 hover:underline",
           )}
           href="/projects"
         >
-          <ChevronLeft className="ms-2 size-4 stroke-1 transition-all duration-100 ease-in-out group-hover:inline-block group-hover:text-foreground" />
+          <ChevronLeft className="ms-2 mt-icon size-4 stroke-1 transition-all duration-100 ease-in-out group-hover:inline-block group-hover:text-foreground" />
           Atrás
         </Link>
         <H2 className="flex-1 border-none py-6 md:text-center text-4xl">{project.nombre}</H2>
       </header>
       <div className="pt-4 lg:hidden flex flex-col items-center w-full gap-y-6">
-      <Button className="btn btn-primary ">
-           Sacate las dudas
-          <Link className="group relative" href="/" target="_blank">
+        <Link className="group relative flex items-center gap-2" href="https://wa.me/5491169101717" target="_blank">
+           <Button className="btn btn-primary">
+              Sacate las dudas
              <Whatsapp className="size-5" />
-          </Link>
-        </Button>
-        <Link className="text-sm inline-flex items-center font-normal text-slate-800/65" href='#descripcion'>Más información
+            </Button>
+         </Link>
+         <Link className="text-sm inline-flex items-center font-normal text-slate-800/65" href='#descripcion'>Más información
           <ChevronDown className="ms-1 size-4 stroke-1" />
         </Link>
       </div>
@@ -51,12 +51,12 @@ export function ProjectArticle({project, children}: ProjectArticleProps) {
           <div className="inline-flex w-full justify-center lg:justify-end">
             <footer className="self-end">
               <div className="flex justify-end py-6">
-                <Button className="btn btn-primary">
-                  Sacate las dudas
-                  <Link className="group relative" href="/" target="_blank">
+                <Link className="group relative flex items-center gap-2" href="https://wa.me/5491169101717" target="_blank">
+                 <Button className="btn btn-primary">
+                    Sacate las dudas
                     <Whatsapp className="size-5" />
-                  </Link>
-                </Button>
+                  </Button>
+                </Link>
               </div>
             </footer>
           </div>
