@@ -17,11 +17,14 @@ export function RelatedProducts({products}: RelatedProductsProps) {
   return (
     <ScrollArea className="w-full whitespace-nowrap">
       <ul
-        className={cn("mb-12 flex gap-8 overflow-x-auto pb-4", length < 2 ? "justify-center" : "")}
+        className={cn(
+          "mb-12 flex gap-4 overflow-x-auto pb-4 md:gap-8",
+          length < 2 ? "justify-center" : "",
+        )}
       >
         {products.map((related) => (
-          <li key={related.id} className="space-y-2">
-            <ProductLink className="w-28" product={related} ratio={1} />
+          <li key={related.id} className="w-1/2 flex-shrink-0 space-y-2 md:flex-shrink">
+            <ProductLink product={related} ratio={1} />
           </li>
         ))}
       </ul>
