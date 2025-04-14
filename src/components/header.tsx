@@ -7,11 +7,13 @@ import {cn, toWhatsAppUrl} from "@/lib/utils";
 import {quicksand} from "@/fonts";
 import {getInstagram} from "@/modules/content/instagram";
 import {getWhatsApp} from "@/modules/content/whatsapp/api";
+import {getHeader} from "@/modules/content/header";
 
 export async function Header() {
   const instagram = await getInstagram();
   const {data: whatsapp} = await getWhatsApp();
   const whatsAppUrl = toWhatsAppUrl(whatsapp.telefono);
+  const {data: header} = await getHeader();
 
   return (
     <div className="h-auto w-full border-b">
@@ -22,7 +24,7 @@ export async function Header() {
           )}
         >
           <Link className={cn("mb-4 text-center text-3xl font-bold")} href="/">
-            JAD Marmoleria
+            {header.title}
           </Link>
           <div
             className={cn(
@@ -31,15 +33,15 @@ export async function Header() {
             )}
           >
             <Link className="group relative" href="/">
-              <span className="px-2 tracking-widest">Home</span>
+              <span className="px-2 tracking-widest">{header.home}</span>
               <div className="h-[0.15rem] w-full bg-transparent transition-colors duration-100 ease-in-out group-hover:bg-amber-400/65" />
             </Link>
             <Link className="group relative" href="/products">
-              <span className="px-2 tracking-widest">Catálogo</span>
+              <span className="px-2 tracking-widest">{header.products}</span>
               <div className="h-[0.15rem] w-full bg-transparent transition-colors duration-100 ease-in-out group-hover:bg-amber-400/65" />
             </Link>
             <Link className="group relative" href="/projects">
-              <span className="px-2 tracking-widest">Nuestro trabajo</span>
+              <span className="px-2 tracking-widest">{header.projects}</span>
               <div className="h-[0.15rem] w-full bg-transparent transition-colors duration-100 ease-in-out group-hover:bg-amber-400/65" />
             </Link>
             <Link className="group relative" href={instagram.url} target="_blank">
