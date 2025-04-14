@@ -3,20 +3,25 @@ import {BlocksRenderer, type BlocksContent} from "@strapi/blocks-react-renderer"
 import {ChevronDown, ChevronLeft} from "lucide-react";
 
 import {Project} from "../types";
+import {BlocksRendererWrapper} from "./blocksrenderer-wrapper";
 
 import {H1, H2, H3, H4, P} from "@/components/typo";
 import {Button} from "@/components/ui/button";
 import {Whatsapp} from "@/components/icons/whatsapp";
-import {cn} from "@/lib/utils";
-import { BlocksRendererWrapper } from "./blocksrenderer-wrapper";
+import {cn, toWhatsAppUrl} from "@/lib/utils";
+import {getWhatsApp} from "@/modules/content/whatsapp/api";
 
 type ProjectArticleProps = {
   project: Project;
   children?: React.ReactNode;
 };
 
-export function ProjectArticle({project, children}: ProjectArticleProps) {
+export async function ProjectArticle({project, children}: ProjectArticleProps) {
   const content: BlocksContent = project.descripcion as unknown as BlocksContent;
+  const {data: whatsapp} = await getWhatsApp();
+
+  const whatsAppUrl = toWhatsAppUrl(whatsapp.telefono);
+
   return (
     <article className="border-e border-s">
       <header className="flex items-center justify-between gap-4 border-b">
@@ -32,7 +37,7 @@ export function ProjectArticle({project, children}: ProjectArticleProps) {
         <H2 className="flex-1 border-none py-6 md:text-center text-4xl">{project.nombre}</H2>
       </header>
       <div className="pt-4 lg:hidden flex flex-col items-center w-full gap-y-6">
-        <Link className="group relative flex items-center gap-2" href="https://wa.me/5491169101717" target="_blank">
+        <Link className="group relative flex items-center gap-2" href={whatsAppUrl} target="_blank">
            <Button className="btn btn-primary">
               Sacate las dudas
              <Whatsapp className="size-5" />
@@ -51,7 +56,11 @@ export function ProjectArticle({project, children}: ProjectArticleProps) {
           <div className="inline-flex w-full justify-center lg:justify-end">
             <footer className="self-end">
               <div className="flex justify-end py-6">
-                <Link className="group relative flex items-center gap-2" href="https://wa.me/5491169101717" target="_blank">
+                <Link
+                  className="group relative flex items-center gap-2"
+                  href={whatsAppUrl}
+                  target="_blank"
+                >
                  <Button className="btn btn-primary">
                     Sacate las dudas
                     <Whatsapp className="size-5" />

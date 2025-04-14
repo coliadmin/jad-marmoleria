@@ -5,13 +5,18 @@ import {Whatsapp} from "./icons/whatsapp";
 
 import {getHero} from "@/modules/content/hero";
 import {Button} from "@/components/ui/button";
-import {cn} from "@/lib/utils";
+import {cn, toWhatsAppUrl} from "@/lib/utils";
 import {quicksand} from "@/fonts";
+import {getWhatsApp} from "@/modules/content/whatsapp/api";
 
 export async function Hero() {
   const {
     data: {imagenes, descripcion, titulo},
   } = await getHero();
+
+  const {data: whatsapp} = await getWhatsApp();
+
+  const whatsAppUrl = toWhatsAppUrl(whatsapp.telefono);
 
   const startH = titulo.indexOf("{");
   const endH = titulo.indexOf("}");
@@ -35,33 +40,31 @@ export async function Hero() {
 
   return (
     <section className="mb-8 inline-flex h-[38rem] w-full justify-center p-2 lg:h-[750px] lg:p-0">
-      <div className="hidden max-w-[52rem] flex-1 lg:block">
+      <div className="hidden flex-1 lg:block lg:max-w-lg xl:max-w-2xl 2xl:max-w-[52rem]">
         <div className="relative inline-flex gap-2">
           <div className={cn("absolute -z-20 h-[600px] w-[300px] rounded bg-blue-200")}>
             <img alt={p2.name} className="h-full rounded object-cover" src={p2.url} />
           </div>
-          <div className="absolute left-60 top-10 -z-10 h-[600px] w-[300px] rounded bg-blue-400">
+          <div className="absolute left-36 top-10 -z-10 h-[600px] w-[300px] rounded bg-blue-400 xl:left-40 2xl:left-60">
             <img alt={p1.name} className="h-full rounded object-cover" src={p1.url} />
           </div>
-          <div className="absolute left-[30rem] top-20 z-0 h-[600px] w-[300px] rounded bg-blue-600">
+          <div className="absolute left-80 top-20 z-0 hidden h-[600px] w-[300px] rounded bg-blue-600 xl:block 2xl:left-[30rem]">
             <img alt={p3.name} className="h-full rounded object-cover" src={p3.url} />
           </div>
         </div>
       </div>
-      <div className="m-auto mt-24 max-w-lg lg:m-0  lg:pt-36">
+      <div className="m-auto mt-24 max-w-lg lg:m-0 lg:pl-6 lg:pt-36 xl:pl-0">
         <H1 className="">{titleComponent()}</H1>
         <P className={cn("text-xl text-muted-foreground", quicksand.className)}>{descripcion}</P>
         <div className="mt-8 inline-flex gap-2">
-          <Link href="https://wa.me/5491169101717" target="_blank" className="flex items-center gap-2">
+          <Link className="flex items-center gap-2" href={whatsAppUrl} target="_blank">
             <Button className="w-48">
               Contactanos
               <Whatsapp className="size-7" />
             </Button>
           </Link>
           <Link href="/products">
-            <Button variant="outline">
-            Ver catálogo
-            </Button>
+            <Button variant="outline">Ver catálogo</Button>
           </Link>
         </div>
       </div>

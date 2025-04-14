@@ -73,7 +73,7 @@ export default async function ProductPage({params: {slug}}: ProductPageProps) {
         </div>
       </section>
       <aside className="flex justify-center border-t">
-        <div className="mx-24 flex max-w-lg flex-col justify-center sm:max-w-2xl md:max-w-3xl lg:max-w-5xl">
+        <div className="mx-4 flex max-w-lg flex-col justify-center sm:max-w-2xl md:mx-12 md:max-w-3xl lg:mx-24 lg:max-w-5xl">
           <H3 className="my-6 text-center text-2xl font-medium">
             Productos que podrían interesarte
           </H3>
