@@ -130,7 +130,7 @@ export default async function ProductsPage({searchParams: {category, value}}: Pr
        </div>
        <div className="hidden lg:block">
         {filters.map((filter) => (
-            <div className="gap-8 py-4">
+            <div key={filter.slug} className="gap-8 py-4">
               <h4 className="border-b font-medium">
                 <span className="px-3">{filter.title}</span>
               </h4>
@@ -145,13 +145,13 @@ export default async function ProductsPage({searchParams: {category, value}}: Pr
           ))}
        </div>
       </aside>
-      <section className="lg:flex-1 lg:border-s">
+      <section className="flex-1 lg:border-s">
         <H3 className="border-b py-3 text-center">{title()}</H3>
         {category && value ? (
           <ul className="flex flex-wrap justify-evenly gap-4 py-8">
             {filterProds.map((product) => (
               <li key={product.id} className="inline-flex">
-                <ProductLink product={product} ratio={1} />
+                <ProductLink className="w-vertical" product={product} ratio={1} />
               </li>
             ))}
           </ul>
@@ -159,7 +159,7 @@ export default async function ProductsPage({searchParams: {category, value}}: Pr
           <ul className="grid gap-12 py-8 md:grid-cols-2 lg:grid-cols-3">
             {products.data.map((product) => (
               <li key={product.id} className="inline-flex max-w-[19rem] justify-self-center">
-                <ProductLink product={product} ratio={1} />
+                <ProductLink className="w-vertical" product={product} ratio={1} />
               </li>
             ))}
           </ul>
