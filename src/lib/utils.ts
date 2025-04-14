@@ -29,3 +29,9 @@ export function isImageOrVideo(filePath: string): "image" | "video" | null {
     return null;
   }
 }
+
+export function toWhatsAppUrl(telefono: number) {
+  const url = "https://wa.me/" + telefono;
+
+  return url;
+}
