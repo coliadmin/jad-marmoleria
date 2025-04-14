@@ -5,19 +5,23 @@ import {ChevronDown, ChevronLeft} from "lucide-react";
 
 import {H2, P} from "@/components/typo";
 import {Button} from "@/components/ui/button";
-import {cn} from "@/lib/utils";
+import {cn, toWhatsAppUrl} from "@/lib/utils";
 import {Whatsapp} from "@/components/icons/whatsapp";
 import {IconLink} from "@/components/icon-link";
 import {IconNames} from "@/components/icons";
 import {NavProductButton} from "@/components/nav-button";
+import {getWhatsApp} from "@/modules/content/whatsapp/api";
 
 type ProductArticleProps = {
   product: Product;
   children?: React.ReactNode;
-nextProduct?: Product;
+  nextProduct?: Product;
 };
 
-export function ProductArticle({product, children, nextProduct}: ProductArticleProps) {
+export async function ProductArticle({product, children, nextProduct}: ProductArticleProps) {
+  const {data: whatsapp} = await getWhatsApp();
+  const whatsAppUrl = toWhatsAppUrl(whatsapp.telefono);
+
   return (
     <article className="lg:border-e lg:border-s">
       <header className="relative flex items-center border-b">
@@ -52,7 +56,7 @@ export function ProductArticle({product, children, nextProduct}: ProductArticleP
             variant="rightString"
           />
         </div>
-        <Link href="/" target="_blank">
+        <Link href={whatsAppUrl} target="_blank">
           <Button className="btn btn-primary ">
             Sacate las dudas
             <Whatsapp className="size-5" />
@@ -113,9 +117,13 @@ export function ProductArticle({product, children, nextProduct}: ProductArticleP
             </ul>
             <footer className="self-center lg:self-end">
               <div className="flex justify-end py-6">
-                <Link className="group relative flex items-center gap-2" href="https://wa.me/5491169101717" target="_blank">
-                 <Button className="btn btn-primary">
-                   Sacate las dudas
+                <Link
+                  className="group relative flex items-center gap-2"
+                  href={whatsAppUrl}
+                  target="_blank"
+                >
+                  <Button className="btn btn-primary">
+                    Sacate las dudas
                     <Whatsapp className="size-5" />
                   </Button>
                 </Link>
