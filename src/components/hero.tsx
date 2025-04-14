@@ -5,13 +5,18 @@ import {Whatsapp} from "./icons/whatsapp";
 
 import {getHero} from "@/modules/content/hero";
 import {Button} from "@/components/ui/button";
-import {cn} from "@/lib/utils";
+import {cn, toWhatsAppUrl} from "@/lib/utils";
 import {quicksand} from "@/fonts";
+import {getWhatsApp} from "@/modules/content/whatsapp/api";
 
 export async function Hero() {
   const {
     data: {imagenes, descripcion, titulo},
   } = await getHero();
+
+  const {data: whatsapp} = await getWhatsApp();
+
+  const whatsAppUrl = toWhatsAppUrl(whatsapp.telefono);
 
   const startH = titulo.indexOf("{");
   const endH = titulo.indexOf("}");
@@ -52,16 +57,14 @@ export async function Hero() {
         <H1 className="">{titleComponent()}</H1>
         <P className={cn("text-xl text-muted-foreground", quicksand.className)}>{descripcion}</P>
         <div className="mt-8 inline-flex gap-2">
-          <Link href="https://wa.me/5491169101717" target="_blank" className="flex items-center gap-2">
+          <Link className="flex items-center gap-2" href={whatsAppUrl} target="_blank">
             <Button className="w-48">
               Contactanos
               <Whatsapp className="size-7" />
             </Button>
           </Link>
           <Link href="/products">
-            <Button variant="outline">
-            Ver catálogo
-            </Button>
+            <Button variant="outline">Ver catálogo</Button>
           </Link>
         </div>
       </div>
