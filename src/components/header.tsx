@@ -9,7 +9,7 @@ import {quicksand} from "@/fonts";
 export function Header() {
   return (
     <div className="h-auto w-full border-b">
-      <header className="flex h-min w-full justify-center overflow-hidden px-28 py-3 backdrop-blur">
+      <header className="flex h-min w-full justify-center overflow-hidden px-4 py-3 backdrop-blur md:px-12 lg:px-28">
         <nav
           className={cn(
             "relative flex max-w-5xl flex-1 flex-col justify-center overflow-hidden rounded p-0 py-1",
@@ -20,7 +20,7 @@ export function Header() {
           </Link>
           <div
             className={cn(
-              "m-auto inline-flex w-full max-w-3xl justify-center gap-4 rounded py-1 font-semibold",
+              "m-auto inline-flex w-full max-w-3xl justify-center gap-2 rounded py-1 font-semibold md:gap-4",
               quicksand.className,
             )}
           >

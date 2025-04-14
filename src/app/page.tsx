@@ -18,13 +18,14 @@ import {IconNames} from "@/components/icons";
 import {Categories} from "@/modules/categories/enum";
 
 export default async function HomePage() {
-  const products = await api.products.get();
+  const {data} = await api.products.get();
+  const products = data.slice(0, 3);
   const usos = await api.uses.get();
   const aplications = await api.aplications.get();
   const faqs = await api.faqs.get();
 
   return (
-    <section className="m-auto mx-auto p-8 lg:pt-8">
+    <section className="m-auto mx-auto p-4 lg:pt-8">
       <Hero />
       <div className="m-auto max-w-5xl">
         <H2 className={cn("mb-8 border-none text-center leading-[3.2rem]")}>
@@ -77,9 +78,9 @@ export default async function HomePage() {
           Algunos de nuestros productos más solicitados
         </H2>
         <ul className="flex flex-wrap justify-center gap-8 pb-12 lg:justify-between">
-          {products.data.map((product) => (
+          {products.map((product) => (
             <li key={product.id} className="inline-flex">
-              <ProductLink product={product} />
+              <ProductLink className="w-vertical" product={product} />
             </li>
           ))}
         </ul>

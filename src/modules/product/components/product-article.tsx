@@ -19,7 +19,7 @@ nextProduct?: Product;
 
 export function ProductArticle({product, children, nextProduct}: ProductArticleProps) {
   return (
-    <article className="border-e border-s">
+    <article className="lg:border-e lg:border-s">
       <header className="relative flex items-center border-b">
         <Link
           className={cn(
@@ -30,7 +30,9 @@ export function ProductArticle({product, children, nextProduct}: ProductArticleP
           <ChevronLeft className="ms-2 mt-icon size-4 stroke-1 transition-all duration-100 ease-in-out group-hover:inline-block group-hover:text-foreground" />
           Atrás
         </Link>
-        <H2 className="flex-grow border-none py-6 text-center text-4xl">{product.nombre}</H2>
+        <H2 className="ml-6 flex-grow border-none py-6 text-center text-4xl sm:ml-0">
+          {product.nombre}
+        </H2>
       </header>
       <div className="flex w-full flex-col items-center gap-y-6 pt-4 lg:hidden">
         <div className="flex w-full justify-between px-4">
