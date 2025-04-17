@@ -1,4 +1,5 @@
 import {Link} from "next-view-transitions";
+import {Metadata} from "next";
 
 import {api} from "@/api";
 import {fetchProductByCategory} from "@/modules/product";
@@ -59,6 +60,13 @@ async function getFilters() {
 
   return filters;
 }
+export const metadata: Metadata = {
+  title: "JAD Marmolería - Catálogo",
+  openGraph: {
+    title: "JAD Marmolería - Catálogo",
+    url: `/products`,
+  },
+};
 
 export default async function ProductsPage({searchParams: {category, value}}: Props) {
   const products = await api.products.get();
