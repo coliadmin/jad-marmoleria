@@ -1,6 +1,16 @@
+import {Metadata} from "next";
+
 import {api} from "@/api";
 import {H3} from "@/components/typo";
 import {ProductLink} from "@/modules/product";
+
+export const metadata: Metadata = {
+  title: "JAD Marmolería - Nosotros",
+  openGraph: {
+    title: "JAD Marmolería - Nosotros",
+    url: `/projects`,
+  },
+};
 
 export default async function ProjectsPage() {
   const {data} = await api.projects.get();

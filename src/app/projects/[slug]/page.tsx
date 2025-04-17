@@ -28,8 +28,21 @@ export async function generateMetadata({params: {slug}}: ProjectPageProps) {
 
   return {
     title: project.nombre,
-    description: project.descripcion,
-    image: project.portada.url,
+    description: project.nombre,
+    openGraph: {
+      title: project.nombre,
+      description: project.nombre,
+      images: [
+        {
+          url: project.portada.url,
+          alt: project.nombre,
+        },
+      ],
+      url: `/projects/${slug}`,
+      type: "article",
+      locale: "es_AR",
+      siteName: "JAD Marmoleria",
+    },
   };
 }
 
