@@ -21,7 +21,7 @@ export default async function Custom404() {
           <H3 className="text-balance font-medium">
             La página que has tratado de acceder no existe o ha sido eliminada.
           </H3>
-          <Link href="/">
+          <Link prefetch href="/">
             <Button className="text-base" variant="outline">
               <ArrowLeft />
               Volver a la Home
@@ -37,7 +37,7 @@ export default async function Custom404() {
           orientation="horizontal"
         />
         <section className="mt-16 w-full xl:ml-28">
-          <Link className="xl:hidden" href="/products">
+          <Link prefetch className="xl:hidden" href="/products">
             <Button className="text-base" variant="outline">
               Ver todos
               <ArrowUpRight />
@@ -47,7 +47,7 @@ export default async function Custom404() {
             Productos que podrían interesarte
           </H3>
           <RelatedProducts products={products} />
-          <Link className="hidden xl:block" href="/products">
+          <Link prefetch className="hidden xl:block" href="/products">
             <Button className="text-base" variant="outline">
               Ver todos
               <ArrowUpRight />
