@@ -32,7 +32,20 @@ export async function generateMetadata({params: {slug}}: ProductPageProps) {
   return {
     title: product.nombre,
     description: product.descripcion,
-    image: toUrl(product.portada.url),
+    openGraph: {
+      title: product.nombre,
+      description: product.descripcion,
+      images: [
+        {
+          url: toUrl(product.portada.url),
+          alt: product.nombre,
+        },
+      ],
+      url: `/products/${slug}`,
+      type: "article",
+      locale: "es_AR",
+      siteName: "JAD Marmoleria",
+    },
   };
 }
 
