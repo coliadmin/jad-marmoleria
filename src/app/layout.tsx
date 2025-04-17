@@ -17,7 +17,7 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
   return (
     <ViewTransitions>
       <html className="scroll-smooth" lang="es">
-        <body className="border-border bg-background text-foreground">
+        <body className="scrollbar border-border bg-background text-foreground">
           <div
             className={cn(
               montserrat.className,
