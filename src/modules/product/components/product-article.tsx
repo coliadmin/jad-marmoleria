@@ -26,6 +26,7 @@ export async function ProductArticle({product, children, nextProduct}: ProductAr
     <article className="lg:border-e lg:border-s">
       <header className="relative flex items-center border-b">
         <Link
+          prefetch
           className={cn(
             "group absolute left-0 inline-flex items-center gap-1 px-2 text-sm font-normal text-slate-800/65 hover:underline",
           )}
