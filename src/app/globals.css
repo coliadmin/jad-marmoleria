@@ -105,7 +105,32 @@
   * {
     @apply border-border;
   }
+  html {
+     scrollbar-gutter: stable;
+  }
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+@layer utilities {
+  .scrollbar::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+  }
+
+  .scrollbar::-webkit-scrollbar-track {
+    border-radius: 100vh;
+    background: #d7d7d729;
+  }
+
+  .scrollbar::-webkit-scrollbar-thumb {
+    background: #71706a83;
+    border-radius: 100vh;
+    border: 3px solid #f4f4f3;
+  }
+
+  .scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #918d88c7;
   }
 }

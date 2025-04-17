@@ -55,12 +55,10 @@ async function getFilters() {
       slug: Categories.APLICATION,
       category: aplications,
     },
-  ]
+  ];
 
   return filters;
 }
-
-
 
 export default async function ProductsPage({searchParams: {category, value}}: Props) {
   const products = await api.products.get();
@@ -90,21 +88,23 @@ export default async function ProductsPage({searchParams: {category, value}}: Pr
         <div className="border-b lg:w-auto flex flex-row gap-4 lg:gap-0 lg:justify-between">
           <H3 className="ml-3">Filtros</H3>
           <Link
+            prefetch
             className={cn(
                 "content-center invisible rounded-e-full px-2 text-sm font-normal text-slate-800/65 hover:underline",
                 category && "visible" || value && "visible",
-              )}
-           href="/products"
+            )}
+            href="/products"
           >
-           Limpiar filtro
+            Limpiar filtro
           </Link>
         </div>
        <div className="block border-b lg:hidden ml-1">
          <ScrollArea className="whitespace-nowrap w-full">
             <div className="flex gap-6 p-2 overflow-x-auto">
-            {filters.map((filter) => (
+              {filters.map((filter) => (
                 <Link
                   key={filter.slug}
+                  prefetch
                   className={cn(
                     "rounded-full font-medium",
                     category === filter.slug && "bg-gray-200/65 px-3",
@@ -115,7 +115,7 @@ export default async function ProductsPage({searchParams: {category, value}}: Pr
                 </Link>
               ))}
             </div>
-          <ScrollBar orientation="horizontal" />
+            <ScrollBar orientation="horizontal" />
           </ScrollArea>
           <ScrollArea className="whitespace-nowrap w-full">
             <div className="flex gap-6 p-2 overflow-x-auto">
@@ -125,11 +125,11 @@ export default async function ProductsPage({searchParams: {category, value}}: Pr
                 ))
               ))}
             </div>
-          <ScrollBar orientation="horizontal" />
+            <ScrollBar orientation="horizontal" />
           </ScrollArea>
-       </div>
-       <div className="hidden lg:block">
-        {filters.map((filter) => (
+        </div>
+        <div className="hidden lg:block">
+          {filters.map((filter) => (
             <div key={filter.slug} className="gap-8 py-4">
               <h4 className="border-b font-medium">
                 <span className="px-3">{filter.title}</span>
@@ -137,13 +137,13 @@ export default async function ProductsPage({searchParams: {category, value}}: Pr
               <ul className="space-y-2 ps-5 pt-2">
                 {filter.category.map((item) => (
                   <li key={item.id}>
-                  <FilterLink category={filter.slug} value={item} />
+                    <FilterLink category={filter.slug} value={item} />
                   </li>
                 ))}
               </ul>
             </div>
           ))}
-       </div>
+        </div>
       </aside>
       <section className="flex-1 lg:border-s">
         <H3 className="border-b py-3 text-center">{title()}</H3>

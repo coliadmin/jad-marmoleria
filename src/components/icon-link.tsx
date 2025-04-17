@@ -14,7 +14,7 @@ type Props = {
 
 export function IconLink({href, icon, iconName}: Props) {
   return (
-    <Link className="m-auto w-6" href={href}>
+    <Link prefetch className="m-auto w-6" href={href}>
       <span className="mt-2 flex justify-center">{icons[icon]}</span>
       <P className={cn(quicksand.className, "text-center text-lg leading-none")}>
         <span className="rounded px-2">{iconName}</span>

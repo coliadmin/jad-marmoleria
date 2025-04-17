@@ -62,7 +62,7 @@ export default async function HomePage() {
             </li>
           ))}
           <li className="size-32 rounded border p-2 py-4 transition-colors duration-200 ease-in-out hover:border-foreground">
-            <Link className="m-auto w-6" href="/products">
+            <Link prefetch className="m-auto w-6" href="/products">
               <span className="mt-2 flex justify-center">
                 <ArrowUpRight />
               </span>
