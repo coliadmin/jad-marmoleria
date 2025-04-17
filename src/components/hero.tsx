@@ -63,7 +63,7 @@ export async function Hero() {
               <Whatsapp className="size-7" />
             </Button>
           </Link>
-          <Link href="/products">
+          <Link prefetch href="/products">
             <Button variant="outline">Ver catálogo</Button>
           </Link>
         </div>

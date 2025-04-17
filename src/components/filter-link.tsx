@@ -18,6 +18,7 @@ export function FilterLink({category, value}: FilterLinkProps) {
 
   return (
     <Link
+      prefetch
       className={cn(
         "lg:hover:underline",
         activeValue === value.slug && " lg:rounded-s-none rounded-full bg-amber-300/65 px-3 lg:px-2",

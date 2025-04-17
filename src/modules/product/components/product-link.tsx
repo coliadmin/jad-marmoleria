@@ -24,7 +24,7 @@ export function ProductLink({
   path = "products",
 }: ProductLinkProps) {
   return (
-    <Link className="group space-y-2" href={`/${path}/${product.slug}`}>
+    <Link prefetch className="group space-y-2" href={`/${path}/${product.slug}`}>
       <VerticalImage
         alt={product.portada.name}
         className={className}

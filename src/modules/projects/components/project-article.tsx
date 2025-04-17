@@ -26,6 +26,7 @@ export async function ProjectArticle({project, children}: ProjectArticleProps) {
     <article className="border-e border-s">
       <header className="flex items-center justify-between gap-4 border-b">
         <Link
+          prefetch
           className={cn(
             "group inline-flex items-center gap-1 px-2 text-sm font-normal text-slate-800/65 hover:underline",
           )}
