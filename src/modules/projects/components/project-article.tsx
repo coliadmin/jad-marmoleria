@@ -37,6 +37,7 @@ export async function ProjectArticle({project, children}: ProjectArticleProps) {
         </Link>
         <H2 className="flex-1 border-none py-6 md:text-center text-4xl">{project.nombre}</H2>
       </header>
+      <div className="flex w-full flex-col items-center gap-y-6 pt-4 lg:hidden">
         <Link
           className="group relative flex items-center gap-2"
           href={whatsAppUrl}
