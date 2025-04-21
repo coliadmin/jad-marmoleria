@@ -23,7 +23,7 @@ export async function ProjectArticle({project, children}: ProjectArticleProps) {
   const whatsAppUrl = toWhatsAppUrl(whatsapp.telefono);
 
   return (
-    <article className="border-e border-s">
+    <article className="lg:border-e lg:border-s">
       <header className="flex items-center justify-between gap-4 border-b">
         <Link
           prefetch
@@ -37,8 +37,13 @@ export async function ProjectArticle({project, children}: ProjectArticleProps) {
         </Link>
         <H2 className="flex-1 border-none py-6 md:text-center text-4xl">{project.nombre}</H2>
       </header>
-      <div className="pt-4 lg:hidden flex flex-col items-center w-full gap-y-6">
-        <Link className="group relative flex items-center gap-2" href={whatsAppUrl} target="_blank">
+      <div className="flex w-full flex-col items-center gap-y-6 pt-4 lg:hidden">
+        <Link
+          className="group relative flex items-center gap-2"
+          href={whatsAppUrl}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
            <Button className="btn btn-primary">
               Sacate las dudas
              <Whatsapp className="size-5" />
@@ -60,11 +65,11 @@ export async function ProjectArticle({project, children}: ProjectArticleProps) {
                 <Link
                   className="group relative flex items-center gap-2"
                   href={whatsAppUrl}
+                  rel="noopener noreferrer"
                   target="_blank"
                 >
                  <Button className="btn btn-primary">
                     Sacate las dudas
-                  rel="noopener noreferrer"
                     <Whatsapp className="size-5" />
                   </Button>
                 </Link>
