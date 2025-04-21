@@ -57,7 +57,12 @@ export async function Hero() {
         <H1 className="">{titleComponent()}</H1>
         <P className={cn("text-xl text-muted-foreground", quicksand.className)}>{descripcion}</P>
         <div className="mt-8 inline-flex gap-2">
-          <Link className="flex items-center gap-2" href={whatsAppUrl} target="_blank">
+          <Link
+            className="flex items-center gap-2"
+            href={whatsAppUrl}
+            rel="noopener noreferrer"
+            target="_blank"
+          >
             <Button className="w-48">
               Contactanos
               <Whatsapp className="size-7" />

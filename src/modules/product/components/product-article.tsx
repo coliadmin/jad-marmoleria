@@ -57,7 +57,7 @@ export async function ProductArticle({product, children, nextProduct}: ProductAr
             variant="rightString"
           />
         </div>
-        <Link href={whatsAppUrl} target="_blank">
+        <Link href={whatsAppUrl} rel="noopener noreferrer" target="_blank">
           <Button className="btn btn-primary ">
             Sacate las dudas
             <Whatsapp className="size-5" />
@@ -121,6 +121,7 @@ export async function ProductArticle({product, children, nextProduct}: ProductAr
                 <Link
                   className="group relative flex items-center gap-2"
                   href={whatsAppUrl}
+                  rel="noopener noreferrer"
                   target="_blank"
                 >
                   <Button className="btn btn-primary">
