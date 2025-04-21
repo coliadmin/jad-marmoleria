@@ -21,6 +21,11 @@ jobs:
       - name: Install pnpm
         run: npm install -g pnpm
 
+      - name: Set environment variables
+        run: |
+          echo "STRAPI_HOST=${{ secrets.STRAPI_HOST }}" >> $GITHUB_ENV
+          echo "STRAPI_TOKEN=${{ secrets.STRAPI_TOKEN }}" >> $GITHUB_ENV
+
       - name: Install dependencies
         run: pnpm install
 
