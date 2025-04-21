@@ -64,6 +64,7 @@ export async function ProjectArticle({project, children}: ProjectArticleProps) {
                 >
                  <Button className="btn btn-primary">
                     Sacate las dudas
+                  rel="noopener noreferrer"
                     <Whatsapp className="size-5" />
                   </Button>
                 </Link>
