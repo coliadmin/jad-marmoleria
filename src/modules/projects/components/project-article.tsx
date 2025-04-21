@@ -60,11 +60,11 @@ export async function ProjectArticle({project, children}: ProjectArticleProps) {
                 <Link
                   className="group relative flex items-center gap-2"
                   href={whatsAppUrl}
+                  rel="noopener noreferrer"
                   target="_blank"
                 >
                  <Button className="btn btn-primary">
                     Sacate las dudas
-                  rel="noopener noreferrer"
                     <Whatsapp className="size-5" />
                   </Button>
                 </Link>
