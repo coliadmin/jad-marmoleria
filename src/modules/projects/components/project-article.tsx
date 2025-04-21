@@ -23,7 +23,7 @@ export async function ProjectArticle({project, children}: ProjectArticleProps) {
   const whatsAppUrl = toWhatsAppUrl(whatsapp.telefono);
 
   return (
-    <article className="border-e border-s">
+    <article className="lg:border-e lg:border-s">
       <header className="flex items-center justify-between gap-4 border-b">
         <Link
           prefetch
