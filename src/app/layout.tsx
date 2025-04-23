@@ -32,6 +32,9 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
   return (
     <ViewTransitions>
       <html className="scroll-smooth" lang="es">
+        <head>
+          <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+        </head>
         <body className="scrollbar border-border bg-background text-foreground">
           <div
             className={cn(
