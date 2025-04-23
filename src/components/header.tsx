@@ -28,20 +28,20 @@ export async function Header() {
           </Link>
           <div
             className={cn(
-              "m-auto inline-flex w-full max-w-3xl justify-center gap-2 rounded py-1 font-semibold md:gap-4",
+              "m-auto inline-flex w-full max-w-3xl justify-center gap-4 rounded py-1 font-semibold",
               quicksand.className,
             )}
           >
             <Link prefetch className="group relative" href="/">
-              <span className="px-2 tracking-widest">{header.home}</span>
+              <span className="tracking-widest sm:px-2">{header.home}</span>
               <div className="h-[0.15rem] w-full bg-transparent transition-colors duration-100 ease-in-out group-hover:bg-amber-400/65" />
             </Link>
             <Link prefetch className="group relative" href="/products">
-              <span className="px-2 tracking-widest">{header.products}</span>
+              <span className="tracking-widest sm:px-2">{header.products}</span>
               <div className="h-[0.15rem] w-full bg-transparent transition-colors duration-100 ease-in-out group-hover:bg-amber-400/65" />
             </Link>
             <Link prefetch className="group relative" href="/projects">
-              <span className="px-2 tracking-widest">{header.projects}</span>
+              <span className="tracking-widest sm:px-2">{header.projects}</span>
               <div className="h-[0.15rem] w-full bg-transparent transition-colors duration-100 ease-in-out group-hover:bg-amber-400/65" />
             </Link>
             <Link
