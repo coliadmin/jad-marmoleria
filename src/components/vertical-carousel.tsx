@@ -50,8 +50,8 @@ export function VerticalCarousel({images}: VerticalCarouselProps) {
           {current} / {count}
         </span>
       </div>
-      <CarouselPrevious className="rounded" />
-      <CarouselNext className="rounded" />
+      <CarouselPrevious className="hidden rounded sm:flex" />
+      <CarouselNext className="hidden rounded sm:flex" />
     </Carousel>
   );
 }
