@@ -53,14 +53,16 @@ export default async function ProjectPage({params: {slug}}: ProjectPageProps) {
     return notFound();
   }
 
-  const multimedia = [...project.imagenes, ...project.videos];
+  const videos = project.videos ?? [];
+
+  const multimedia = [...project.imagenes, ...videos];
 
   return (
     <section className="container">
       <div className="flex flex-1 items-center">
         <div className="flex-1 lg:mx-2">
           <ProjectArticle project={project}>
-            <aside className="m-auto lg:ms-16 lg:m-0 w-vertical">
+            <aside className="m-auto w-vertical lg:m-0 lg:ms-16">
               {project.imagenes !== null ? (
                 <VerticalCarousel images={multimedia} />
               ) : (
