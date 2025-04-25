@@ -10,11 +10,11 @@ type HeroProps = {
 };
 
 export async function HeroV3({title, subtitle}: HeroProps) {
-  const products = await api.products.get();
+  const products = await api.products.getList();
 
-  const p1 = products.data[0];
-  const p2 = products.data[1];
-  const p3 = products.data[2];
+  const p1 = products[0];
+  const p2 = products[1];
+  const p3 = products[2];
 
   return (
     <section className="mb-8 mt-8 inline-flex h-[750px] w-full justify-evenly">
