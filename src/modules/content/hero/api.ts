@@ -1,29 +1,37 @@
-import {Hero} from "./types";
+import {Hero, HeroDTO} from "./types";
 
 import {QueryResponse, query} from "@/lib/strapi";
 import {toUrl} from "@/lib/strapi";
 
-export async function getHero(): QueryResponse<Hero> {
-  const res = await fetchHero();
+function transformHero(dto: HeroDTO): Hero {
+  return {
+    ...dto,
+    descripcion: dto.descripcion ?? "",
+    imagenes: dto.imagenes?.map((img) => ({...img, url: toUrl(img.url)})) ?? [],
+  };
+}
 
-  const cpy = res;
+export async function fetchHero(): QueryResponse<HeroDTO> {
+  try {
+    const res = await query<Hero>(
+      "hero?populate[imagenes][fields][0]=name&populate[imagenes][fields][1]=url",
+      {next: {tags: ["hero"]}},
+    );
 
-  res.data.imagenes.forEach((x, idx) => {
-    cpy.data.imagenes.splice(idx, 1, {...x, url: toUrl(x.url)});
-  });
+    return res;
+  } catch (error) {
+    throw error;
+  }
+}
+
+export async function getHero(): Promise<Hero> {
+  const {data} = await fetchHero();
+
+  const cpy = transformHero(data);
 
   return cpy;
 }
 
-export async function fetchHero(): QueryResponse<Hero> {
-  try {
-    const res = await query<Hero>(
-      "hero?populate[imagenes][fields][0]=name&populate[imagenes][fields][1]=url",
-      { next: { tags: ['hero'] } });
-
-    return res;
-  } catch (error) {
-    //return null;
-    throw error;
-  }
-}
+export const api = {
+  get: getHero,
+};
