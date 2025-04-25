@@ -1,19 +1,37 @@
-import {Faq} from "./types";
+import {Faq, FaqDTO} from "./types";
 
-import {QueryResponse, query, Api} from "@/lib/strapi";
+import {query, QueryResponse} from "@/lib/strapi";
 
-async function getFaqs(): QueryResponse<Faq[]> {
-  const res = await query<Faq[]>(
-    "faqs?populate[fields][0]=slug&populate[fields][1]=titulo&populate[fields][2]=respuesta",
-    {next: {tags: ["faq"]}},
-  );
-
-  return res;
+function transformFaq(dto: FaqDTO): Faq {
+  return {
+    ...dto,
+    respuesta: dto.respuesta ?? "",
+  };
 }
 
-export const api: Api<Faq> = {
-  get: getFaqs,
-  fetch: () => {
-    throw new Error("Not implemented");
-  },
+async function fetchFaqsList(): QueryResponse<FaqDTO[]> {
+  try {
+    const res = await query<FaqDTO[]>(
+      "faqs?populate[fields][0]=slug&populate[fields][1]=titulo&populate[fields][2]=respuesta",
+      {next: {tags: ["faq"]}},
+    );
+
+    return res;
+  } catch (error) {
+    throw error;
+  }
+}
+
+async function getFaqsList(): Promise<Faq[]> {
+  const {data} = await fetchFaqsList();
+
+  if (!data) return [];
+
+  const cpy = data.map((x) => transformFaq(x));
+
+  return cpy;
+}
+
+export const api = {
+  getList: getFaqsList,
 };
