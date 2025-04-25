@@ -3,13 +3,14 @@ import {BlocksRenderer, type BlocksContent} from "@strapi/blocks-react-renderer"
 import {ChevronDown, ChevronLeft} from "lucide-react";
 
 import {Project} from "../types";
+
 import {BlocksRendererWrapper} from "./blocksrenderer-wrapper";
 
 import {H1, H2, H3, H4, P} from "@/components/typo";
 import {Button} from "@/components/ui/button";
 import {Whatsapp} from "@/components/icons/whatsapp";
 import {cn, toWhatsAppUrl} from "@/lib/utils";
-import {getWhatsApp} from "@/modules/content/whatsapp/api";
+import {api} from "@/api";
 
 type ProjectArticleProps = {
   project: Project;
@@ -18,7 +19,7 @@ type ProjectArticleProps = {
 
 export async function ProjectArticle({project, children}: ProjectArticleProps) {
   const content: BlocksContent = project.descripcion as unknown as BlocksContent;
-  const {data: whatsapp} = await getWhatsApp();
+  const whatsapp = await api.whatsapp.get();
 
   const whatsAppUrl = toWhatsAppUrl(whatsapp.telefono);
 
@@ -35,7 +36,7 @@ export async function ProjectArticle({project, children}: ProjectArticleProps) {
           <ChevronLeft className="ms-2 mt-icon size-4 stroke-1 transition-all duration-100 ease-in-out group-hover:inline-block group-hover:text-foreground" />
           Atrás
         </Link>
-        <H2 className="flex-1 border-none py-6 md:text-center text-4xl">{project.nombre}</H2>
+        <H2 className="flex-1 border-none py-6 text-4xl md:text-center">{project.nombre}</H2>
       </header>
       <div className="flex w-full flex-col items-center gap-y-6 pt-4 lg:hidden">
         <Link
@@ -44,11 +45,11 @@ export async function ProjectArticle({project, children}: ProjectArticleProps) {
           rel="noopener noreferrer"
           target="_blank"
         >
-           <Button className="btn btn-primary">
-              Sacate las dudas
-             <Whatsapp className="size-5" />
-            </Button>
-         </Link>
+          <Button className="btn btn-primary">
+            Sacate las dudas
+            <Whatsapp className="size-5" />
+          </Button>
+        </Link>
          <Link className="text-sm inline-flex items-center font-normal text-slate-800/65" href='#descripcion'>Más información
           <ChevronDown className="ms-1 size-4 stroke-1" />
         </Link>
@@ -68,7 +69,7 @@ export async function ProjectArticle({project, children}: ProjectArticleProps) {
                   rel="noopener noreferrer"
                   target="_blank"
                 >
-                 <Button className="btn btn-primary">
+                  <Button className="btn btn-primary">
                     Sacate las dudas
                     <Whatsapp className="size-5" />
                   </Button>
