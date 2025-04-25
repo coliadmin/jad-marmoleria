@@ -18,11 +18,11 @@ import {IconNames} from "@/components/icons";
 import {Categories} from "@/modules/categories/enum";
 
 export default async function HomePage() {
-  const {data} = await api.products.get();
-  const products = data.slice(0, 3);
+  const prds = await api.products.getList();
+  const products = prds.slice(0, 3);
   const usos = await api.uses.get();
   const aplications = await api.aplications.get();
-  const faqs = await api.faqs.get();
+  const faqs = await api.faqs.getList();
 
   return (
     <section className="m-auto mx-auto p-4 lg:pt-8">
@@ -88,7 +88,7 @@ export default async function HomePage() {
       <div className="m-auto mt-24 max-w-3xl py-16">
         <H2 className="mb-14 border-none text-center">Preguntas Frecuentes</H2>
         <ul className="flex max-w-3xl flex-col gap-12 px-8">
-          {faqs.data.map((faq) => (
+          {faqs.map((faq) => (
             <li key={faq.id} className="border-b">
               <Accordion collapsible defaultValue={faq.id} type="single">
                 <AccordionItem value={faq.id}>
