@@ -5,6 +5,8 @@ import {api as materials} from "@/modules/categories/material";
 import {api as projects} from "@/modules/projects";
 import {api as aplications} from "@/modules/categories/aplication";
 import {api as faqs} from "@/modules/faqs";
+import {api as instagram} from "@/modules/content/instagram";
+import {api as whatsapp} from "@/modules/content/whatsapp";
 
 export const api = {
   products,
@@ -14,4 +16,6 @@ export const api = {
   materials,
   aplications,
   faqs,
+  instagram,
+  whatsapp,
 };
