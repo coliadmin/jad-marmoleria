@@ -4,6 +4,7 @@ import {api} from "@/api";
 import {ProjectArticle} from "@/modules/projects/components/project-article";
 import {VerticalCarousel} from "@/components/vertical-carousel";
 import {Skeleton} from "@/components/ui/skeleton";
+import {Image} from "@/lib/strapi";
 
 type ProjectPageProps = {
   params: {
@@ -12,15 +13,15 @@ type ProjectPageProps = {
 };
 
 export async function generateStaticParams() {
-  const {data} = await api.projects.get();
+  const projects = await api.projects.getList();
 
-  return data.map((p) => ({
+  return projects.map((p) => ({
     slug: p.slug,
   }));
 }
 
 export async function generateMetadata({params: {slug}}: ProjectPageProps) {
-  const project = await api.projects.fetch(slug);
+  const project = await api.projects.get(slug);
 
   if (!project) {
     return notFound();
@@ -47,15 +48,13 @@ export async function generateMetadata({params: {slug}}: ProjectPageProps) {
 }
 
 export default async function ProjectPage({params: {slug}}: ProjectPageProps) {
-  const project = await api.projects.fetch(slug);
+  const project = await api.projects.get(slug);
 
   if (!project) {
     return notFound();
   }
 
-  const videos = project.videos ?? [];
-
-  const multimedia = [...project.imagenes, ...videos];
+  const multimedia: Image[] = [...project.imagenes, ...project.videos];
 
   return (
     <section className="container">
