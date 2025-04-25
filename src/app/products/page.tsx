@@ -2,7 +2,6 @@ import {Link} from "next-view-transitions";
 import {Metadata} from "next";
 
 import {api} from "@/api";
-import {fetchProductByCategory} from "@/modules/product";
 import {ProductLink} from "@/modules/product";
 import {H3} from "@/components/typo";
 import {Categories} from "@/modules/categories/enum";
@@ -60,6 +59,7 @@ async function getFilters() {
 
   return filters;
 }
+
 export const metadata: Metadata = {
   title: "JAD Marmolería - Catálogo",
   openGraph: {
@@ -69,8 +69,8 @@ export const metadata: Metadata = {
 };
 
 export default async function ProductsPage({searchParams: {category, value}}: Props) {
-  const products = await api.products.get();
-  const filterProds = await fetchProductByCategory(category, value);
+  const products = await api.products.getList();
+  const filterProds = await api.products.getByCategory(category, value);
 
   const filters = await getFilters();
 
@@ -156,16 +156,16 @@ export default async function ProductsPage({searchParams: {category, value}}: Pr
       <section className="flex-1 lg:border-s">
         <H3 className="border-b py-3 text-center">{title()}</H3>
         {category && value ? (
-          <ul className="flex flex-wrap justify-evenly gap-4 py-8">
+          <ul className="grid gap-12 py-8 md:grid-cols-2 lg:grid-cols-3">
             {filterProds.map((product) => (
-              <li key={product.id} className="inline-flex">
+              <li key={product.id} className="inline-flex max-w-[19rem] justify-self-center">
                 <ProductLink className="w-vertical" product={product} ratio={1} />
               </li>
             ))}
           </ul>
         ) : (
           <ul className="grid gap-12 py-8 md:grid-cols-2 lg:grid-cols-3">
-            {products.data.map((product) => (
+            {products.map((product) => (
               <li key={product.id} className="inline-flex max-w-[19rem] justify-self-center">
                 <ProductLink className="w-vertical" product={product} ratio={1} />
               </li>
