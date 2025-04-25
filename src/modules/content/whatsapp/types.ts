@@ -1,8 +1,12 @@
 import {Data} from "@/lib/strapi";
 
-interface WhatsAppDTO {
+interface DTO {
   telefono: number;
   mensaje?: string;
 }
 
-export type WhatsApp = Data<WhatsAppDTO>;
+export type WhatsAppDTO = Data<DTO>;
+
+export type WhatsApp = Omit<WhatsAppDTO, "mensaje"> & {
+  mensaje: string;
+};
