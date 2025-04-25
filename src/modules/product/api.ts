@@ -1,68 +1,116 @@
-import {Product} from "./types";
+import {Color} from "../categories/color";
+import {Material} from "../categories/material";
+
+import {Product, ProductDTO} from "./types";
 
 import {STRAPI_HOST} from "@/config";
-import {Api, Image, query, type QueryResponse} from "@/lib/strapi";
+import {query, type QueryResponse} from "@/lib/strapi";
 
 // TODO: Increase performance by reducing the number fields fetched, specify the fields to fetch.
-async function getProducts(): QueryResponse<Product[]> {
-  const res = await query<Product[]>(
-    "products?populate[usos][fields][0]=nombre&populate[usos][fields][1]=slug&populate[portada][fields][0]=name&populate[portada][fields][1]=url&populate[portada][fields][2]=hash&fields[0]=nombre&fields[1]=slug&fields[2]=descripcion&fields[3]=espesor&fields[4]=disponibilidad&status=published",
-    { next: { tags: ['product'] } });
 
-  const cpy = res;
+function transformProduct(dto: ProductDTO): Product {
+  const colorAlt: Color = {documentId: "", id: "", nombre: "", slug: ""};
+  const materialAlt: Material = {documentId: "", id: "", nombre: "", slug: ""};
 
-  res.data.forEach((x, idx) =>
-    cpy.data.splice(idx, 1, {...x, portada: {...x.portada, url: STRAPI_HOST + x.portada.url}}),
-  );
-
-  return cpy;
+  return {
+    ...dto,
+    descripcion: dto.descripcion ?? "",
+    espesor: dto.espesor ?? "",
+    color: dto.color ?? colorAlt,
+    material: dto.material ?? materialAlt,
+    imagenes: dto.imagenes?.map((img) => ({...img, url: STRAPI_HOST + img.url})) ?? [],
+    portada: {...dto.portada, url: STRAPI_HOST + dto.portada.url},
+    usos: dto.usos?.map((uso) => ({...uso, slug: uso.slug})) ?? [],
+    aplicaciones:
+      dto.aplicaciones?.map((aplicacion) => ({...aplicacion, slug: aplicacion.slug})) ?? [],
+  };
 }
 
-async function fetchProduct(slug: string): Promise<Product | null> {
+async function fetchProduct(slug: string): QueryResponse<ProductDTO[] | null> {
   try {
-    const {data} = await query<Product[]>(
+    const res = await query<ProductDTO[]>(
       `products?filters[slug][$contains]=${slug}&populate[usos][fields][0]=nombre&populate[usos][fields][1]=slug&populate[aplicaciones][fields][0]=nombre&populate[aplicaciones][fields][1]=slug&populate[material][fields][0]=nombre&populate[material][fields][1]=slug&populate[imagenes][fields][0]=name&populate[imagenes][fields][1]=url&populate[imagenes][fields][2]=hash&populate[portada][fields][0]=name&populate[portada][fields][1]=url&populate[portada][fields][2]=hash`,
-      { next: { tags: ['product'] } });
+      {next: {tags: ["product"]}},
+    );
 
-    return data[0];
+    return res;
   } catch (error) {
-    //return null;
     throw error;
   }
-
-  // console.log(data);
-
-  // if (data.length === 0 || data.length > 1 || !data[0]) {
-  //   return null;
-  // }
-
-  // return data[0];
 }
 
-/// Hay que mejorar, hecho para testear!
-export async function fetchProductByCategory(category: string, value: string): Promise<Product[]> {
+async function fetchProductsByCategory(
+  category: string,
+  value: string,
+): QueryResponse<ProductDTO[] | null> {
+  try {
+    const res = await query<ProductDTO[]>(
+      `products?filters[${category}][slug][$contains]=${value}&populate[usos][fields][0]=nombre&populate[usos][fields][1]=slug&populate[imagenes][fields][0]=name&populate[imagenes][fields][1]=url&populate[imagenes][fields][2]=hash&populate[portada][fields][0]=name&populate[portada][fields][1]=url&populate[portada][fields][2]=hash`,
+      {next: {tags: ["product"]}},
+    );
+
+    return res;
+  } catch (error) {
+    throw error;
+  }
+}
+
+async function fetchProductsList(): QueryResponse<ProductDTO[]> {
+  try {
+    const res = await query<ProductDTO[]>(
+      "products?populate[imagenes][fields][0]=name&populate[imagenes][fields][1]=url&populate[imagenes][fields][2]=hash&populate[portada][fields][0]=name&populate[portada][fields][1]=url&populate[portada][fields][2]=hash",
+      {next: {tags: ["product"]}},
+    );
+
+    return res;
+  } catch (error) {
+    throw error;
+  }
+}
+
+async function getProduct(slug: string): Promise<Product | null> {
+  try {
+    const {data} = await fetchProduct(slug);
+
+    if (!data[0]) return null;
+
+    const cpy = transformProduct(data[0]);
+
+    return cpy;
+  } catch (error) {
+    throw error;
+  }
+}
+
+async function getProductsByCategory(category: string, value: string): Promise<Product[]> {
   if (!category && !value) {
     return [];
   }
 
   try {
-    const {data} = await query<Product[]>(
-      `products?filters[${category}][slug][$contains]=${value}&populate[usos][fields][0]=nombre&populate[usos][fields][1]=slug&populate[imagenes][fields][0]=name&populate[imagenes][fields][1]=url&populate[imagenes][fields][2]=hash&populate[portada][fields][0]=name&populate[portada][fields][1]=url&populate[portada][fields][2]=hash`,
-      { next: { tags: ['product'] } });
+    const {data} = await fetchProductsByCategory(category, value);
 
-    const cpy = data;
+    if (!data) return [];
+    const cpy = data.map((x) => transformProduct(x));
 
-    data.forEach((x, idx) =>
-      cpy.splice(idx, 1, {...x, portada: {...x.portada, url: STRAPI_HOST + x.portada.url}}),
-    );
-
-    return data;
+    return cpy;
   } catch (error) {
     throw error;
   }
 }
 
-export const api: Api<Product> = {
-  get: getProducts,
-  fetch: fetchProduct,
+async function getProductsList(): Promise<Product[]> {
+  const {data} = await fetchProductsList();
+
+  if (!data) return [];
+
+  const cpy = data.map((x) => transformProduct(x));
+
+  return cpy;
+}
+
+export const api = {
+  get: getProduct,
+  getList: getProductsList,
+  getByCategory: getProductsByCategory,
 };
