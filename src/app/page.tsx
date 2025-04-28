@@ -20,8 +20,8 @@ import {Categories} from "@/modules/categories/enum";
 export default async function HomePage() {
   const prds = await api.products.getList();
   const products = prds.slice(0, 3);
-  const usos = await api.uses.get();
-  const aplications = await api.aplications.get();
+  const usos = await api.uses.getList();
+  const aplications = await api.aplications.getList();
   const faqs = await api.faqs.getList();
 
   return (
@@ -37,7 +37,7 @@ export default async function HomePage() {
           Encontrá el marmol que buscas según tus necesidades
         </H2>
         <ul className="mx-auto flex max-w-xl flex-wrap justify-evenly gap-8">
-          {usos.data.map((uso) => (
+          {usos.map((uso) => (
             <li
               key={uso.id}
               className="w-32 rounded border p-2 py-4 transition-colors duration-200 ease-in-out hover:border-foreground"
@@ -49,7 +49,7 @@ export default async function HomePage() {
               />
             </li>
           ))}
-          {aplications.data.map((aplication) => (
+          {aplications.map((aplication) => (
             <li
               key={aplication.id}
               className="size-32 rounded border p-2 py-4 transition-colors duration-200 ease-in-out hover:border-foreground"
