@@ -6,14 +6,13 @@ import {toUrl} from "@/lib/strapi";
 function transformHero(dto: HeroDTO): Hero {
   return {
     ...dto,
-    descripcion: dto.descripcion ?? "",
-    imagenes: dto.imagenes?.map((img) => ({...img, url: toUrl(img.url)})) ?? [],
+    imagenes: dto.imagenes.map((img) => ({...img, url: toUrl(img.url)})),
   };
 }
 
 export async function fetchHero(): QueryResponse<HeroDTO> {
   try {
-    const res = await query<Hero>(
+    const res = await query<HeroDTO>(
       "hero?populate[imagenes][fields][0]=name&populate[imagenes][fields][1]=url",
       {next: {tags: ["hero"]}},
     );
