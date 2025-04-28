@@ -1,8 +1,13 @@
 import {Data} from "@/lib/strapi";
 
-interface AplicationDTO {
+interface DTO {
   nombre: string;
   slug: string;
+  descripcion?: string;
 }
 
-export type Aplication = Data<AplicationDTO>;
+export type AplicationDTO = Data<DTO>;
+
+export type Aplication = Omit<AplicationDTO, "descripcion"> & {
+  descripcion: string;
+};
