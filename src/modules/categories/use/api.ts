@@ -1,16 +1,23 @@
-import {Use} from "./types";
+import {Use, UseDTO} from "./types";
 
 import {Api, query, QueryResponse} from "@/lib/strapi";
 
-async function getUses(): QueryResponse<Use[]> {
-  const res = await query<Use[]>("usos?populate[fields][0]=nombre&populate[fields][1]=slug", { next: { tags: ['uso'] } });
+async function fetchUsesList(): QueryResponse<UseDTO[]> {
+  const res = await query<UseDTO[]>("usos?populate[fields][0]=nombre&populate[fields][1]=slug", {
+    next: {tags: ["uso"]},
+  });
 
   return res;
 }
 
-export const api: Api<Use> = {
-  get: getUses,
-  fetch: () => {
-    throw new Error("Not implemented");
-  },
+async function getUsesList(): Promise<Use[]> {
+  const {data} = await fetchUsesList();
+
+  const cpy = data;
+
+  return cpy;
+}
+
+export const api = {
+  getList: getUsesList,
 };
