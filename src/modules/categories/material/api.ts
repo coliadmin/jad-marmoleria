@@ -1,18 +1,31 @@
-import {Material} from "./types";
+import {Material, MaterialDTO} from "./types";
 
 import {Api, query, QueryResponse} from "@/lib/strapi";
 
-async function getMaterials(): QueryResponse<Material[]> {
-  const res = await query<Material[]>(
+function transformMaterial(dto: MaterialDTO): Material {
+  return {
+    ...dto,
+    descripcion: dto.descripcion ?? "",
+  };
+}
+
+async function fetchMaterialsList(): QueryResponse<MaterialDTO[]> {
+  const res = await query<MaterialDTO[]>(
     "materials?populate[fields][0]=nombre&populate[fields][1]=slug",
-    { next: { tags: ['material'] } });
+    {next: {tags: ["material"]}},
+  );
 
   return res;
 }
 
-export const api: Api<Material> = {
-  get: getMaterials,
-  fetch: () => {
-    throw new Error("Not implemented");
-  },
+async function getMaterialsList(): Promise<Material[]> {
+  const {data} = await fetchMaterialsList();
+
+  const cpy = data.map((x) => transformMaterial(x));
+
+  return cpy;
+}
+
+export const api = {
+  getList: getMaterialsList,
 };
