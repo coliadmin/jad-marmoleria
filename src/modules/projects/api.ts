@@ -6,8 +6,7 @@ import {STRAPI_HOST} from "@/config";
 function transformProject(dto: ProjectDTO): Project {
   return {
     ...dto,
-    descripcion: dto.descripcion ?? "",
-    imagenes: dto.imagenes?.map((img) => ({...img, url: STRAPI_HOST + img.url})) ?? [],
+    imagenes: dto.imagenes.map((img) => ({...img, url: STRAPI_HOST + img.url})),
     videos: dto.videos?.map((video) => ({...video, url: STRAPI_HOST + video.url})) ?? [],
     portada: {...dto.portada, url: STRAPI_HOST + dto.portada.url},
   };
