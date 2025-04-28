@@ -8,11 +8,11 @@ import {Aplication} from "../categories/aplication";
 export interface DTO {
   nombre: string;
   slug: string;
-  descripcion?: string;
+  descripcion: string;
   espesor?: string;
   disponibilidad: boolean;
   portada: Image;
-  imagenes?: Image[];
+  imagenes: Image[];
 }
 interface Categories {
   color?: Color;
@@ -25,13 +25,11 @@ export type ProductDTO = Data<DTO> & Categories;
 
 export type Product = Omit<
   ProductDTO,
-  "descripcion" | "espesor" | "color" | "material" | "imagenes" | "usos" | "aplicaciones"
+  "espesor" | "color" | "material" | "usos" | "aplicaciones"
 > & {
-  descripcion: string;
   espesor: string;
   color: Color;
   material: Material;
-  imagenes: Image[];
   usos: Use[];
   aplicaciones: Aplication[];
 };

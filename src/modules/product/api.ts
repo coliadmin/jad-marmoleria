@@ -10,15 +10,14 @@ import {query, type QueryResponse} from "@/lib/strapi";
 
 function transformProduct(dto: ProductDTO): Product {
   const colorAlt: Color = {documentId: "", id: "", nombre: "", slug: ""};
-  const materialAlt: Material = {documentId: "", id: "", nombre: "", slug: ""};
+  const materialAlt: Material = {documentId: "", id: "", nombre: "", slug: "", descripcion: ""};
 
   return {
     ...dto,
-    descripcion: dto.descripcion ?? "",
     espesor: dto.espesor ?? "",
     color: dto.color ?? colorAlt,
     material: dto.material ?? materialAlt,
-    imagenes: dto.imagenes?.map((img) => ({...img, url: STRAPI_HOST + img.url})) ?? [],
+    imagenes: dto.imagenes.map((img) => ({...img, url: STRAPI_HOST + img.url})),
     portada: {...dto.portada, url: STRAPI_HOST + dto.portada.url},
     usos: dto.usos?.map((uso) => ({...uso, slug: uso.slug})) ?? [],
     aplicaciones:
