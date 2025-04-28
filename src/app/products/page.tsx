@@ -25,14 +25,14 @@ type Props = {
 interface Filters {
   title: string;
   slug: string;
-  category: Data<Color[]> | Data<Aplication[]> | Data<Material[]> | Data<Use[]>;
+  category: Color[] | Aplication[] | Material[] | Use[];
 }
 
 async function getFilters() {
-  const {data: colors} = await api.colors.get();
-  const {data: uses} = await api.uses.get();
-  const {data: materials} = await api.materials.get();
-  const {data: aplications} = await api.aplications.get();
+  const colors = await api.colors.getList();
+  const uses = await api.uses.getList();
+  const materials = await api.materials.getList();
+  const aplications = await api.aplications.getList();
 
   const filters: Filters[] = [
     {
