@@ -2,13 +2,6 @@ import {Faq, FaqDTO} from "./types";
 
 import {query, QueryResponse} from "@/lib/strapi";
 
-function transformFaq(dto: FaqDTO): Faq {
-  return {
-    ...dto,
-    respuesta: dto.respuesta ?? "",
-  };
-}
-
 async function fetchFaqsList(): QueryResponse<FaqDTO[]> {
   try {
     const res = await query<FaqDTO[]>(
@@ -27,7 +20,7 @@ async function getFaqsList(): Promise<Faq[]> {
 
   if (!data) return [];
 
-  const cpy = data.map((x) => transformFaq(x));
+  const cpy = data;
 
   return cpy;
 }

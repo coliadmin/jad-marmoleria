@@ -3,11 +3,9 @@ import {Data} from "@/lib/strapi";
 interface DTO {
   titulo: string;
   slug: string;
-  respuesta?: string;
+  respuesta: string;
 }
 
 export type FaqDTO = Data<DTO>;
 
-export type Faq = Omit<FaqDTO, "respuesta"> & {
-  respuesta: string;
-};
+export type Faq = FaqDTO;
