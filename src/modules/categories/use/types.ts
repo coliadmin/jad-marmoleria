@@ -1,8 +1,10 @@
 import {Data} from "@/lib/strapi";
 
-interface UseDTO {
+interface DTO {
   nombre: string;
   slug: string;
 }
 
-export type Use = Data<UseDTO>;
+export type UseDTO = Data<DTO>;
+
+export type Use = UseDTO;

@@ -1,10 +1,12 @@
 import {Data} from "@/lib/strapi";
 
-interface HeaderDTO {
+interface DTO {
   title: string;
   home: string;
   products: string;
   projects: string;
 }
 
-export type Header = Data<HeaderDTO>;
+export type HeaderDTO = Data<DTO>;
+
+export type Header = HeaderDTO;

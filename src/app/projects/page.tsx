@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 };
 
 export default async function ProjectsPage() {
-  const {data} = await api.projects.get();
+  const projects = await api.projects.getList();
 
   return (
     <section className="container flex lg:border-e lg:border-s">
@@ -21,8 +21,8 @@ export default async function ProjectsPage() {
         <header className="w-full border-b pb-0">
           <H3 className="py-3 text-center">Our Work</H3>
         </header>
-        <ul className="grid md:grid-cols-2 lg:grid-cols-3 gap-12 py-8">
-          {data.map((x) => (
+        <ul className="grid gap-12 py-8 md:grid-cols-2 lg:grid-cols-3">
+          {projects.map((x) => (
             <li key={x.id} className="inline-flex max-w-[19rem] justify-self-center ">
               <ProductLink path="projects" product={x} ratio={1} />
             </li>

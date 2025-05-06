@@ -1,16 +1,24 @@
-import {Color} from "./types";
+import {Color, ColorDTO} from "./types";
 
-import {Api, query, QueryResponse} from "@/lib/strapi";
+import {query, QueryResponse} from "@/lib/strapi";
 
-async function getColors(): QueryResponse<Color[]> {
-  const res = await query<Color[]>("colors?populate[fields][0]=nombre&populate[fields][1]=slug", { next: { tags: ['color'] } });
+async function fetchColorsList(): QueryResponse<ColorDTO[]> {
+  const res = await query<ColorDTO[]>(
+    "colors?populate[fields][0]=nombre&populate[fields][1]=slug",
+    {next: {tags: ["color"]}},
+  );
 
   return res;
 }
 
-export const api: Api<Color> = {
-  get: getColors,
-  fetch: () => {
-    throw new Error("Not implemented");
-  },
+async function getColorsList(): Promise<Color[]> {
+  const {data} = await fetchColorsList();
+
+  const cpy = data;
+
+  return cpy;
+}
+
+export const api = {
+  getList: getColorsList,
 };

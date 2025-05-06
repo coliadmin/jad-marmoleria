@@ -1,8 +1,10 @@
 import type {Data} from "@/lib/strapi";
 
-interface ColorDTO {
+interface DTO {
   nombre: string;
   slug: string;
 }
 
-export type Color = Data<ColorDTO>;
+export type ColorDTO = Data<DTO>;
+
+export type Color = ColorDTO;

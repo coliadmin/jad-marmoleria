@@ -1,18 +1,33 @@
-import {Aplication} from "./types";
+import {Aplication, AplicationDTO} from "./types";
 
-import {Api, query, QueryResponse} from "@/lib/strapi";
+import {query, QueryResponse} from "@/lib/strapi";
 
-async function getAplications(): QueryResponse<Aplication[]> {
-  const res = await query<Aplication[]>(
+function transformAplication(data: AplicationDTO): Aplication {
+  return {
+    ...data,
+    descripcion: data.descripcion ?? "",
+  };
+}
+
+async function fetchAplicationsList(): QueryResponse<AplicationDTO[]> {
+  const res = await query<AplicationDTO[]>(
     "applications?populate[fields][0]=nombre&populate[fields][1]=slug",
-    { next: { tags: ['application'] } });
+    {next: {tags: ["application"]}},
+  );
 
   return res;
 }
 
-export const api: Api<Aplication> = {
-  get: getAplications,
-  fetch: () => {
-    throw new Error("Not implemented");
-  },
+async function getAplicationsList(): Promise<Aplication[]> {
+  const {data} = await fetchAplicationsList();
+
+  if (!data) return [];
+
+  const cpy = data.map((x) => transformAplication(x));
+
+  return cpy;
+}
+
+export const api = {
+  getList: getAplicationsList,
 };

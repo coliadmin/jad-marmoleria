@@ -7,14 +7,12 @@ import {getHero} from "@/modules/content/hero";
 import {Button} from "@/components/ui/button";
 import {cn, toWhatsAppUrl} from "@/lib/utils";
 import {quicksand} from "@/fonts";
-import {getWhatsApp} from "@/modules/content/whatsapp/api";
+import {api} from "@/api";
 
 export async function Hero() {
-  const {
-    data: {imagenes, descripcion, titulo},
-  } = await getHero();
+  const {titulo, descripcion, imagenes} = await getHero();
 
-  const {data: whatsapp} = await getWhatsApp();
+  const whatsapp = await api.whatsapp.get();
 
   const whatsAppUrl = toWhatsAppUrl(whatsapp.telefono);
 

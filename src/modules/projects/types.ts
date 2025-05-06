@@ -1,12 +1,16 @@
 import type {Image as Img, Data} from "@/lib/strapi";
 
-interface ProjectDTO {
+export interface DTO {
   nombre: string;
   slug: string;
   descripcion: string;
   portada: Img;
   imagenes: Img[];
-  videos: Img[];
+  videos?: Img[];
 }
 
-export type Project = Data<ProjectDTO>;
+export type ProjectDTO = Data<DTO>;
+
+export type Project = Omit<ProjectDTO, "videos"> & {
+  videos: Img[];
+};
