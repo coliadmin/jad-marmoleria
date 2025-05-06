@@ -1,4 +1,0 @@
-#* Prueba de integración para el módulo de whatsapp
-GET /api/whatsapp
-Authorization: Bearer 375e18f79907e9fbc9de13d7c0e347651afb35eb08e359602899c3c4cad0bd27412b25387242a8f3206580f53950904b726da527d5ada6fc94c92e08c51817626be3c36438a972ab915ab4f5e3bf746eae591734403b5f0edfdf7a33f91b2a1af921f84a7c0e65836673e88cbf511412a56506dc2f500b33adc78d62039744c9
-Host: jad-marmoleria.colidevs.com

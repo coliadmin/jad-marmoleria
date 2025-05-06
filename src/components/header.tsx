@@ -5,15 +5,13 @@ import {Whatsapp} from "./icons/whatsapp";
 
 import {cn, toWhatsAppUrl} from "@/lib/utils";
 import {quicksand} from "@/fonts";
-import {getInstagram} from "@/modules/content/instagram";
-import {getWhatsApp} from "@/modules/content/whatsapp/api";
-import {getHeader} from "@/modules/content/header";
+import {api} from "@/api";
 
 export async function Header() {
-  const instagram = await getInstagram();
-  const {data: whatsapp} = await getWhatsApp();
+  const instagram = await api.instagram.get();
+  const whatsapp = await api.whatsapp.get();
   const whatsAppUrl = toWhatsAppUrl(whatsapp.telefono);
-  const {data: header} = await getHeader();
+  const header = await api.header.get();
 
   return (
     <div className="h-auto w-full border-b">

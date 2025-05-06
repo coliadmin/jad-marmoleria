@@ -8,11 +8,11 @@ import {api} from "@/api";
 import {Separator} from "@/components/ui/separator";
 
 export default async function Custom404() {
-  const {data} = await api.products.get();
-  const products = data.slice(0, 2);
+  const prds = await api.products.getList();
+  const products = prds.slice(0, 3);
 
   return (
-    <section className="mx-20 mt-12 grid h-full place-content-center xl:mt-0">
+    <section className="mx-20 my-12 grid h-full place-content-center xl:mt-0">
       <section className="flex flex-col items-start xl:flex-row xl:items-center">
         <section className="flex w-full flex-col gap-14 pb-8 pr-8 text-start xl:max-w-xl">
           <H1 className="font-semibold">
@@ -36,7 +36,7 @@ export default async function Custom404() {
           className="bg-gradient-to-b from-muted via-border to-muted xl:hidden"
           orientation="horizontal"
         />
-        <section className="mt-16 w-full xl:ml-28">
+        <section className="mt-16 w-full md:max-w-2xl xl:ml-28 2xl:max-w-5xl">
           <Link prefetch className="xl:hidden" href="/products">
             <Button className="text-base" variant="outline">
               Ver todos

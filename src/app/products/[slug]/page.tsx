@@ -15,15 +15,15 @@ type ProductPageProps = {
 };
 
 export async function generateStaticParams() {
-  const {data} = await api.products.get();
+  const products = await api.products.getList();
 
-  return data.map((p) => ({
+  return products.map((p) => ({
     slug: p.slug,
   }));
 }
 
 export async function generateMetadata({params: {slug}}: ProductPageProps) {
-  const product = await api.products.fetch(slug);
+  const product = await api.products.get(slug);
 
   if (!product) {
     return notFound();
@@ -50,21 +50,18 @@ export async function generateMetadata({params: {slug}}: ProductPageProps) {
 }
 
 export default async function ProductPage({params: {slug}}: ProductPageProps) {
-  const {fetch, get} = api.products;
+  const {get, getList} = api.products;
 
-  const [{data}, product] = await Promise.all([get(), fetch(slug)]);
+  const [product, products] = await Promise.all([get(slug), getList()]);
 
   if (!product) {
     return notFound();
   }
 
-  const relatedProducts = data.filter((p) => p.slug !== product.slug);
+  const relatedProducts = products.filter((p) => p.slug !== product.slug);
 
-  const nextProductIdx = data.findIndex((p) => p.slug === slug);
-  const nextProduct = data[nextProductIdx + 1] || data[0];
-
-  const productImages = product.imagenes || [];
-  const apiImages = productImages.map((image) => ({...image, url: toUrl(image.url)}));
+  const nextProductIdx = products.findIndex((p) => p.slug === slug);
+  const nextProduct = products[nextProductIdx + 1] || products[0];
 
   return (
     <>
@@ -75,7 +72,7 @@ export default async function ProductPage({params: {slug}}: ProductPageProps) {
             <ProductArticle nextProduct={nextProduct} product={product}>
               <aside className="m-auto w-vertical lg:ms-16">
                 {product.imagenes !== null ? (
-                  <VerticalCarousel images={apiImages} />
+                  <VerticalCarousel images={product.imagenes} />
                 ) : (
                   <Skeleton className="h-[33.75rem] w-vertical" />
                 )}

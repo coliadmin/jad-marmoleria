@@ -10,7 +10,7 @@ import {Whatsapp} from "@/components/icons/whatsapp";
 import {IconLink} from "@/components/icon-link";
 import {IconNames} from "@/components/icons";
 import {NavProductButton} from "@/components/nav-button";
-import {getWhatsApp} from "@/modules/content/whatsapp/api";
+import {api} from "@/api";
 
 type ProductArticleProps = {
   product: Product;
@@ -19,7 +19,7 @@ type ProductArticleProps = {
 };
 
 export async function ProductArticle({product, children, nextProduct}: ProductArticleProps) {
-  const {data: whatsapp} = await getWhatsApp();
+  const whatsapp = await api.whatsapp.get();
   const whatsAppUrl = toWhatsAppUrl(whatsapp.telefono);
 
   return (
