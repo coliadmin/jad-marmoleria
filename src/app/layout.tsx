@@ -35,14 +35,14 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
         <head>
           <meta content="width=device-width, initial-scale=1.0" name="viewport" />
         </head>
-        <body className="scrollbar border-border bg-background text-foreground">
+        <body className="border-border bg-background text-foreground scrollbar">
           <div
             className={cn(
               montserrat.className,
               "relative grid min-h-[100dvh] grid-rows-[auto,1fr] antialiased",
             )}
           >
-            <Header />
+            {/* <Header /> */}
             <main>{children}</main>
             {/* <div className="border-t">
             <ColiFooter />
