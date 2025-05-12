@@ -9,7 +9,7 @@ import {ScrollArea} from "@radix-ui/react-scroll-area";
 
 import {api} from "@/api";
 import {ProductLink} from "@/modules/product";
-import {H3} from "@/components/typo";
+import {H2, H3, H4} from "@/components/typo";
 import {Categories} from "@/modules/categories/enum";
 import {FilterLink} from "@/components/filter-link";
 import {query, CategoryCommons, categoryXPlural, Data} from "@/lib/strapi";
@@ -159,18 +159,30 @@ export default async function ProductsPage({searchParams: {category, value}}: Pr
       <section className="flex-1 lg:border-s">
         <H3 className="border-b py-3 text-center">{title()}</H3>
         {category && value ? (
-          <ul className="grid gap-12 py-8 md:grid-cols-2 lg:grid-cols-3">
-            {filterProds.map((product) => (
-              <li key={product.id} className="inline-flex max-w-[19rem] justify-self-center">
-                <ProductLink className="w-vertical" product={product} ratio={1} />
-              </li>
-            ))}
-          </ul>
+          filterProds.length !== 0 ? (
+            <ul className="grid gap-12 py-8 md:grid-cols-2 lg:grid-cols-3">
+              {filterProds.map((product) => (
+                <li key={product.id} className="inline-flex max-w-[19rem] justify-self-center">
+                  <ProductLink
+                    className="w-vertical border p-2 transition-all duration-200 ease-in-out group-hover:border-foreground group-hover:bg-slate-100"
+                    product={product}
+                    ratio={1}
+                  />
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <H4 className="mx-auto mt-24 w-fit font-medium">No hay productos de esta categoría.</H4>
+          )
         ) : (
           <ul className="grid gap-12 py-8 md:grid-cols-2 lg:grid-cols-3">
             {products.map((product) => (
               <li key={product.id} className="inline-flex max-w-[19rem] justify-self-center">
-                <ProductLink className="w-vertical" product={product} ratio={1} />
+                <ProductLink
+                  className="w-vertical border p-2 transition-all duration-200 ease-in-out group-hover:border-foreground group-hover:bg-slate-100"
+                  product={product}
+                  ratio={1}
+                />
               </li>
             ))}
           </ul>
