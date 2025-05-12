@@ -24,7 +24,12 @@ export default async function ProjectsPage() {
         <ul className="grid gap-12 py-8 md:grid-cols-2 lg:grid-cols-3">
           {projects.map((x) => (
             <li key={x.id} className="inline-flex max-w-[19rem] justify-self-center ">
-              <ProductLink path="projects" product={x} ratio={1} />
+              <ProductLink
+                className="w-vertical border p-2 transition-all duration-200 ease-in-out group-hover:border-foreground group-hover:bg-slate-100"
+                path="projects"
+                product={x}
+                ratio={1}
+              />
             </li>
           ))}
         </ul>
