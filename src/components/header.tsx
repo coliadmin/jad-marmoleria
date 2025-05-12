@@ -21,7 +21,12 @@ export async function Header() {
             "relative flex max-w-5xl flex-1 flex-col justify-center overflow-hidden rounded p-0 py-1",
           )}
         >
-          <Link prefetch className={cn("mb-4 text-center text-3xl font-bold")} href="/">
+          <Link
+            prefetch
+            className={cn("mb-4 text-center text-3xl font-bold")}
+            href="/"
+            scroll={false}
+          >
             {header.title}
           </Link>
           <div
@@ -30,7 +35,7 @@ export async function Header() {
               quicksand.className,
             )}
           >
-            <Link prefetch className="group relative" href="/">
+            <Link prefetch className="group relative" href="/" scroll={false}>
               <span className="tracking-widest sm:px-2">{header.home}</span>
               <div className="h-[0.15rem] w-full bg-transparent transition-colors duration-100 ease-in-out group-hover:bg-amber-400/65" />
             </Link>
