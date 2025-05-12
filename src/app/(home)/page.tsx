@@ -38,7 +38,7 @@ export default async function HomePage() {
           {usos.map((uso) => (
             <li
               key={uso.id}
-              className="w-32 rounded border p-2 py-4 transition-colors duration-200 ease-in-out hover:border-foreground"
+              className="flex w-32 items-center justify-center rounded border p-2 py-4 transition-colors duration-200 ease-in-out hover:border-foreground"
             >
               <IconLink
                 href={`/products?category=${Categories.USE}&value=${uso.slug}`}
@@ -50,7 +50,7 @@ export default async function HomePage() {
           {aplications.map((aplication) => (
             <li
               key={aplication.id}
-              className="size-32 rounded border p-2 py-4 transition-colors duration-200 ease-in-out hover:border-foreground"
+              className="flex w-32 items-center justify-center rounded border p-2 py-4 transition-colors duration-200 ease-in-out hover:border-foreground"
             >
               <IconLink
                 href={`/products?category=${Categories.APLICATION}&value=${aplication.slug}`}
@@ -59,14 +59,12 @@ export default async function HomePage() {
               />
             </li>
           ))}
-          <li className="size-32 rounded border p-2 py-4 transition-colors duration-200 ease-in-out hover:border-foreground">
-            <Link prefetch className="m-auto w-6" href="/products">
-              <span className="mt-2 flex justify-center">
+          <li className="flex w-32 items-center justify-center rounded border p-2 py-4 transition-colors duration-200 ease-in-out hover:border-foreground">
+            <Link prefetch className="space-y-2" href="/products">
+              <span className="mt-icon flex justify-center">
                 <ArrowUpRight />
               </span>
-              <P className={cn(quicksand.className, "text-center text-lg leading-none")}>
-                <span className="rounded px-2">Ver todos</span>
-              </P>
+              <p className="text-center text-lg">Ver todos</p>
             </Link>
           </li>
         </ul>
