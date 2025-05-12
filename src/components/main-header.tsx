@@ -81,7 +81,7 @@ export async function MainHeader() {
             </div>
           </div>
           <div className="w-full max-w-xl sm:max-w-2xl md:max-w-5xl lg:mx-auto lg:max-w-[88rem]">
-            <div className="max-w-[21rem]">
+            <div className="mx-auto max-w-[21rem] lg:m-0 lg:pl-2 2xl:p-0">
               <Link prefetch href="/" scroll={false}>
                 {titleComponent()}
               </Link>
