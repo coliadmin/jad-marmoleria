@@ -14,11 +14,11 @@ export async function HeaderV2() {
   const header = await api.header.get();
 
   return (
-    <div className="h-auto w-full bg-transparent">
-      <header className="flex h-min w-full justify-center overflow-hidden px-4 py-3 backdrop-filter md:px-12 lg:px-28">
+    <div className="h-auto w-full bg-transparent backdrop-blur-[2px] backdrop-filter">
+      <header className="flex h-min w-full justify-center overflow-hidden px-4 py-3 md:px-12 lg:px-28">
         <nav
           className={cn(
-            "relative flex max-w-5xl flex-1 flex-col justify-center overflow-hidden rounded p-0 py-1",
+            "relative flex max-w-5xl flex-1 flex-col justify-center overflow-hidden p-0 py-1 transition-colors duration-200 ease-in-out",
           )}
         >
           <Link prefetch className={cn("mb-4 text-center text-3xl font-bold")} href="/">

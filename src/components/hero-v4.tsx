@@ -2,8 +2,8 @@ import {Link} from "next-view-transitions";
 
 import {H1, Highlight, P} from "./typo";
 import {Whatsapp} from "./icons/whatsapp";
-import {HeaderV2} from "./header-v2";
 
+import {HeaderV2} from "@/components/header-v2";
 import {getHero} from "@/modules/content/hero";
 import {Button} from "@/components/ui/button";
 import {cn, toWhatsAppUrl} from "@/lib/utils";
@@ -34,16 +34,23 @@ export async function HeroV4() {
   };
 
   return (
-    <section className="relative h-[38rem] w-full lg:h-[750px]">
-      <div
-        className="absolute inset-0 -z-10 bg-cover bg-center"
-        style={{backgroundImage: `url('${"/image.png"}'`}}
-      />
+    <section className="relative flex h-screen w-full flex-col ">
+      <div className="absolute inset-0 -z-10">
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundImage: `url('/image.png')`,
+            backgroundSize: "cover",
+            backgroundPosition: "top",
+          }}
+        />
+        <div className="absolute inset-0 bg-black/10" />
+      </div>
       <HeaderV2 />
-      <div className="relative z-10 flex h-full w-full items-center justify-center p-2 lg:p-0">
-        <div className="m-auto max-w-lg lg:m-0 lg:pl-6 lg:pt-36 xl:pl-0">
-          <H1 className="">{titleComponent()}</H1>
-          <P className={cn("text-xl text-muted-foreground", quicksand.className)}>{descripcion}</P>
+      <div className="flex w-full flex-1 justify-end p-8">
+        <div className="flex max-w-lg flex-col justify-center">
+          <H1>{titleComponent()}</H1>
+          <P className={cn("text-xl text-accent-foreground", quicksand.className)}>{descripcion}</P>
           <div className="mt-8 inline-flex gap-2">
             <Link
               className="flex items-center gap-2"
