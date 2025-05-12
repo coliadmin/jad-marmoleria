@@ -34,7 +34,7 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
         <head>
           <meta content="width=device-width, initial-scale=1.0" name="viewport" />
         </head>
-        <body className="w-full border-border bg-background text-foreground scrollbar">
+        <body className="w-full border-border bg-slate-50 text-foreground scrollbar">
           <div
             className={cn(
               montserrat.className,
