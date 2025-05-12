@@ -24,7 +24,7 @@ export async function ProjectArticle({project, children}: ProjectArticleProps) {
   const whatsAppUrl = toWhatsAppUrl(whatsapp.telefono);
 
   return (
-    <article className="lg:border-e lg:border-s">
+    <article className="w-full lg:border-e lg:border-s">
       <header className="flex items-center justify-between gap-4 border-b">
         <Link
           prefetch
@@ -50,11 +50,15 @@ export async function ProjectArticle({project, children}: ProjectArticleProps) {
             <Whatsapp className="size-5" />
           </Button>
         </Link>
-         <Link className="text-sm inline-flex items-center font-normal text-slate-800/65" href='#descripcion'>Más información
+        <Link
+          className="inline-flex items-center text-sm font-normal text-slate-800/65"
+          href="#descripcion"
+        >
+          Más información
           <ChevronDown className="ms-1 size-4 stroke-1" />
         </Link>
       </div>
-      <div className="lg:inline-flex m-auto w-full gap-20 px-6 py-6">
+      <div className="m-auto w-full gap-20 px-6 py-6 lg:inline-flex">
         {children}
         <div className="mx-auto max-w-3xl flex-1 space-y-6 ">
           <div className="prose pt-6 lg:pt-0" id="descripcion">
