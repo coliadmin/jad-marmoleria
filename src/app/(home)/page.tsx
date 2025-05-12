@@ -8,7 +8,6 @@ import {
 } from "@radix-ui/react-accordion";
 
 import {api} from "@/api";
-import {Hero} from "@/components/hero";
 import {H2, P} from "@/components/typo";
 import {ProductLink} from "@/modules/product";
 import {cn} from "@/lib/utils";
@@ -16,7 +15,6 @@ import {quicksand} from "@/fonts";
 import {IconLink} from "@/components/icon-link";
 import {IconNames} from "@/components/icons";
 import {Categories} from "@/modules/categories/enum";
-import {HeroV4} from "@/components/hero-v4";
 
 export default async function HomePage() {
   const prds = await api.products.getList();
@@ -26,8 +24,7 @@ export default async function HomePage() {
   const faqs = await api.faqs.getList();
 
   return (
-    <section className="m-auto mx-auto p-4 lg:pt-8">
-      <HeroV4 />
+    <section className="m-auto mx-auto">
       <div className="m-auto max-w-5xl">
         <H2 className={cn("mb-8 border-none text-center leading-[3.2rem]")}>
           <div className="space-x-4">

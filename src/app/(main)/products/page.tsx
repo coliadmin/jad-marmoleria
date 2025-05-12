@@ -1,5 +1,11 @@
+import type {Aplication} from "@/modules/categories/aplication";
+import type {Use} from "@/modules/categories/use";
+import type {Material} from "@/modules/categories/material";
+import type {Color} from "@/modules/categories/color/types";
+
 import {Link} from "next-view-transitions";
 import {Metadata} from "next";
+import {ScrollArea} from "@radix-ui/react-scroll-area";
 
 import {api} from "@/api";
 import {ProductLink} from "@/modules/product";
@@ -8,12 +14,7 @@ import {Categories} from "@/modules/categories/enum";
 import {FilterLink} from "@/components/filter-link";
 import {query, CategoryCommons, categoryXPlural, Data} from "@/lib/strapi";
 import {capitalize, cn} from "@/lib/utils";
-import type { Aplication } from "@/modules/categories/aplication";
-import type { Use } from "@/modules/categories/use";
-import type { Material } from "@/modules/categories/material";
-import type {Color} from "@/modules/categories/color/types";
-import { ScrollArea } from "@radix-ui/react-scroll-area";
-import { ScrollBar } from "@/components/ui/scroll-area";
+import {ScrollBar} from "@/components/ui/scroll-area";
 
 type Props = {
   searchParams: {
@@ -92,23 +93,23 @@ export default async function ProductsPage({searchParams: {category, value}}: Pr
 
   return (
     <section className="mx-auto flex w-full max-w-xl flex-col overflow-hidden border-e border-s sm:max-w-2xl md:max-w-5xl lg:mx-auto lg:max-w-[88rem] lg:flex-row">
-      <aside className="flex flex-col lg:h-full lg:w-[250px] w-full pt-6 lg:py-6">
-        <div className="border-b lg:w-auto flex flex-row gap-4 lg:gap-0 lg:justify-between">
+      <aside className="flex w-full flex-col pt-6 lg:h-full lg:w-[250px] lg:py-6">
+        <div className="flex flex-row gap-4 border-b lg:w-auto lg:justify-between lg:gap-0">
           <H3 className="ml-3">Filtros</H3>
           <Link
             prefetch
             className={cn(
-                "content-center invisible rounded-e-full px-2 text-sm font-normal text-slate-800/65 hover:underline",
-                category && "visible" || value && "visible",
+              "invisible content-center rounded-e-full px-2 text-sm font-normal text-slate-800/65 hover:underline",
+              (category && "visible") || (value && "visible"),
             )}
             href="/products"
           >
             Limpiar filtro
           </Link>
         </div>
-       <div className="block border-b lg:hidden ml-1">
-         <ScrollArea className="whitespace-nowrap w-full">
-            <div className="flex gap-6 p-2 overflow-x-auto">
+        <div className="ml-1 block border-b lg:hidden">
+          <ScrollArea className="w-full whitespace-nowrap">
+            <div className="flex gap-6 overflow-x-auto p-2">
               {filters.map((filter) => (
                 <Link
                   key={filter.slug}
@@ -125,13 +126,15 @@ export default async function ProductsPage({searchParams: {category, value}}: Pr
             </div>
             <ScrollBar orientation="horizontal" />
           </ScrollArea>
-          <ScrollArea className="whitespace-nowrap w-full">
-            <div className="flex gap-6 p-2 overflow-x-auto">
-            {filters.map((filter) => (
-              filter.slug === category && filter.category.map((item) => (
-                <FilterLink category={filter.slug} value={item} key={item.id} />
-                ))
-              ))}
+          <ScrollArea className="w-full whitespace-nowrap">
+            <div className="flex gap-6 overflow-x-auto p-2">
+              {filters.map(
+                (filter) =>
+                  filter.slug === category &&
+                  filter.category.map((item) => (
+                    <FilterLink key={item.id} category={filter.slug} value={item} />
+                  )),
+              )}
             </div>
             <ScrollBar orientation="horizontal" />
           </ScrollArea>
