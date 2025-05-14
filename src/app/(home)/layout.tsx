@@ -4,9 +4,9 @@ import {HeroV4} from "@/components/hero-v4";
 
 export default function HomeLayout({children}: {children: React.ReactNode}) {
   return (
-    <section className="space-y-8">
+    <main className="w-full">
       <HeroV4 />
-      {children}
-    </section>
+      <section className="mt-8 w-full">{children}</section>
+    </main>
   );
 }
