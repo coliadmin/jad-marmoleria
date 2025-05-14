@@ -32,7 +32,7 @@ export async function HomeHeader() {
   };
 
   return (
-    <div className="flex h-full w-full flex-col justify-between bg-transparent md:h-auto">
+    <div className="flex w-full flex-1 flex-col justify-between bg-transparent">
       <header className="flex h-min w-full justify-center overflow-hidden pb-4">
         <nav
           className={cn(
