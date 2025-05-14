@@ -8,7 +8,6 @@ import {
 } from "@radix-ui/react-accordion";
 
 import {api} from "@/api";
-import {Hero} from "@/components/hero";
 import {H2, P} from "@/components/typo";
 import {ProductLink} from "@/modules/product";
 import {cn} from "@/lib/utils";
@@ -25,8 +24,7 @@ export default async function HomePage() {
   const faqs = await api.faqs.getList();
 
   return (
-    <section className="m-auto mx-auto p-4 lg:pt-8">
-      <Hero />
+    <section className="m-auto px-1 md:px-0 mx-auto">
       <div className="m-auto max-w-5xl">
         <H2 className={cn("mb-8 border-none text-center leading-[3.2rem]")}>
           <div className="space-x-4">
@@ -40,7 +38,7 @@ export default async function HomePage() {
           {usos.map((uso) => (
             <li
               key={uso.id}
-              className="w-32 rounded border p-2 py-4 transition-colors duration-200 ease-in-out hover:border-foreground"
+              className="flex w-32 items-center justify-center rounded border p-2 py-4 transition-colors duration-200 ease-in-out hover:border-foreground"
             >
               <IconLink
                 href={`/products?category=${Categories.USE}&value=${uso.slug}`}
@@ -52,7 +50,7 @@ export default async function HomePage() {
           {aplications.map((aplication) => (
             <li
               key={aplication.id}
-              className="size-32 rounded border p-2 py-4 transition-colors duration-200 ease-in-out hover:border-foreground"
+              className="flex w-32 items-center justify-center rounded border p-2 py-4 transition-colors duration-200 ease-in-out hover:border-foreground"
             >
               <IconLink
                 href={`/products?category=${Categories.APLICATION}&value=${aplication.slug}`}
@@ -61,20 +59,18 @@ export default async function HomePage() {
               />
             </li>
           ))}
-          <li className="size-32 rounded border p-2 py-4 transition-colors duration-200 ease-in-out hover:border-foreground">
-            <Link prefetch className="m-auto w-6" href="/products">
-              <span className="mt-2 flex justify-center">
+          <li className="flex w-32 items-center justify-center rounded border p-2 py-4 transition-colors duration-200 ease-in-out hover:border-foreground">
+            <Link prefetch className="space-y-2" href="/products">
+              <span className="mt-icon flex justify-center">
                 <ArrowUpRight />
               </span>
-              <P className={cn(quicksand.className, "text-center text-lg leading-none")}>
-                <span className="rounded px-2">Ver todos</span>
-              </P>
+              <p className="text-center text-lg">Ver todos</p>
             </Link>
           </li>
         </ul>
       </div>
       <div className="m-auto mt-24 max-w-5xl">
-        <H2 className="mb-8 border-none text-center">
+        <H2 className="mb-8 border-none leading-[3.2rem] text-center">
           Algunos de nuestros productos más solicitados
         </H2>
         <ul className="flex flex-wrap justify-center gap-8 pb-12 lg:justify-between">

@@ -67,8 +67,8 @@ export default async function ProductPage({params: {slug}}: ProductPageProps) {
     <>
       <section className="container">
         <div className="flex flex-1 items-center">
-          <NavProductButton className="hidden lg:block" mode="back" variant="left" />
-          <div className="flex-1 lg:mx-12">
+          <NavProductButton className="hidden lg:inline-flex" mode="back" variant="left" />
+          <div className="flex w-full max-w-xl flex-1 sm:max-w-2xl md:max-w-5xl lg:mx-auto lg:max-w-[88rem]">
             <ProductArticle nextProduct={nextProduct} product={product}>
               <aside className="m-auto w-vertical lg:ms-16">
                 {product.imagenes !== null ? (
@@ -79,7 +79,11 @@ export default async function ProductPage({params: {slug}}: ProductPageProps) {
               </aside>
             </ProductArticle>
           </div>
-          <NavProductButton className="hidden lg:block" path={nextProduct.slug} variant="right" />
+          <NavProductButton
+            className="hidden lg:inline-flex"
+            path={nextProduct.slug}
+            variant="right"
+          />
         </div>
       </section>
       <aside className="flex justify-center border-t">

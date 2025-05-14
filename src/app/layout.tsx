@@ -6,7 +6,6 @@ import {ViewTransitions} from "next-view-transitions";
 
 import {montserrat} from "@/fonts";
 import {cn} from "@/lib/utils";
-import {Header} from "@/components/header";
 
 export const metadata: Metadata = {
   title: "JAD Marmoleria",
@@ -31,18 +30,17 @@ export const metadata: Metadata = {
 export default function RootLayout({children}: {children: React.ReactNode}) {
   return (
     <ViewTransitions>
-      <html className="scroll-smooth" lang="es">
+      <html className="w-full scroll-smooth" lang="es">
         <head>
           <meta content="width=device-width, initial-scale=1.0" name="viewport" />
         </head>
-        <body className="scrollbar border-border bg-background text-foreground">
+        <body className="w-full border-border bg-slate-50 text-foreground scrollbar">
           <div
             className={cn(
               montserrat.className,
-              "relative grid min-h-[100dvh] grid-rows-[auto,1fr] antialiased",
+              "relative grid min-h-[100dvh] w-full grid-rows-[auto,1fr] antialiased",
             )}
           >
-            <Header />
             <main>{children}</main>
             {/* <div className="border-t">
             <ColiFooter />

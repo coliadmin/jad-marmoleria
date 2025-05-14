@@ -1,19 +1,21 @@
+import type {Aplication} from "@/modules/categories/aplication";
+import type {Use} from "@/modules/categories/use";
+import type {Material} from "@/modules/categories/material";
+import type {Color} from "@/modules/categories/color/types";
+
 import {Link} from "next-view-transitions";
 import {Metadata} from "next";
+import {ScrollArea} from "@radix-ui/react-scroll-area";
+import {X} from "lucide-react";
 
 import {api} from "@/api";
 import {ProductLink} from "@/modules/product";
-import {H3} from "@/components/typo";
+import {H2, H3, H4} from "@/components/typo";
 import {Categories} from "@/modules/categories/enum";
 import {FilterLink} from "@/components/filter-link";
 import {query, CategoryCommons, categoryXPlural, Data} from "@/lib/strapi";
 import {capitalize, cn} from "@/lib/utils";
-import type { Aplication } from "@/modules/categories/aplication";
-import type { Use } from "@/modules/categories/use";
-import type { Material } from "@/modules/categories/material";
-import type {Color} from "@/modules/categories/color/types";
-import { ScrollArea } from "@radix-ui/react-scroll-area";
-import { ScrollBar } from "@/components/ui/scroll-area";
+import {ScrollBar} from "@/components/ui/scroll-area";
 
 type Props = {
   searchParams: {
@@ -91,31 +93,37 @@ export default async function ProductsPage({searchParams: {category, value}}: Pr
   };
 
   return (
-    <section className="mx-auto flex w-full max-w-xl flex-col overflow-hidden border-e border-s sm:max-w-2xl md:max-w-5xl lg:mx-auto lg:max-w-[88rem] lg:flex-row">
-      <aside className="flex flex-col lg:h-full lg:w-[250px] w-full pt-6 lg:py-6">
-        <div className="border-b lg:w-auto flex flex-row gap-4 lg:gap-0 lg:justify-between">
+    <section className="mx-auto flex w-full  flex-col overflow-hidden border-e border-s  md:max-w-5xl lg:mx-auto lg:max-w-[88rem] lg:flex-row">
+      <aside className="flex w-full  flex-col pt-6 lg:h-full lg:w-[250px] lg:py-6">
+        <div className="mb-2 flex gap-4 lg:mb-0 lg:w-auto lg:justify-between lg:gap-0">
           <H3 className="ml-3">Filtros</H3>
-          <Link
-            prefetch
-            className={cn(
-                "content-center invisible rounded-e-full px-2 text-sm font-normal text-slate-800/65 hover:underline",
-                category && "visible" || value && "visible",
-            )}
-            href="/products"
-          >
-            Limpiar filtro
-          </Link>
+          <div className="my-auto px-2 text-sm font-normal text-slate-800/65">
+            <p className={cn("block ", (category && "hidden") || (value && "hidden"))}>
+              Sin filtros activos
+            </p>
+            <Link
+              prefetch
+              className={cn(
+                "hidden gap-2 rounded-e-full hover:underline",
+                (category && "inline-flex") || (value && "inline-flex"),
+              )}
+              href="/products"
+            >
+              <X className="mt-icon size-3 self-center" />
+              Limpiar filtro
+            </Link>
+          </div>
         </div>
-       <div className="block border-b lg:hidden ml-1">
-         <ScrollArea className="whitespace-nowrap w-full">
-            <div className="flex gap-6 p-2 overflow-x-auto">
+        <div className="block w-full  border-b border-t lg:hidden">
+          <div className="relative w-full max-w-md overflow-x-auto sm:max-w-xl md:max-w-full">
+            <div className="flex gap-4 whitespace-nowrap p-2">
               {filters.map((filter) => (
                 <Link
                   key={filter.slug}
                   prefetch
                   className={cn(
-                    "rounded-full font-medium",
-                    category === filter.slug && "bg-gray-200/65 px-3",
+                    "rounded-full border px-6 py-1 font-medium",
+                    category === filter.slug && "bg-gray-200/65",
                   )}
                   href={`/products?category=${filter.slug}`}
                 >
@@ -123,20 +131,21 @@ export default async function ProductsPage({searchParams: {category, value}}: Pr
                 </Link>
               ))}
             </div>
-            <ScrollBar orientation="horizontal" />
-          </ScrollArea>
-          <ScrollArea className="whitespace-nowrap w-full">
-            <div className="flex gap-6 p-2 overflow-x-auto">
-            {filters.map((filter) => (
-              filter.slug === category && filter.category.map((item) => (
-                <FilterLink category={filter.slug} value={item} key={item.id} />
-                ))
-              ))}
+          </div>
+          <ScrollArea className="w-full whitespace-nowrap">
+            <div className="flex max-w-md gap-4 overflow-x-auto p-2 sm:max-w-xl md:max-w-full">
+              {filters.map(
+                (filter) =>
+                  filter.slug === category &&
+                  filter.category.map((item) => (
+                    <FilterLink key={item.id} category={filter.slug} value={item} />
+                  )),
+              )}
             </div>
             <ScrollBar orientation="horizontal" />
           </ScrollArea>
         </div>
-        <div className="hidden lg:block">
+        <div className="hidden border-t lg:block">
           {filters.map((filter) => (
             <div key={filter.slug} className="gap-8 py-4">
               <h4 className="border-b font-medium">
@@ -156,18 +165,30 @@ export default async function ProductsPage({searchParams: {category, value}}: Pr
       <section className="flex-1 lg:border-s">
         <H3 className="border-b py-3 text-center">{title()}</H3>
         {category && value ? (
-          <ul className="grid gap-12 py-8 md:grid-cols-2 lg:grid-cols-3">
-            {filterProds.map((product) => (
-              <li key={product.id} className="inline-flex max-w-[19rem] justify-self-center">
-                <ProductLink className="w-vertical" product={product} ratio={1} />
-              </li>
-            ))}
-          </ul>
+          filterProds.length !== 0 ? (
+            <ul className="grid gap-12 py-8 md:grid-cols-2 xl:grid-cols-3">
+              {filterProds.map((product) => (
+                <li key={product.id} className="inline-flex max-w-[19rem] justify-self-center">
+                  <ProductLink
+                    className="w-vertical border p-2 transition-all duration-200 ease-in-out group-hover:border-foreground group-hover:bg-slate-100"
+                    product={product}
+                    ratio={1}
+                  />
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <H4 className="mx-auto mt-24 w-fit font-medium">No hay productos de esta categoría.</H4>
+          )
         ) : (
-          <ul className="grid gap-12 py-8 md:grid-cols-2 lg:grid-cols-3">
+          <ul className="grid gap-12 py-8 md:grid-cols-2 xl:grid-cols-3">
             {products.map((product) => (
               <li key={product.id} className="inline-flex max-w-[19rem] justify-self-center">
-                <ProductLink className="w-vertical" product={product} ratio={1} />
+                <ProductLink
+                  className="w-vertical border p-2 transition-all duration-200 ease-in-out group-hover:border-foreground group-hover:bg-slate-100"
+                  product={product}
+                  ratio={1}
+                />
               </li>
             ))}
           </ul>

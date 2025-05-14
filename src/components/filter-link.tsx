@@ -20,8 +20,9 @@ export function FilterLink({category, value}: FilterLinkProps) {
     <Link
       prefetch
       className={cn(
-        "lg:hover:underline",
-        activeValue === value.slug && " lg:rounded-s-none rounded-full bg-amber-300/65 px-3 lg:px-2",
+        "rounded-full border px-4 py-1 lg:rounded-none lg:border-none lg:px-0 lg:py-0 lg:hover:underline",
+        activeValue === value.slug &&
+          " bg-amber-500/65 lg:rounded-e-full lg:rounded-s-none lg:border-none lg:px-2",
       )}
       href={`/products?category=${category.toString()}&value=${value.slug}`}
     >
