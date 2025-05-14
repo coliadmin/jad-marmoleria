@@ -1,5 +1,5 @@
 import {Link} from "next-view-transitions";
-import {Instagram} from "lucide-react";
+import {ChevronDown, Instagram} from "lucide-react";
 
 import {Whatsapp} from "./icons/whatsapp";
 import {Highlight} from "./typo";
@@ -32,7 +32,7 @@ export async function HomeHeader() {
   };
 
   return (
-    <div className="md:h-auto h-full w-full flex flex-col justify-between bg-transparent">
+    <div className="flex h-full w-full flex-col justify-between bg-transparent md:h-auto">
       <header className="flex h-min w-full justify-center overflow-hidden pb-4">
         <nav
           className={cn(
@@ -41,7 +41,7 @@ export async function HomeHeader() {
         >
           <div
             className={cn(
-              "m-auto w-full hidden md:inline-flex justify-center bg-primary/10 py-2 font-semibold backdrop-blur",
+              "m-auto hidden w-full justify-center bg-primary/10 py-2 font-semibold backdrop-blur md:inline-flex",
               quicksand.className,
             )}
           >
@@ -85,20 +85,27 @@ export async function HomeHeader() {
           </Link>
         </nav>
       </header>
-      <footer className="md:hidden pb-4 w-full">
-        <nav className="flex w-full text-white bottom-0 h-min left-0 right-0 transition-colors duration-200 ease-in-out">
-          <div className={cn(
-              "m-auto w-full flex justify-evenly py-2 font-semibold",
+      <footer className="mb-8 w-full md:hidden">
+        <nav className="h-min w-full space-y-6 text-white transition-colors duration-200 ease-in-out">
+          <div
+            className={cn(
+              "m-auto flex w-full justify-evenly py-2 font-semibold",
               quicksand.className,
-            )}>
-              <Link prefetch className="group relative" href="/products">
-                <span className="tracking-widest text-xl sm:px-2">{header.products}</span>
-                <div className="h-[0.15rem] w-full bg-transparent transition-colors duration-100 ease-in-out group-hover:bg-muted" />
-              </Link>
-              <Link prefetch className="group relative" href="/projects">
-                <span className="tracking-widest text-xl sm:px-2">{header.projects}</span>
-                <div className="h-[0.15rem] w-full bg-transparent transition-colors duration-100 ease-in-out group-hover:bg-muted" />
-              </Link>
+            )}
+          >
+            <Link prefetch className="group relative backdrop-blur" href="/products">
+              <span className="text-2xl tracking-widest sm:px-2">{header.products}</span>
+              <div className="h-[0.15rem] w-full border-b-2 border-b-muted bg-transparent" />
+            </Link>
+            <Link prefetch className="group relative backdrop-blur" href="/projects">
+              <span className="text-2xl tracking-widest sm:px-2">{header.projects}</span>
+              <div className="h-[0.15rem] w-full border-b-2 border-b-muted bg-transparent" />
+            </Link>
+          </div>
+          <div className="flex justify-center">
+            <Link className="rounded-full border border-muted/30" href="#home">
+              <ChevronDown className="mt-icon size-8 stroke-muted/70 stroke-1" />
+            </Link>
           </div>
         </nav>
       </footer>
