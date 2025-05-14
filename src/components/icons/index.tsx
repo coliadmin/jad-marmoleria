@@ -1,4 +1,4 @@
-import {Armchair, ShowerHead, Feather, ChefHat} from "lucide-react";
+import {Armchair, ShowerHead, Feather, ChefHat, Layers} from "lucide-react";
 
 export const InteriorIcon = Armchair;
 
@@ -13,6 +13,7 @@ export enum IconNames {
   exterior = "exterior",
   "mesadas-de-cocina" = "mesadas-de-cocina",
   "mesadas-de-bano" = "mesadas-de-bano",
+  revestir = "revestir",
 }
 
 export const icons: Record<IconNames, React.ReactNode> = {
@@ -20,4 +21,5 @@ export const icons: Record<IconNames, React.ReactNode> = {
   exterior: <ExteriorIcon />,
   "mesadas-de-cocina": <KitchenIcon />,
   "mesadas-de-bano": <BathroomIcon />,
+  revestir: <Layers />,
 };

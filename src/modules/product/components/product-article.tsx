@@ -23,7 +23,7 @@ export async function ProductArticle({product, children, nextProduct}: ProductAr
   const whatsAppUrl = toWhatsAppUrl(whatsapp.telefono);
 
   return (
-    <article className="lg:border-e lg:border-s">
+    <article className="w-full lg:border-e lg:border-s">
       <header className="relative flex items-center border-b">
         <Link
           prefetch
@@ -89,11 +89,11 @@ export async function ProductArticle({product, children, nextProduct}: ProductAr
             </P>
           </div>
           <div className="inline-flex w-full flex-col justify-between space-y-6">
-            <ul className="flex flex-wrap gap-4 lg:max-w-md">
+            <ul className="flex flex-wrap gap-4 lg:max-w-md xl:max-w-xl">
               {product.usos!.map((uso) => (
                 <li
                   key={uso.id}
-                  className="size-32 rounded border p-2 py-4 transition-colors duration-200 ease-in-out hover:border-foreground"
+                  className="flex size-28 items-center justify-center rounded border py-4 transition-colors duration-200 ease-in-out hover:border-foreground"
                 >
                   <IconLink
                     href={`/products?category=usos&value=${uso.slug}`}
@@ -106,7 +106,7 @@ export async function ProductArticle({product, children, nextProduct}: ProductAr
               {product.aplicaciones!.map((aplic) => (
                 <li
                   key={aplic.id}
-                  className="size-32 rounded border p-2 py-4 transition-colors duration-200 ease-in-out hover:border-foreground"
+                  className="flex size-28 items-center justify-center text-balance rounded border p-2 transition-colors duration-200 ease-in-out hover:border-foreground"
                 >
                   <IconLink
                     href={`/products?category=aplicaciones&value=${aplic.slug}`}
