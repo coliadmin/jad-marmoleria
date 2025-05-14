@@ -24,7 +24,7 @@ export default async function HomePage() {
   const faqs = await api.faqs.getList();
 
   return (
-    <section className="m-auto mx-auto">
+    <section className="m-auto px-1 md:px-0 mx-auto">
       <div className="m-auto max-w-5xl">
         <H2 className={cn("mb-8 border-none text-center leading-[3.2rem]")}>
           <div className="space-x-4">
@@ -70,7 +70,7 @@ export default async function HomePage() {
         </ul>
       </div>
       <div className="m-auto mt-24 max-w-5xl">
-        <H2 className="mb-8 border-none text-center">
+        <H2 className="mb-8 border-none leading-[3.2rem] text-center">
           Algunos de nuestros productos más solicitados
         </H2>
         <ul className="flex flex-wrap justify-center gap-8 pb-12 lg:justify-between">

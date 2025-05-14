@@ -32,16 +32,16 @@ export async function HomeHeader() {
   };
 
   return (
-    <div className="h-auto w-full bg-transparent">
+    <div className="md:h-auto h-full w-full flex flex-col justify-between bg-transparent">
       <header className="flex h-min w-full justify-center overflow-hidden pb-4">
         <nav
           className={cn(
-            "mix-blend- relative flex w-full flex-1 flex-col items-center justify-center space-y-6 overflow-hidden text-white transition-colors duration-200 ease-in-out",
+            "relative flex w-full flex-1 flex-col items-center justify-center space-y-6 overflow-hidden text-white transition-colors duration-200 ease-in-out",
           )}
         >
           <div
             className={cn(
-              "m-auto inline-flex w-full justify-center bg-primary/10 py-2 font-semibold backdrop-blur",
+              "m-auto w-full hidden md:inline-flex justify-center bg-primary/10 py-2 font-semibold backdrop-blur",
               quicksand.className,
             )}
           >
@@ -85,6 +85,23 @@ export async function HomeHeader() {
           </Link>
         </nav>
       </header>
+      <footer className="md:hidden pb-4 w-full">
+        <nav className="flex w-full text-white bottom-0 h-min left-0 right-0 transition-colors duration-200 ease-in-out">
+          <div className={cn(
+              "m-auto w-full flex justify-evenly py-2 font-semibold",
+              quicksand.className,
+            )}>
+              <Link prefetch className="group relative" href="/products">
+                <span className="tracking-widest text-xl sm:px-2">{header.products}</span>
+                <div className="h-[0.15rem] w-full bg-transparent transition-colors duration-100 ease-in-out group-hover:bg-muted" />
+              </Link>
+              <Link prefetch className="group relative" href="/projects">
+                <span className="tracking-widest text-xl sm:px-2">{header.projects}</span>
+                <div className="h-[0.15rem] w-full bg-transparent transition-colors duration-100 ease-in-out group-hover:bg-muted" />
+              </Link>
+          </div>
+        </nav>
+      </footer>
     </div>
   );
 }
