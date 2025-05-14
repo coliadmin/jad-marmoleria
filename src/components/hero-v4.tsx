@@ -10,7 +10,7 @@ export async function HeroV4() {
   const p3 = imagenes[5];
 
   return (
-    <section className="relative h-[100dvh] w-full overflow-hidden">
+    <section className="relative h-[100svh] w-full overflow-hidden">
       <div className="absolute inset-0 -z-10 grid h-full w-full gap-1 md:grid-cols-2 xl:grid-cols-3">
         <div className="relative hidden md:block">
           <img alt={p1.name} className="h-full w-full object-cover" src={p1.url} />
