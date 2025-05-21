@@ -10,7 +10,7 @@ import {api} from "@/api";
 export async function Header() {
   const instagram = await api.instagram.get();
   const whatsapp = await api.whatsapp.get();
-  const whatsAppUrl = toWhatsAppUrl(whatsapp.telefono);
+  const whatsAppUrl = toWhatsAppUrl(whatsapp);
   const header = await api.header.get();
 
   return (

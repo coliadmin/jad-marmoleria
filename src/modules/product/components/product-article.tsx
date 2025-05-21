@@ -18,9 +18,10 @@ type ProductArticleProps = {
   nextProduct?: Product;
 };
 
+
 export async function ProductArticle({product, children, nextProduct}: ProductArticleProps) {
   const whatsapp = await api.whatsapp.get();
-  const whatsAppUrl = toWhatsAppUrl(whatsapp.telefono);
+  const whatsAppUrl = toWhatsAppUrl(whatsapp, product, "producto");
 
   return (
     <article className="w-full lg:border-e lg:border-s">
