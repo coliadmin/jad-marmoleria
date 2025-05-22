@@ -1,5 +1,6 @@
 import {Color} from "../categories/color";
 import {Material} from "../categories/material";
+import { Project, ProjectDTO} from "../projects";
 
 import {Product, ProductDTO} from "./types";
 
@@ -7,6 +8,15 @@ import {STRAPI_HOST} from "@/config";
 import {query, type QueryResponse} from "@/lib/strapi";
 
 // TODO: Increase performance by reducing the number fields fetched, specify the fields to fetch.
+
+function transformProject(dto: ProjectDTO): Project {
+  return {
+    ...dto,
+    imagenes: [],
+    videos: [],
+    portada: {...dto.portada, url: STRAPI_HOST + dto.portada.url},
+  };
+}
 
 function transformProduct(dto: ProductDTO): Product {
   const colorAlt: Color = {documentId: "", id: "", nombre: "", slug: ""};
@@ -22,13 +32,15 @@ function transformProduct(dto: ProductDTO): Product {
     usos: dto.usos?.map((uso) => ({...uso, slug: uso.slug})) ?? [],
     aplicaciones:
       dto.aplicaciones?.map((aplicacion) => ({...aplicacion, slug: aplicacion.slug})) ?? [],
+    proyectos:
+      dto.proyectos?.map((project) => transformProject(project)) ?? []
   };
 }
 
 async function fetchProduct(slug: string): QueryResponse<ProductDTO[] | null> {
   try {
     const res = await query<ProductDTO[]>(
-      `products?filters[slug][$contains]=${slug}&populate[usos][fields][0]=nombre&populate[usos][fields][1]=slug&populate[aplicaciones][fields][0]=nombre&populate[aplicaciones][fields][1]=slug&populate[material][fields][0]=nombre&populate[material][fields][1]=slug&populate[imagenes][fields][0]=name&populate[imagenes][fields][1]=url&populate[imagenes][fields][2]=hash&populate[portada][fields][0]=name&populate[portada][fields][1]=url&populate[portada][fields][2]=hash`,
+      `products?filters[slug][$contains]=${slug}&&populate[proyectos][fields][0]=nombre&populate[proyectos][fields][1]=slug&populate[proyectos][populate][portada][fields][0]=name&populate[proyectos][populate][portada][fields][1]=url&populate[proyectos][populate][portada][fields][2]=hash&populate[usos][fields][0]=nombre&populate[usos][fields][1]=slug&populate[aplicaciones][fields][0]=nombre&populate[aplicaciones][fields][1]=slug&populate[material][fields][0]=nombre&populate[material][fields][1]=slug&populate[imagenes][fields][0]=name&populate[imagenes][fields][1]=url&populate[imagenes][fields][2]=hash&populate[portada][fields][0]=name&populate[portada][fields][1]=url&populate[portada][fields][2]=hash`,
       {next: {tags: ["product"]}},
     );
 
