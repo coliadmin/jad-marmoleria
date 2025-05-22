@@ -7,6 +7,7 @@ import {VerticalCarousel} from "@/components/vertical-carousel";
 import {H3} from "@/components/typo";
 import {Skeleton} from "@/components/ui/skeleton";
 import {NavProductButton} from "@/components/nav-button";
+import { cn } from "@/lib/utils";
 
 type ProductPageProps = {
   params: {
@@ -86,8 +87,16 @@ export default async function ProductPage({params: {slug}}: ProductPageProps) {
           />
         </div>
       </section>
-      <aside className="flex justify-center border-t">
-        <div className="mx-4 flex max-w-lg flex-col justify-center sm:max-w-2xl md:mx-12 md:max-w-3xl lg:mx-24 lg:max-w-5xl">
+      <aside className="flex flex-col items-center justify-center border-t">
+        <div className={cn("px-6 md:px-4 hidden w-full max-w-md flex-col justify-center sm:max-w-xl md:max-w-3xl lg:max-w-5xl xl:max-w-7xl",
+            product.proyectos.length !== 0 ? "inline-flex" : "")}>
+            <H3 className="my-6 text-center text-2xl font-medium">
+              Proyectos que podrían interesarte
+            </H3>
+            <RelatedProducts products={product.proyectos} type="projects" />
+        </div>
+
+        <div className="px-6 md:px-4 flex w-full max-w-md flex-col justify-center sm:max-w-xl md:max-w-3xl lg:max-w-5xl xl:max-w-7xl">
           <H3 className="my-6 text-center text-2xl font-medium">
             Productos que podrían interesarte
           </H3>
