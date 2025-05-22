@@ -27,7 +27,7 @@ export function ProductLink({
     <Link prefetch className="group space-y-2" href={`/${path}/${product.slug}`}>
       <VerticalImage
         alt={product.portada.name}
-        className={className}
+        className={cn("w-vertical border p-2 transition-all duration-200 ease-in-out group-hover:border-foreground group-hover:bg-slate-100",className)}
         ratio={ratio}
         src={product.portada.url}
       />

@@ -6,25 +6,27 @@ import {ProductLink} from "./product-link";
 
 import {cn} from "@/lib/utils";
 import {ScrollBar} from "@/components/ui/scroll-area";
+import { Project } from "@/modules/projects";
 
 type RelatedProductsProps = {
-  products: Product[];
+  products: Product[] | Project[];
+  type?: "products" | "projects",
 };
 
-export function RelatedProducts({products}: RelatedProductsProps) {
+export function RelatedProducts({products, type}: RelatedProductsProps) {
   const length = products.length;
 
   return (
     <ScrollArea className="w-full whitespace-nowrap">
       <ul
         className={cn(
-          "mb-12 flex gap-4 overflow-x-auto pb-4 md:gap-8",
-          length < 2 ? "justify-center" : "",
+          "flex gap-4 mb-12 md:gap-8",
+          length < 2 ? "justify-center" : "overflow-x-auto",
         )}
       >
         {products.map((related) => (
-          <li key={related.id} className="w-1/2 flex-shrink-0 space-y-2 md:flex-shrink">
-            <ProductLink product={related} ratio={1} />
+          <li key={related.id} className="flex-shrink pb-2 md:flex-shrink">
+            <ProductLink product={related} path={type} ratio={1} />
           </li>
         ))}
       </ul>

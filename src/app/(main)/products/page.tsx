@@ -169,11 +169,7 @@ export default async function ProductsPage({searchParams: {category, value}}: Pr
             <ul className="grid gap-12 py-8 md:grid-cols-2 xl:grid-cols-3">
               {filterProds.map((product) => (
                 <li key={product.id} className="inline-flex max-w-[19rem] justify-self-center">
-                  <ProductLink
-                    className="w-vertical border p-2 transition-all duration-200 ease-in-out group-hover:border-foreground group-hover:bg-slate-100"
-                    product={product}
-                    ratio={1}
-                  />
+                  <ProductLink product={product} ratio={1} />
                 </li>
               ))}
             </ul>
@@ -184,11 +180,7 @@ export default async function ProductsPage({searchParams: {category, value}}: Pr
           <ul className="grid gap-12 py-8 md:grid-cols-2 xl:grid-cols-3">
             {products.map((product) => (
               <li key={product.id} className="inline-flex max-w-[19rem] justify-self-center">
-                <ProductLink
-                  className="w-vertical border p-2 transition-all duration-200 ease-in-out group-hover:border-foreground group-hover:bg-slate-100"
-                  product={product}
-                  ratio={1}
-                />
+                <ProductLink product={product} ratio={1} />
               </li>
             ))}
           </ul>
