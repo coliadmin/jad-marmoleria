@@ -4,7 +4,6 @@ import type {Material} from "@/modules/categories/material";
 import type {Color} from "@/modules/categories/color/types";
 
 import {Link} from "next-view-transitions";
-import {Metadata} from "next";
 import {ScrollArea} from "@radix-ui/react-scroll-area";
 import {X} from "lucide-react";
 
@@ -16,6 +15,7 @@ import {FilterLink} from "@/components/filter-link";
 import {query, CategoryCommons, categoryXPlural, Data} from "@/lib/strapi";
 import {capitalize, cn} from "@/lib/utils";
 import {ScrollBar} from "@/components/ui/scroll-area";
+import { getMeta } from "../../../../public/assets/meta";
 
 type Props = {
   searchParams: {
@@ -62,12 +62,17 @@ async function getFilters() {
   return filters;
 }
 
-export const metadata: Metadata = {
-  title: "JAD Marmolería - Catálogo",
-  openGraph: {
-    title: "JAD Marmolería - Catálogo",
-    url: `/products`,
-  },
+export async function generateMetadata() {
+  const header = await api.header.get();
+  const meta = await getMeta();
+
+  return {
+    title: meta.title + " - " + header.products,
+    openGraph: {
+      title: meta.openGraph?.title + " - " + header.products,
+      url: "/products",
+    },
+  }
 };
 
 export default async function ProductsPage({searchParams: {category, value}}: Props) {
