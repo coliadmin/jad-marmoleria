@@ -4,6 +4,7 @@ interface DTO {
   siteName: string;
   siteDescription: string;
   favicon?: Image;
+  defaultSeo: DefaultSeo;
 }
 
 interface DefaultSeo {
@@ -12,9 +13,11 @@ interface DefaultSeo {
   shareImage?: Image;
 }
 
-export type GlobalDTO = Data<DTO> & DefaultSeo;
+export type GlobalDTO = Data<DTO>;
 
-export type Global = Omit<GlobalDTO, "favicon" | "shareImage" > & {
+export type Global = Omit<GlobalDTO, "favicon" | "defaultSeo"> & {
   favicon: Image;
-  shareImage: Image;
+  defaultSeo: Omit<DefaultSeo, "shareImage"> & {
+    shareImage: Image;
+  };
 };
