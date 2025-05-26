@@ -2,15 +2,22 @@ import {Image, QueryResponse, query} from "@/lib/strapi";
 import {toUrl} from "@/lib/strapi";
 import { GlobalDTO, Global } from "./types";
 
-//TODO: Recuperar bien los datos de defaultSeo, se trae undefined!
-
 function transformGlobal(dto: GlobalDTO): Global {
   const imageAlt: Image = {documentId: "", hash: "", id: "", name: "", url: ""}
+  const favicon: Image = dto.favicon ? ({...dto.favicon, url: toUrl(dto.favicon.url)}) : imageAlt;
+  const shareImage: Image = dto.defaultSeo.shareImage ? ({...dto.defaultSeo.shareImage, url: toUrl(dto.defaultSeo.shareImage.url)}) : favicon;
+
+  const defaultSeo: Global["defaultSeo"] = dto.defaultSeo ? ({...dto.defaultSeo, shareImage: shareImage}) :
+  {
+    metaTitle: dto.siteName,
+    metaDescription: dto.siteDescription,
+    shareImage: shareImage,
+  };
 
   return {
     ...dto,
-    favicon: dto.favicon ?  ({...dto.favicon, url: toUrl(dto.favicon.url)}) : imageAlt,
-    shareImage: dto.shareImage ? ({...dto.shareImage, url: toUrl(dto.shareImage.url)}) : imageAlt,
+    favicon,
+    defaultSeo,
   };
 }
 
