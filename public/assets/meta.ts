@@ -7,20 +7,22 @@ export async function getMeta(): Promise<Metadata> {
   const global = await api.global.get();
 
   const meta = {
-    title: global.siteName,
-    description: global.siteDescription,
-       authors: [
+    title: global.defaultSeo.metaTitle,
+    description: global.defaultSeo.metaDescription,
+    icons: {
+      icon: global.favicon.url !== "" ? global.favicon.url : "/favicon.ico",
+    },
+    authors: [
       {
         name: "colidevs CLI",
       },
     ],
     openGraph: {
-      title: global.siteName,
-      description:
-        global.siteDescription,
+      title: global.defaultSeo.metaTitle,
+      description: global.defaultSeo.metaDescription,
       images: [
         {
-          url: global.favicon.url,
+          url: global.defaultSeo.shareImage.url,
           alt: "logo " + global.siteName,
         },
       ],
