@@ -8,6 +8,7 @@ import {api as faqs} from "@/modules/faqs";
 import {api as instagram} from "@/modules/content/instagram";
 import {api as whatsapp} from "@/modules/content/whatsapp";
 import {api as header} from "@/modules/content/header";
+import {api as global} from "@/modules/content/global";
 
 export const api = {
   products,
@@ -20,4 +21,5 @@ export const api = {
   instagram,
   whatsapp,
   header,
+  global,
 };

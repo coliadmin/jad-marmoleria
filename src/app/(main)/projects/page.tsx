@@ -1,15 +1,20 @@
-import {Metadata} from "next";
 
 import {api} from "@/api";
 import {H3} from "@/components/typo";
 import {ProductLink} from "@/modules/product";
+import { getMeta } from "../../../../public/assets/meta";
 
-export const metadata: Metadata = {
-  title: "JAD Marmolería - Nosotros",
-  openGraph: {
-    title: "JAD Marmolería - Nosotros",
-    url: `/projects`,
-  },
+export async function generateMetadata() {
+  const header = await api.header.get();
+  const meta = await getMeta();
+
+  return {
+    title: meta.title + " - " + header.projects,
+    openGraph: {
+      title: meta.openGraph?.title + " - " + header.projects,
+      url: "/projects",
+    },
+  }
 };
 
 export default async function ProjectsPage() {
