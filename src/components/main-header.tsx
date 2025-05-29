@@ -70,28 +70,30 @@ export async function MainHeader() {
               <Email email="jad.marmoleria@gmail.com" />
             </div>
           </div>
-          <div className="relative flex w-full justify-between gap-6 px-2 md:max-w-5xl md:justify-start lg:mx-auto lg:max-w-[88rem] 2xl:p-0">
-            <div className="max-w-[21rem]">
-              <Link prefetch href="/" scroll={false}>
-                {titleComponent()}
-              </Link>
-            </div>
-            <div className="flex h-full items-center gap-4 md:hidden">
+          <div className="relative flex w-full justify-evenly gap-6 px-2 md:max-w-5xl md:justify-start lg:mx-auto lg:max-w-[88rem] 2xl:p-0">
+            <div className="flex items-center md:hidden">
               <Link
-                className="group relative"
+                className="group relative items-center"
                 href={instagram.url}
                 rel="noopener noreferrer"
                 target="_blank"
               >
-                <Instagram className="mt-icon size-5" />
+                <Instagram className="mt-icon size-7" />
               </Link>
+            </div>
+            <div className="max-w-28">
+              <Link prefetch href="/" scroll={false}>
+                <img alt="logo JAD" src="/logo.png" width="100px"></img>
+              </Link>
+            </div>
+            <div className="flex items-center md:hidden">
               <Link
                 className="group relative"
                 href={whatsAppUrl}
                 rel="noopener noreferrer"
                 target="_blank"
               >
-                <Whatsapp className="mt-icon size-5" />
+                <Whatsapp className="mt-icon size-7" />
               </Link>
             </div>
             <div

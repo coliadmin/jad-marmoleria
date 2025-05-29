@@ -80,8 +80,8 @@ export async function HomeHeader() {
               </Link>
             </div>
           </div>
-          <Link prefetch className={cn("max-w-fit backdrop-blur")} href="/" scroll={false}>
-            {titleComponent()}
+          <Link prefetch className={cn("max-w-fit backdrop-blur-sm")} href="/" scroll={false}>
+            <img alt="logo JAD" src="/logo.png" width="120px"></img>
           </Link>
         </nav>
       </header>
