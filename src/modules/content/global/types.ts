@@ -5,6 +5,7 @@ interface DTO {
   siteDescription: string;
   favicon?: Image;
   defaultSeo: DefaultSeo;
+  accentColor: string;
 }
 
 interface DefaultSeo {

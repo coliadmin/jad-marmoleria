@@ -28,6 +28,8 @@ export async function fetchGlobal(): QueryResponse<GlobalDTO> {
       {next: {tags: ["global"]}},
     );
 
+    res.data.accentColor = res.data.accentColor || "#DEB887";
+
     return res;
   } catch (error) {
     throw error;
