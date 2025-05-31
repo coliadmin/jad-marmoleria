@@ -31,7 +31,7 @@ export default function Email({email}: EmailProps) {
     <div className="relative flex items-center">
       <Button
         className={cn(
-          "flex gap-2 p-0 text-sm font-medium text-white hover:no-underline",
+          "flex gap-2 p-0 text-sm font-medium text-foreground hover:no-underline",
           quicksand.className,
         )}
         variant="link"
