@@ -14,23 +14,11 @@ export async function MainHeader() {
   const whatsapp = await api.whatsapp.get();
   const whatsAppUrl = toWhatsAppUrl(whatsapp);
   const header = await api.header.get();
+  const global = await api.global.get();
 
-  const startH = header.title.indexOf("{");
-  const endH = header.title.indexOf("}");
+  const hex = global.accentColor;
+  const accentColor = `bg-[${hex}]`;
 
-  const h = header.title.substring(startH + 1, endH);
-
-  const startTitle = header.title.split("{")[0];
-  const endTitle = header.title.split("}")[1];
-
-  const titleComponent = () => {
-    return (
-      <span className="flex gap-2 text-center text-4xl font-bold">
-        {startTitle} <Highlight>{h}</Highlight>
-        <div className="border-b-2 border-b-primary">{endTitle}</div>
-      </span>
-    );
-  };
 
   return (
     <div className="h-auto w-full border-b bg-transparent">
@@ -42,8 +30,8 @@ export async function MainHeader() {
         >
           <div
             className={cn(
-              "m-auto hidden w-full bg-primary/90 py-1 text-sm font-medium text-white md:inline-flex",
-              quicksand.className,
+              "m-auto hidden w-full py-1 text-sm font-medium text-foreground md:inline-flex",
+              quicksand.className, accentColor
             )}
           >
             <div className="flex w-full items-center justify-evenly gap-10 md:max-w-5xl lg:mx-auto lg:max-w-[88rem]">
@@ -70,30 +58,30 @@ export async function MainHeader() {
               <Email email="jad.marmoleria@gmail.com" />
             </div>
           </div>
-          <div className="relative flex w-full justify-evenly gap-6 px-2 md:max-w-5xl md:justify-start lg:mx-auto lg:max-w-[88rem] 2xl:p-0">
-            <div className="flex items-center md:hidden">
+          <div className="relative flex w-full items-center md:items-end px-2 md:max-w-5xl md:justify-start lg:mx-auto lg:max-w-[88rem] 2xl:p-0">
+            <div className="flex items-center w-full md:hidden">
               <Link
-                className="group relative items-center"
+                className="w-full h-full"
                 href={instagram.url}
                 rel="noopener noreferrer"
                 target="_blank"
               >
-                <Instagram className="mt-icon size-7" />
+                <Instagram className="mt-icon m-auto size-7" />
               </Link>
             </div>
-            <div className="max-w-28">
+            <div className="w-full max-w-28">
               <Link prefetch href="/" scroll={false}>
                 <img alt="logo JAD" src="/logo.svg" width="100px"></img>
               </Link>
             </div>
-            <div className="flex items-center md:hidden">
+            <div className="flex items-center w-full md:hidden">
               <Link
-                className="group relative"
+                className="w-full h-full"
                 href={whatsAppUrl}
                 rel="noopener noreferrer"
                 target="_blank"
               >
-                <Whatsapp className="mt-icon size-7" />
+                <Whatsapp className="mt-icon m-auto size-7" />
               </Link>
             </div>
             <div
@@ -118,8 +106,8 @@ export async function MainHeader() {
           </div>
           <div
             className={cn(
-              "m-auto inline-flex w-full justify-center gap-6 bg-primary/90 py-2 font-semibold text-white md:hidden",
-              quicksand.className,
+              "m-auto inline-flex w-full justify-center gap-6 py-2 font-semibold text-foreground md:hidden",
+              quicksand.className, accentColor
             )}
           >
             <Link prefetch className="group relative" href="/" scroll={false}>
