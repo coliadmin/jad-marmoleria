@@ -6,6 +6,7 @@ function transformGlobal(dto: GlobalDTO): Global {
   const imageAlt: Image = {documentId: "", hash: "", id: "", name: "", url: ""}
   const favicon: Image = dto.favicon ? ({...dto.favicon, url: toUrl(dto.favicon.url)}) : imageAlt;
   const shareImage: Image = dto.defaultSeo.shareImage ? ({...dto.defaultSeo.shareImage, url: toUrl(dto.defaultSeo.shareImage.url)}) : favicon;
+  const accentColor = dto.accentColor !== "" && dto.accentColor ? dto.accentColor : "#DEB887";
 
   const defaultSeo: Global["defaultSeo"] = dto.defaultSeo ? ({...dto.defaultSeo, shareImage: shareImage}) :
   {
@@ -18,6 +19,7 @@ function transformGlobal(dto: GlobalDTO): Global {
     ...dto,
     favicon,
     defaultSeo,
+    accentColor,
   };
 }
 
@@ -27,8 +29,6 @@ export async function fetchGlobal(): QueryResponse<GlobalDTO> {
       "global?populate[favicon][fields][0]=name&populate[favicon][fields][1]=url&populate[favicon][fields][2]=hash&populate[defaultSeo][populate][shareImage][fields][0]=name&populate[defaultSeo][populate][shareImage][fields][1]=url&populate[defaultSeo][populate][shareImage][fields][2]=hash",
       {next: {tags: ["global"]}},
     );
-
-    res.data.accentColor = res.data.accentColor || "#DEB887";
 
     return res;
   } catch (error) {
