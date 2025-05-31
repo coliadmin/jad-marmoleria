@@ -17,6 +17,7 @@ type FilterLinkProps = {
 export function FilterLink({category, value, className, accentColor}: FilterLinkProps) {
   const searchParams = useSearchParams();
   const activeValue = searchParams.get("value");
+  accentColor = activeValue === value.slug ? accentColor : "transparent";
 
   return (
     <Link
@@ -25,9 +26,10 @@ export function FilterLink({category, value, className, accentColor}: FilterLink
         "rounded-full border px-4 py-1 lg:rounded-none lg:border-none lg:px-0 lg:py-0 lg:hover:underline",
         activeValue === value.slug &&
           "lg:rounded-e-full lg:rounded-s-none lg:border-none lg:px-2",
-         activeValue === value.slug ? (accentColor) : "",
            className
       )}
+      style={{backgroundColor: accentColor}}
+
       href={`/products?category=${category.toString()}&value=${value.slug}`}
     >
       {value.nombre}
