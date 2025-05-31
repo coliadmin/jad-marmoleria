@@ -10,11 +10,14 @@ import {cn} from "@/lib/utils";
 type FilterLinkProps = {
   category: string;
   value: Color | Use | Material;
+  className?: string;
+  accentColor?: string;
 };
 
-export function FilterLink({category, value}: FilterLinkProps) {
+export function FilterLink({category, value, className, accentColor}: FilterLinkProps) {
   const searchParams = useSearchParams();
   const activeValue = searchParams.get("value");
+  accentColor = activeValue === value.slug ? accentColor : "transparent";
 
   return (
     <Link
@@ -22,8 +25,11 @@ export function FilterLink({category, value}: FilterLinkProps) {
       className={cn(
         "rounded-full border px-4 py-1 lg:rounded-none lg:border-none lg:px-0 lg:py-0 lg:hover:underline",
         activeValue === value.slug &&
-          " bg-amber-500/65 lg:rounded-e-full lg:rounded-s-none lg:border-none lg:px-2",
+          "lg:rounded-e-full lg:rounded-s-none lg:border-none lg:px-2",
+           className
       )}
+      style={{backgroundColor: accentColor}}
+
       href={`/products?category=${category.toString()}&value=${value.slug}`}
     >
       {value.nombre}

@@ -4,7 +4,6 @@ import type {Material} from "@/modules/categories/material";
 import type {Color} from "@/modules/categories/color/types";
 
 import {Link} from "next-view-transitions";
-import {Metadata} from "next";
 import {ScrollArea} from "@radix-ui/react-scroll-area";
 import {X} from "lucide-react";
 
@@ -16,6 +15,7 @@ import {FilterLink} from "@/components/filter-link";
 import {query, CategoryCommons, categoryXPlural, Data} from "@/lib/strapi";
 import {capitalize, cn} from "@/lib/utils";
 import {ScrollBar} from "@/components/ui/scroll-area";
+import { getMeta } from "../../../../public/assets/meta";
 
 type Props = {
   searchParams: {
@@ -62,19 +62,26 @@ async function getFilters() {
   return filters;
 }
 
-export const metadata: Metadata = {
-  title: "JAD Marmolería - Catálogo",
-  openGraph: {
-    title: "JAD Marmolería - Catálogo",
-    url: `/products`,
-  },
+export async function generateMetadata() {
+  const header = await api.header.get();
+  const meta = await getMeta();
+
+  return {
+    title: meta.title + " - " + header.products,
+    openGraph: {
+      title: meta.openGraph?.title + " - " + header.products,
+      url: "/products",
+    },
+  }
 };
 
 export default async function ProductsPage({searchParams: {category, value}}: Props) {
   const products = await api.products.getList();
   const filterProds = await api.products.getByCategory(category, value);
-
   const filters = await getFilters();
+  const global = await api.global.get();
+
+  const hex = global.accentColor;
 
   const title = async () => {
     const baseTitle = "Catálogo";
@@ -138,7 +145,7 @@ export default async function ProductsPage({searchParams: {category, value}}: Pr
                 (filter) =>
                   filter.slug === category &&
                   filter.category.map((item) => (
-                    <FilterLink key={item.id} category={filter.slug} value={item} />
+                    <FilterLink key={item.id} category={filter.slug} accentColor={hex} value={item} />
                   )),
               )}
             </div>
@@ -154,7 +161,7 @@ export default async function ProductsPage({searchParams: {category, value}}: Pr
               <ul className="space-y-2 ps-5 pt-2">
                 {filter.category.map((item) => (
                   <li key={item.id}>
-                    <FilterLink category={filter.slug} value={item} />
+                    <FilterLink category={filter.slug} accentColor={hex} value={item} />
                   </li>
                 ))}
               </ul>

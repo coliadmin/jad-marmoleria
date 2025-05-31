@@ -21,7 +21,7 @@ export async function ProjectArticle({project, children}: ProjectArticleProps) {
   const content: BlocksContent = project.descripcion as unknown as BlocksContent;
   const whatsapp = await api.whatsapp.get();
 
-  const whatsAppUrl = toWhatsAppUrl(whatsapp.telefono);
+  const whatsAppUrl = toWhatsAppUrl(whatsapp, project, "proyecto");
 
   return (
     <article className="w-full lg:border-e lg:border-s">

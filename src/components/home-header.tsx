@@ -11,7 +11,7 @@ import {api} from "@/api";
 export async function HomeHeader() {
   const instagram = await api.instagram.get();
   const whatsapp = await api.whatsapp.get();
-  const whatsAppUrl = toWhatsAppUrl(whatsapp.telefono);
+  const whatsAppUrl = toWhatsAppUrl(whatsapp);
   const header = await api.header.get();
 
   const startH = header.title.indexOf("{");
@@ -80,8 +80,8 @@ export async function HomeHeader() {
               </Link>
             </div>
           </div>
-          <Link prefetch className={cn("max-w-fit backdrop-blur")} href="/" scroll={false}>
-            {titleComponent()}
+          <Link prefetch href="/" scroll={false}>
+            <img alt="logo JAD" className="m-auto z-50 object-contain aspect-square p-1" src="logo.png"></img>
           </Link>
         </nav>
       </header>

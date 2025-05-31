@@ -14,7 +14,7 @@ export async function Hero() {
 
   const whatsapp = await api.whatsapp.get();
 
-  const whatsAppUrl = toWhatsAppUrl(whatsapp.telefono);
+  const whatsAppUrl = toWhatsAppUrl(whatsapp);
 
   const startH = titulo.indexOf("{");
   const endH = titulo.indexOf("}");

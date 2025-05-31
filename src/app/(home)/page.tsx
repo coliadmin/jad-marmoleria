@@ -28,9 +28,11 @@ export default async function HomePage() {
       <div className="m-auto max-w-5xl">
         <H2 className={cn("mb-8 border-none text-center leading-[3.2rem]")}>
           <div className="space-x-4">
+            <span className="text-lg">⭐</span>
             <span className="text-2xl">⭐</span>
             <span>⭐</span>
             <span className="text-2xl">⭐</span>
+            <span className="text-lg">⭐</span>
           </div>
           Encontrá el marmol que buscas según tus necesidades
         </H2>

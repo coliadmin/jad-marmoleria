@@ -6,26 +6,13 @@ import {ViewTransitions} from "next-view-transitions";
 
 import {montserrat} from "@/fonts";
 import {cn} from "@/lib/utils";
+import { getMeta } from "../../public/assets/meta";
 
-export const metadata: Metadata = {
-  title: "JAD Marmoleria",
-  description:
-    "Somos fabricantes y asesores expertos en mesadas con exclusivos diseños - Mármol, Granito, Cuarzo y piedras Sintetizadas - Servicio Integral a Domicilio",
-  authors: [
-    {
-      name: "colidevs CLI",
-    },
-  ],
-  openGraph: {
-    title: "JAD Marmoleria",
-    description:
-      "Somos fabricantes y asesores expertos en mesadas con exclusivos diseños - Mármol, Granito, Cuarzo y piedras Sintetizadas - Servicio Integral a Domicilio",
-    url: `/`,
-    type: "website",
-    locale: "es_AR",
-    siteName: "JAD Marmoleria",
-  },
-};
+export async function generateMetadata(){
+  const meta = await getMeta();
+
+  return meta;
+}
 
 export default function RootLayout({children}: {children: React.ReactNode}) {
   return (

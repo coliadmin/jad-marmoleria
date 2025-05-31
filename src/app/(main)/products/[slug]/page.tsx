@@ -38,7 +38,7 @@ export async function generateMetadata({params: {slug}}: ProductPageProps) {
       description: product.descripcion,
       images: [
         {
-          url: toUrl(product.portada.url),
+          url: product.portada.url,
           alt: product.nombre,
         },
       ],
