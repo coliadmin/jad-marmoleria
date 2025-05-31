@@ -17,8 +17,6 @@ export async function MainHeader() {
   const global = await api.global.get();
 
   const hex = global.accentColor;
-  const accentColor = `bg-[${hex}]`;
-
 
   return (
     <div className="h-auto w-full border-b bg-transparent">
@@ -31,8 +29,9 @@ export async function MainHeader() {
           <div
             className={cn(
               "m-auto hidden w-full py-1 text-sm font-medium text-foreground md:inline-flex",
-              quicksand.className, accentColor
+              quicksand.className,
             )}
+            style={{backgroundColor: hex}}
           >
             <div className="flex w-full items-center justify-evenly gap-10 md:max-w-5xl lg:mx-auto lg:max-w-[88rem]">
               <Link
@@ -107,8 +106,9 @@ export async function MainHeader() {
           <div
             className={cn(
               "m-auto inline-flex w-full justify-center gap-6 py-2 font-semibold text-foreground md:hidden",
-              quicksand.className, accentColor
+              quicksand.className,
             )}
+            style={{backgroundColor: hex}}
           >
             <Link prefetch className="group relative" href="/" scroll={false}>
               <span className="tracking-widest sm:px-2">{header.home}</span>
