@@ -83,7 +83,7 @@ export async function MainHeader() {
             </div>
             <div className="max-w-28">
               <Link prefetch href="/" scroll={false}>
-                <img alt="logo JAD" src="/logo.png" width="100px"></img>
+                <img alt="logo JAD" src="/logo.svg" width="100px"></img>
               </Link>
             </div>
             <div className="flex items-center md:hidden">
