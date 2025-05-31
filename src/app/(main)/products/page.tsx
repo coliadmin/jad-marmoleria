@@ -82,8 +82,6 @@ export default async function ProductsPage({searchParams: {category, value}}: Pr
   const global = await api.global.get();
 
   const hex = global.accentColor;
-  const accentColor = `bg-[${hex}]`;
-
 
   const title = async () => {
     const baseTitle = "Catálogo";
@@ -147,7 +145,7 @@ export default async function ProductsPage({searchParams: {category, value}}: Pr
                 (filter) =>
                   filter.slug === category &&
                   filter.category.map((item) => (
-                    <FilterLink key={item.id} category={filter.slug} accentColor={accentColor} value={item} />
+                    <FilterLink key={item.id} category={filter.slug} accentColor={hex} value={item} />
                   )),
               )}
             </div>
@@ -163,7 +161,7 @@ export default async function ProductsPage({searchParams: {category, value}}: Pr
               <ul className="space-y-2 ps-5 pt-2">
                 {filter.category.map((item) => (
                   <li key={item.id}>
-                    <FilterLink category={filter.slug} accentColor={accentColor} value={item} />
+                    <FilterLink category={filter.slug} accentColor={hex} value={item} />
                   </li>
                 ))}
               </ul>
