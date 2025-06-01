@@ -1,3 +1,4 @@
+/*
 import {Link} from "next-view-transitions";
 
 import {H1, Highlight, P} from "./typo";
@@ -74,3 +75,4 @@ export async function Hero() {
     </section>
   );
 }
+*/

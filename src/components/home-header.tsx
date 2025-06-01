@@ -81,7 +81,7 @@ export async function HomeHeader() {
             </div>
           </div>
           <Link prefetch href="/" scroll={false}>
-            <img alt="logo JAD" className="m-auto z-50 object-contain aspect-square p-1" src="logo.png"></img>
+            <img alt="logo JAD" className="m-auto z-50 object-contain aspect-square p-1" src={header.logo.url}></img>
           </Link>
         </nav>
       </header>
