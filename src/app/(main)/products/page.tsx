@@ -17,10 +17,16 @@ import {capitalize, cn} from "@/lib/utils";
 import {ScrollBar} from "@/components/ui/scroll-area";
 import { getMeta } from "../../../../public/assets/meta";
 
+import { FiltersMobile } from "@/components/filters-mobile";
+
+
 type Props = {
   searchParams: {
-    category: string;
-    value: string;
+    slug?: string | null;
+    color?: string | null;
+    usos?: string | null;
+    material?: string | null;
+    aplicaciones?: string | null;
   };
 };
 
@@ -75,82 +81,46 @@ export async function generateMetadata() {
   }
 };
 
-export default async function ProductsPage({searchParams: {category, value}}: Props) {
+export default async function ProductsPage({searchParams: { 
+  slug = null,
+  color = null,
+  usos = null,
+  material = null,
+  aplicaciones = null}}: Props) {
+    
   const products = await api.products.getList();
-  const filterProds = await api.products.getByCategory(category, value);
+  const filterProds = await api.products.getByCategory({slug, color, usos, material, aplicaciones});
   const filters = await getFilters();
   const global = await api.global.get();
-
+  const isFiltered = !!(slug || color || usos || material || aplicaciones);
   const hex = global.accentColor;
 
-  const title = async () => {
-    const baseTitle = "Catálogo";
-
-    if (!category || !value) return baseTitle;
-
-    const {
-      data: [{nombre: subcategory}],
-    } = await query<CategoryCommons[]>(
-      `${categoryXPlural[category]}?filters[slug][$contains]=${value}&populate[fields][0]=nombre&populate[fields][1]=slug`,
-    );
-
-    const title = `${baseTitle} ${capitalize(category)}:  ${subcategory}`;
-
-    return title;
-  };
-
   return (
-    <section className="mx-auto flex w-full  flex-col overflow-hidden border-e border-s  md:max-w-5xl lg:mx-auto lg:max-w-[88rem] lg:flex-row">
+    <section className="mx-auto flex w-full flex-col overflow-hidden border-e border-s  md:max-w-5xl lg:mx-auto lg:max-w-[88rem] lg:flex-row">
       <aside className="flex w-full  flex-col pt-6 lg:h-full lg:w-[250px] lg:py-6">
         <div className="mb-2 flex gap-4 lg:mb-0 lg:w-auto lg:justify-between lg:gap-0">
           <H3 className="ml-3">Filtros</H3>
           <div className="my-auto px-2 text-sm font-normal text-slate-800/65">
-            <p className={cn("block ", (category && "hidden") || (value && "hidden"))}>
+            <p className={cn("block ", (isFiltered && "hidden"))}>
               Sin filtros activos
             </p>
             <Link
               prefetch
               className={cn(
                 "hidden gap-2 rounded-e-full hover:underline",
-                (category && "inline-flex") || (value && "inline-flex"),
+                (isFiltered && "inline-flex"),
               )}
               href="/products"
             >
+              Limpiar filtros
               <X className="mt-icon size-3 self-center" />
-              Limpiar filtro
             </Link>
           </div>
         </div>
-        <div className="block w-full  border-b border-t lg:hidden">
-          <div className="relative w-full max-w-md overflow-x-auto sm:max-w-xl md:max-w-full">
-            <div className="flex gap-4 whitespace-nowrap p-2">
-              {filters.map((filter) => (
-                <Link
-                  key={filter.slug}
-                  prefetch
-                  className={cn(
-                    "rounded-full border px-6 py-1 font-medium",
-                    category === filter.slug && "bg-gray-200/65",
-                  )}
-                  href={`/products?category=${filter.slug}`}
-                >
-                  {filter.title}
-                </Link>
-              ))}
-            </div>
+        <div className="block w-full border-b border-t lg:hidden">
+          <div className="w-full max-w-md sm:max-w-xl md:max-w-full">
+            <FiltersMobile filters={filters} accentColor={hex}/>
           </div>
-          <ScrollArea className="w-full whitespace-nowrap">
-            <div className="flex max-w-md gap-4 overflow-x-auto p-2 sm:max-w-xl md:max-w-full">
-              {filters.map(
-                (filter) =>
-                  filter.slug === category &&
-                  filter.category.map((item) => (
-                    <FilterLink key={item.id} category={filter.slug} accentColor={hex} value={item} />
-                  )),
-              )}
-            </div>
-            <ScrollBar orientation="horizontal" />
-          </ScrollArea>
         </div>
         <div className="hidden border-t lg:block">
           {filters.map((filter) => (
@@ -170,8 +140,8 @@ export default async function ProductsPage({searchParams: {category, value}}: Pr
         </div>
       </aside>
       <section className="flex-1 lg:border-s">
-        <H3 className="border-b py-3 text-center">{title()}</H3>
-        {category && value ? (
+        <H3 className="border-b py-3 text-center">Catálogo</H3>
+        {isFiltered ? (
           filterProds.length !== 0 ? (
             <ul className="grid gap-12 py-8 md:grid-cols-2 xl:grid-cols-3">
               {filterProds.map((product) => (

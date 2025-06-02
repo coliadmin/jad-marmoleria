@@ -21,7 +21,7 @@ export default async function Custom404() {
           <H3 className="text-balance font-medium">
             La página que has tratado de acceder no existe o ha sido eliminada.
           </H3>
-          <Link prefetch href="/">
+          <Link prefetch href="/" scroll={false}>
             <Button className="text-base" variant="outline">
               <ArrowLeft />
               Volver a la Home

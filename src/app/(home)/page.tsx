@@ -43,7 +43,7 @@ export default async function HomePage() {
               className="flex w-32 items-center justify-center rounded border p-2 py-4 transition-colors duration-200 ease-in-out hover:border-foreground"
             >
               <IconLink
-                href={`/products?category=${Categories.USE}&value=${uso.slug}`}
+                href={`/products?${Categories.USE}=${uso.slug}`}
                 icon={uso.slug as IconNames}
                 iconName={uso.nombre}
               />
@@ -55,7 +55,7 @@ export default async function HomePage() {
               className="flex w-32 items-center justify-center rounded border p-2 py-4 transition-colors duration-200 ease-in-out hover:border-foreground"
             >
               <IconLink
-                href={`/products?category=${Categories.APLICATION}&value=${aplication.slug}`}
+                href={`/products?${Categories.APLICATION}=${aplication.slug}`}
                 icon={aplication.slug as IconNames}
                 iconName={aplication.nombre}
               />

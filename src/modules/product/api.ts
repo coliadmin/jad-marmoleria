@@ -9,6 +9,14 @@ import {query, type QueryResponse} from "@/lib/strapi";
 
 // TODO: Increase performance by reducing the number fields fetched, specify the fields to fetch.
 
+type filterProps = {
+  slug?: string | null;
+  color?: string | null;
+  usos?: string | null;
+  material?: string | null;
+  aplicaciones?: string | null;
+};
+
 function transformProject(dto: ProjectDTO): Project {
   return {
     ...dto,
@@ -50,13 +58,31 @@ async function fetchProduct(slug: string): QueryResponse<ProductDTO[] | null> {
   }
 }
 
-async function fetchProductsByCategory(
-  category: string,
-  value: string,
-): QueryResponse<ProductDTO[] | null> {
-  try {
+async function fetchProductsByCategory({slug, color, usos, material, aplicaciones} : filterProps): QueryResponse<ProductDTO[] | null> {
+
+  let filters = "";
+
+  if(slug){
+    filters = `&filters[slug][$contains]=${slug}`;
+  }
+  if(color){
+    filters += `&filters[color][slug][$contains]=${color}`;
+  }
+  if(usos){
+    filters += `&filters[usos][slug][$contains]=${usos}`;
+  }
+  if(material){
+    filters += `&filters[material][slug][$contains]=${material}`;
+  }
+  if(aplicaciones){
+    filters += `&filters[aplicaciones][slug][$contains]=${aplicaciones}`;
+  }
+
+  filters = filters.substring(1)
+
+    try {
     const res = await query<ProductDTO[]>(
-      `products?filters[${category}][slug][$contains]=${value}&populate[usos][fields][0]=nombre&populate[usos][fields][1]=slug&populate[imagenes][fields][0]=name&populate[imagenes][fields][1]=url&populate[imagenes][fields][2]=hash&populate[portada][fields][0]=name&populate[portada][fields][1]=url&populate[portada][fields][2]=hash`,
+      `products?${filters}&populate[usos][fields][0]=nombre&populate[usos][fields][1]=slug&populate[imagenes][fields][0]=name&populate[imagenes][fields][1]=url&populate[imagenes][fields][2]=hash&populate[portada][fields][0]=name&populate[portada][fields][1]=url&populate[portada][fields][2]=hash`,
       {next: {tags: ["product"]}},
     );
 
@@ -65,6 +91,7 @@ async function fetchProductsByCategory(
     throw error;
   }
 }
+
 
 async function fetchProductsList(): QueryResponse<ProductDTO[]> {
   try {
@@ -93,13 +120,14 @@ async function getProduct(slug: string): Promise<Product | null> {
   }
 }
 
-async function getProductsByCategory(category: string, value: string): Promise<Product[]> {
-  if (!category && !value) {
+async function getProductsByCategory({slug, color, usos, material, aplicaciones} : filterProps): Promise<Product[]> {
+
+  if (!slug && !color && !usos && !material && !aplicaciones) {
     return [];
   }
 
   try {
-    const {data} = await fetchProductsByCategory(category, value);
+    const {data} = await fetchProductsByCategory({slug, color, usos, material, aplicaciones});
 
     if (!data) return [];
     const cpy = data.map((x) => transformProduct(x));
