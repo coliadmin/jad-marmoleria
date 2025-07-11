@@ -3,6 +3,7 @@
 import {useEffect, useState} from "react";
 
 import {VerticalImage} from "./vertical-image";
+import {ImageModal} from "./image-modal";
 
 import {
   Carousel,
@@ -41,7 +42,9 @@ export function VerticalCarousel({images}: VerticalCarouselProps) {
       <CarouselContent>
         {images.map((image) => (
           <CarouselItem key={image.id}>
-            <VerticalImage alt={image.name} src={image.url} />
+            <ImageModal src={image.url} alt={image.name}>
+              <VerticalImage alt={image.name} src={image.url} />
+            </ImageModal>
           </CarouselItem>
         ))}
       </CarouselContent>
