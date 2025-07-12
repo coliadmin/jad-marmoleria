@@ -44,6 +44,8 @@ export function toWhatsAppUrl(whatsapp: WhatsApp, object?: Product | Project, ty
 
 export function createWhatsAppMessage(message: string, object?: Product | Project, type?: string): string {
 
+message = "Hola, vi su página web y quería hacer una consulta  ¡Gracias! "
+
   if(message.length === 0) {
     return "";
   }
@@ -54,11 +56,18 @@ export function createWhatsAppMessage(message: string, object?: Product | Projec
   const startM = message.split("{")[0];
   const endM = message.split("}")[1];
 
+
+if(message.includes("{") === false ){
+    return message;
+}
+
   if(!object){
     return startM + endM;
   }
 
+
   const insertProduct = message.substring(start + 1, end) + " " + type + " " + object.nombre + ",";
+
   const completeMessage = `${startM}${insertProduct}${endM}`;
 
   return completeMessage;
