@@ -43,9 +43,6 @@ export function toWhatsAppUrl(whatsapp: WhatsApp, object?: Product | Project, ty
 }
 
 export function createWhatsAppMessage(message: string, object?: Product | Project, type?: string): string {
-
-message = "Hola, vi su página web y quería hacer una consulta  ¡Gracias! "
-
   if(message.length === 0) {
     return "";
   }
