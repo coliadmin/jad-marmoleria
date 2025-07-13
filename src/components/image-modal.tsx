@@ -4,6 +4,7 @@ import { useState } from "react";
 import { ZoomIn } from "lucide-react";
 import { Modal } from "@/components/ui/modal";
 import { cn } from "@/lib/utils";
+import { Button } from "./ui/button";
 
 type ImageModalProps = {
   src: string;
@@ -40,12 +41,12 @@ export function ImageModal({ src, alt, className, children, onImageClick }: Imag
         <div onClick={handleImageClick}>
           {children}
         </div>
-        <button
+        <Button
           onClick={handleZoomClick}
           className="absolute right-2 top-2 z-10 rounded-full bg-white/80 p-2 shadow-lg transition-all hover:bg-white hover:scale-110"
         >
           <ZoomIn className="h-5 w-5 text-gray-700" />
-        </button>
+        </Button>
       </div>
 
       <Modal isOpen={isOpen} onClose={handleClose} className="p-0">
