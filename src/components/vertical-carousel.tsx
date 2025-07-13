@@ -34,6 +34,18 @@ export function VerticalCarousel({images}: VerticalCarouselProps) {
     api.on("select", () => {
       setCurrent(api.selectedScrollSnap() + 1);
     });
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "ArrowLeft") {
+        api.scrollPrev();
+      } else if (event.key === "ArrowRight") {
+        api.scrollNext();
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
   }, [api]);
 
   return (
