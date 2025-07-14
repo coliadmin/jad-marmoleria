@@ -23,6 +23,7 @@ export function VerticalCarousel({images}: VerticalCarouselProps) {
   const [api, setApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
   const [count, setCount] = useState(0);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     if (!api) {
@@ -37,24 +38,39 @@ export function VerticalCarousel({images}: VerticalCarouselProps) {
     });
 
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "ArrowLeft") {
-        api.scrollPrev();
-      } else if (event.key === "ArrowRight") {
-        api.scrollNext();
+      if (!isModalOpen) {
+        if (event.key === "ArrowLeft") {
+          api.scrollPrev();
+        } else if (event.key === "ArrowRight") {
+          api.scrollNext();
+        }
       }
     };
+
     window.addEventListener("keydown", handleKeyDown);
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, [api]);
+  }, [api, isModalOpen]);
+
+  const modalImages = images.map(img => ({
+    src: img.url,
+    alt: img.name
+  }));
 
   return (
     <Carousel setApi={setApi}>
       <CarouselContent>
-        {images.map((image) => (
+        {images.map((image, index) => (
           <CarouselItem key={image.id}>
-            <ImageModal src={image.url} alt={image.name}>
+            <ImageModal
+              src={image.url}
+              alt={image.name}
+              images={modalImages}
+              initialIndex={index}
+              onModalOpen={() => setIsModalOpen(true)}
+              onModalClose={() => setIsModalOpen(false)}
+            >
               <VerticalImage alt={image.name} src={image.url} />
             </ImageModal>
           </CarouselItem>
