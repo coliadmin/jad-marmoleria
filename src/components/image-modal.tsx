@@ -100,7 +100,7 @@ export function ImageModal({
         </div>
         <Button
           onClick={handleZoomClick}
-          className="absolute right-2 top-2 z-10 rounded-full bg-white/80 p-2 shadow-lg transition-all hover:bg-white hover:scale-110"
+          className="absolute right-2 top-2 z-10 rounded-full bg-white/80 p-3 shadow-lg transition-all hover:bg-white hover:scale-110"
         >
           <ZoomIn className="h-5 w-5 text-gray-700" />
         </Button>
